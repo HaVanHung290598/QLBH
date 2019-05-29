@@ -1,0 +1,51 @@
+@charset "ISO-8859-1";
+footer {
+	padding-top: 60px;
+	padding-bottom: 10px;
+	background-color: #f8f9fa;
+}
+footer a {
+	color: #000;
+}
+footer .web-link a {
+	font-size: 25px;
+    border-radius: 35px;
+    background-color: rgba(0,0,0,0.02);
+    margin-left: 10px;
+}
+footer .web-link {
+	padding: 0px;
+}
+footer .web-link p {
+	margin-left: 18px;
+	font-size: 20px;
+    letter-spacing: 2px;
+}
+footer .menu-footer {
+	padding: 0px;
+}
+footer .menu-footer p {
+	margin-left: 18px;
+	font-size: 20px;
+    letter-spacing: 2px;
+}
+footer .help-footer {
+	padding: 0px;
+}
+footer .help-footer p {
+	margin-left: 18px;
+	font-size: 20px;
+    letter-spacing: 2px;
+}
+footer .question-footer {
+	padding: 0px;
+}
+footer .question-footer p {
+	margin-left: 18px;
+	font-size: 20px;
+    letter-spacing: 2px;
+}
+footer .copyright {
+	margin-top: 50px;
+    text-align: center;
+}

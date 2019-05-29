@@ -1,0 +1,13 @@
+@charset "ISO-8859-1";
+.statistical {
+	padding: 160px 180px;
+	text-align: center;
+	background-image: url(../images/bg_4.jpg);
+	background-size: cover;
+	background-position: center;
+}
+.statistical .number {
+	font-size: 25px;
+	font-weight: 500;
+	margin-bottom: 5px;
+}

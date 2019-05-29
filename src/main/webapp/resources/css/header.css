@@ -1,0 +1,179 @@
+@charset "ISO-8859-1";
+.overlay-text-1 {
+	position: fixed;
+	z-index: 1;
+	left: -70px;
+    transform: rotate(-90deg);
+    top: 50%;
+    font-size: 17px;
+    letter-spacing: 2px;
+}
+.overlay-text-2 {
+	position: fixed;
+	z-index: 1;
+	right: -15px;
+	transform: rotate(+90deg);
+    top: 50%;
+    font-size: 17px;
+    letter-spacing: 2px;
+}
+header {
+	background-image: url(../images/bg_1.jpg);
+	background-size: cover;
+	background-position: center;
+	height: 590px;
+	position: relative;
+	padding-top: 18px;
+}
+header .overlay {
+	top: 0px;
+	left: 0px;
+	bottom: 0px;
+	right: 0px;
+	position: absolute;
+	background-color: #f1b8c4;
+	opacity: .6;
+	width: 50%;
+}
+header .container-fluid {
+	padding-left: 0px;
+	padding-right: 0px;
+	margin-left: auto;
+	margin-right: auto;
+}
+header .logo h1{
+	font-size: 23px;
+	padding: 5px;
+	display: inline-block;
+	font-weight: 200;
+	height: 45px;
+    padding-top: 0px;
+}
+header .logo a{
+	text-decoration: none;
+	color: #000;
+	display: block;
+	padding: 10px;
+}
+.main-menu-scroll {
+	background-color: #fff;
+	position: fixed;
+	top: 0px;
+	z-index: 1000;
+	left: 0;
+    right: 0;
+    padding: 0 120px;
+    box-shadow: 0px 3px 7px #ccc;
+}
+.style-text-last {
+	background-color: #f1b8c4;
+	color: #fff !important;
+}
+.style-text-first {
+	color: #f1b8c4 !important;
+}
+header .menu #submenu {
+	box-shadow: 1px 0px 6px #ccc;
+	display: none;
+	position: absolute;
+	z-index: 10;
+	padding: 0 0 0 15px;
+    background-color: #fff;
+    width: 145px;
+    border: 1px solid #fff;
+    border-radius: 8px;
+    top: 45px;
+}
+header .menu #submenu li {
+	width: 100%;
+	text-align: left;
+}
+header .menu #submenu li a {
+	padding: 15px;
+}
+header .menu .submenu2 {
+	background-color: #fff;
+	position: absolute;
+	width: 350px;
+    right: 0px;
+    padding: 0px 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    z-index: 1;
+    display: none;
+}
+header .menu .submenu2 > li {
+	width: 100%;
+	padding: 10px 0px;
+    border-top: 1px solid #ccc;
+}
+header .menu .submenu2 > li:first-child {
+	text-align: left;
+	margin-bottom: 20px;
+    margin-top: 10px;
+    border: none;
+}
+header .menu .submenu2 .list-products {
+	text-align: left;
+	overflow: hidden;
+}
+header .menu .submenu2 .list-products p:first-child {
+	width: 270px;
+}
+header .menu .submenu2 .list-products p:last-child {
+	font-size: 12px;
+}
+header .menu .submenu2 .carts {
+	border: none;
+}
+header .menu .submenu2 .carts a {
+	width: 55%;
+    float: right;
+    border: 1px solid #f1b8c4;
+    background: #f1b8c4;
+    border-radius: 15px;
+    text-align: center;
+}
+header .menu .submenu2 .delete-product {
+	padding: 2px;
+	color: #ccc;
+}
+header .menu {
+	text-align: right;
+	margin: 0px;
+	height: 100%;
+}
+header .menu li{
+	display: inline-block;
+	height: 100%;
+	position: relative;
+}
+header .menu li a {
+	display: block;
+	padding: 17px 30px;
+	color: #000;
+	text-decoration: none;
+	font-size: 13px;
+}
+header .header-content {
+	text-align: center;
+	margin-top: 95px;
+}
+header .header-content .lable-1 {
+	font-weight: 700;
+	font-size: 110px;
+	color: #fff;
+	letter-spacing: 2px;
+}
+header .header-content .lable-2 {
+	font-weight: 400;
+	font-size: 18px;
+	color: #fff;
+	padding-bottom: 15px;
+}
+header .header-content .lable-3 {
+	background-color: #fff;
+    padding: 20px 26px;
+    border: 1px solid #fff;
+    border-radius: 35px;
+}

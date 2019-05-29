@@ -1,0 +1,151 @@
+@charset "ISO-8859-1";
+header {
+	background-image: url(../images/bg_6.jpg);
+	background-size: cover;
+	background-position: center;
+	height: 400px;
+	position: relative;
+	padding-top: 18px;
+}
+header .container-fluid {
+	padding-left: 0px;
+	padding-right: 0px;
+	margin-left: auto;
+	margin-right: auto;
+}
+header .logo h1{
+	font-size: 23px;
+	padding: 5px;
+	display: inline-block;
+	font-weight: 200;
+	height: 45px;
+    padding-top: 0px;
+}
+header .logo a{
+	text-decoration: none;
+	color: #000;
+	display: block;
+	padding: 10px;
+}
+.main-menu-scroll {
+	background-color: #fff;
+	position: fixed !important;
+	top: 0px;
+	z-index: 1000;
+	left: 0;
+    right: 0;
+    padding: 0 120px !important;
+    box-shadow: 0px 3px 7px #ccc;
+}
+.style-text-last {
+	background-color: #f1b8c4;
+	color: #fff !important;
+}
+.style-text-first {
+	color: #f1b8c4 !important;
+}
+header .menu #submenu {
+	display: none;
+	box-shadow: 1px 0px 6px #ccc;
+	position: absolute;
+	z-index: 10;
+	padding: 0 0 0 15px;
+    background-color: #fff;
+    width: 145px;
+    border: 1px solid #fff;
+    border-radius: 8px;
+}
+header .menu #submenu li {
+	width: 100%;
+	text-align: left;
+}
+header .menu #submenu li a {
+	padding: 15px;
+}
+header .main-menu {
+	position: absolute;
+    background-color: #fff;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 5px 120px;
+}
+header .menu .submenu2 {
+	background-color: #fff;
+	position: absolute;
+	width: 350px;
+    right: 0px;
+    padding: 0px 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    z-index: 1;
+    display: none;
+}
+header .menu .submenu2 > li {
+	width: 100%;
+	padding: 10px 0px;
+    border-top: 1px solid #ccc;
+}
+header .menu .submenu2 > li:first-child {
+	text-align: left;
+	margin-bottom: 20px;
+    margin-top: 10px;
+    border: none;
+}
+header .menu .submenu2 .list-products {
+	text-align: left;
+	overflow: hidden;
+}
+header .menu .submenu2 .list-products p:first-child {
+	width: 270px;
+}
+header .menu .submenu2 .list-products p:last-child {
+	font-size: 12px;
+}
+header .menu .submenu2 .carts {
+	border: none;
+}
+header .menu .submenu2 .carts a {
+	width: 55%;
+    float: right;
+    border: 1px solid #f1b8c4;
+    background: #f1b8c4;
+    border-radius: 15px;
+    text-align: center;
+}
+header .menu .submenu2 .delete-product {
+	padding: 2px;
+	color: #ccc;
+}
+header .menu {
+	text-align: right;
+	margin: 0px;
+	height: 100%;
+}
+header .menu li{
+	display: inline-block;
+	height: 100%;
+}
+header .menu li a {
+	display: block;
+	padding: 17px 30px;
+	color: #000;
+	text-decoration: none;
+	font-size: 13px;
+}
+header .header-content {
+	text-align: center;
+	margin-top: 175px;
+}
+header .header-content .lable-1 {
+	font-size: 50px;
+    font-weight: 100;
+    letter-spacing: 2px;
+}
+header .header-content .lable-2 {
+	color: #000;
+    text-decoration: none;
+}
+header .header-content .lable-3 {
+	display: inline-block;
+}

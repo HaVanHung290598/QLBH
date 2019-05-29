@@ -1,0 +1,14 @@
+@charset "ISO-8859-1";
+.bkground {
+	background-image: url(../images/bg_7.JPG);
+	background-size: cover;
+	background-position: bottom;
+	height: 600px;
+	opacity: 0.9;
+}
+.bkground h1 {
+	font-size: 105px;
+	font-weight: 700;
+	color: #fff;
+	margin-top: 235px;
+}

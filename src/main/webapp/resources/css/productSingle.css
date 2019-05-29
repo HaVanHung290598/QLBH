@@ -1,0 +1,50 @@
+@charset "ISO-8859-1";
+.productSingle {
+	background-color: #f8f9fa;
+    padding: 90px 0px;
+}
+.productSingle .product-name {
+	font-weight: 100;
+    letter-spacing: 1px;
+}
+.productSingle .product-price {
+	font-weight: unset;
+}
+.productSingle .description-product {
+	min-height: 375px;
+}
+.productSingle .product-size {
+	margin-bottom: 15px;
+	width: 25%;
+    height: 45px;
+    padding-left: 10px;
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+.productSingle form {
+	position: relative;
+}
+.productSingle form .except,.plus {
+	width: 45px;
+    height: 45px;
+    margin-right: 5px;
+    background-color: #fff;
+    border: 0.5px solid #a09e9e;
+}
+.productSingle form .number-product {
+	width: 100px;
+	height: 45px;
+	position: absolute;
+	text-align: center;
+}
+.productSingle form .plus {
+	margin-left: 105px;
+}
+.productSingle form > input {
+	border: 0.5px solid #a09e9e;
+    width: 170px;
+    height: 45px;
+    border-radius: 22px;
+    background-color: #f1b8c4;
+    color: #fff;
+}

@@ -1,0 +1,40 @@
+@charset "ISO-8859-1";
+.subscribe {
+	position: relative;
+	text-align: center;
+}
+.subscribe h1 {
+	position: absolute;
+	font-size: 130px;
+	font-weight: 700;
+	color: rgba(0, 0, 0, 0.04);
+	left: 25%;
+    top: 80px;
+}
+.subscribe p {
+	margin-top: 175px;
+    margin-bottom: 50px;
+    font-weight: 500;
+    letter-spacing: 2px;
+}
+.subscribe form {
+	margin-right: 70px;
+    margin-bottom: 70px;
+}
+.subscribe form input:first-child {
+	width: 300px;
+    padding-left: 10px;
+    height: 50px;
+    border: 2px solid #000;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+.subscribe form input:last-child {
+	border: 2px solid #000;
+    position: absolute;
+    height: 50px;
+    width: 100px;
+    border-left: none;
+    background-color: #000;
+    color: #fff;
+}

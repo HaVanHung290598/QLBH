@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+	<definition name="home" template="/WEB-INF/views/home.jsp">
+		<put-attribute name="check" value="/WEB-INF/views/home/check.jsp" />
+ 		<put-attribute name="header" value="/WEB-INF/views/home/header.jsp" />
+ 		<put-attribute name="trending-product" value="/WEB-INF/views/home/trending-product.jsp" />
+ 		<put-attribute name="products" value="/WEB-INF/views/home/products.jsp" />
+ 		<put-attribute name="bkground" value="/WEB-INF/views/home/bkground.jsp" />
+ 		<put-attribute name="management" value="/WEB-INF/views/home/management.jsp" />
+ 		<put-attribute name="statistical" value="/WEB-INF/views/home/statistical.jsp" />
+ 		<put-attribute name="subscribe" value="/WEB-INF/views/home/subscribe.jsp" />
+ 		<put-attribute name="footer" value="/WEB-INF/views/home/footer.jsp" />
+	</definition>
+	
+	<definition name="base-definition" template="/WEB-INF/views/defaultLayout.jsp">
+		<put-attribute name="header-collection" value="/WEB-INF/views/collection/header-collection.jsp" />
+		<put-attribute name="content" value="" />
+		<put-attribute name="products" value="" />
+		<put-attribute name="subscribe" value="/WEB-INF/views/home/subscribe.jsp" />
+ 		<put-attribute name="footer" value="/WEB-INF/views/home/footer.jsp" />
+	</definition>
+	
+	
+	
+	
+	<definition name="collection" extends="base-definition">
+		<put-attribute name="content" value="/WEB-INF/views/home/products.jsp" />
+	</definition>
+	
+	<definition name="productSingle" extends="base-definition">
+		<put-attribute name="content" value="/WEB-INF/views/productSingle/productSingle-content.jsp" />
+	</definition>	
+	
+	<definition name="cart" extends="base-definition">
+		<put-attribute name="content" value="/WEB-INF/views/cart/cart-content.jsp" />
+		<put-attribute name="products" value="/WEB-INF/views/home/products.jsp" />
+	</definition>
+	
+</tiles-definitions>
