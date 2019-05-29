@@ -1,5 +1,7 @@
 package com.hvh.dao;
 
-public interface UserDAO {
+import com.hvh.entity.User;
 
+public interface UserDAO {
+	public User getUserById(int user_id);
 }

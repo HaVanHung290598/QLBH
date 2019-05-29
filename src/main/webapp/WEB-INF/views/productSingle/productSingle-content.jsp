@@ -15,7 +15,7 @@
 					</div>
 					<div class="row">
 						<div class="col-md-12">
-							<form action="" method="get">
+							<form action="cart" method="post">
 								<select name="product-size" class="product-size">
 									<c:forEach items="${productAttributeDTOs}" var="s">
 										<c:if test="${s.attribute == 'size'}">
@@ -31,8 +31,9 @@
 									</c:forEach>
 								</select>
 								<div>
+									<input type="hidden" name="product-id" value="${productDTO.id}">
 									<input onclick="tru()" class="except" type="button" name="except" value="-">
-									<input id="number-product" class="number-product" type="text" value="1">
+									<input id="number-product" class="number-product" type="text" value="1" name="quantity">
 									<input onclick="cong()" class="plus" type="button" name="plus" value="+">
 								</div><br/>
 								<input type="submit" name="" value="Add to cart">

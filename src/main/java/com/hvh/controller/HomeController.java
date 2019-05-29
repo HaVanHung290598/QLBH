@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.hvh.model.CartDTO;
 import com.hvh.model.ProductAttributeDTO;
 import com.hvh.model.ProductDTO;
+import com.hvh.service.CartService;
 import com.hvh.service.ProductAttributeService;
 import com.hvh.service.ProductService;
 
@@ -25,6 +27,9 @@ public class HomeController {
 	
 	@Autowired
 	ProductAttributeService productAtttributeService;
+	
+	@Autowired
+	CartService cartService;
 	
 	@RequestMapping(value= {"/","home"}, method = RequestMethod.GET)
 	public String home(Model model) {
@@ -48,12 +53,12 @@ public class HomeController {
 		return "collection";
 	}
 	@RequestMapping(value="/productSingle", method = RequestMethod.GET)
-	public String ProductSingle(Model model, @RequestParam(name="productId", required = false) Integer id) {
-		if(id != null) {
-			ProductDTO productDTO = productService.getProductById(id);
+	public String ProductSingle(Model model, @RequestParam(name="productId", required = false) Integer productId) {
+		if(productId != null) {
+			ProductDTO productDTO = productService.getProductById(productId);
 			model.addAttribute("productDTO", productDTO);
 			model.addAttribute("display", "block");
-			List<ProductAttributeDTO> productAttributeDTOs = productAtttributeService.getProductAttributeByProduct(id);
+			List<ProductAttributeDTO> productAttributeDTOs = productAtttributeService.getProductAttributeByProduct(productId);
 			model.addAttribute("productAttributeDTOs", productAttributeDTOs);			
 		} else {
 			model.addAttribute("display", "none");
@@ -68,6 +73,23 @@ public class HomeController {
 		model.addAttribute("head", "MY CART");
 		model.addAttribute("home", "HOME");
 		model.addAttribute("page", "CART");
+		List<CartDTO> carts = cartService.getListCartByUser(1);
+		model.addAttribute("carts", carts);
 		return "cart";
+	}
+	@RequestMapping(value="/cart", method = RequestMethod.POST)
+	public String cart(HttpServletRequest req, HttpServletResponse resp) {
+		int product_id = Integer.parseInt(req.getParameter("product-id"));
+		String color = req.getParameter("product-color");
+		String size = req.getParameter("product-size");
+		int quantity = Integer.parseInt(req.getParameter("quantity"));
+		CartDTO cartDTO = new CartDTO();
+		cartDTO.setProduct_id(product_id);
+		cartDTO.setUser_id(1);
+		cartDTO.setQuantity(quantity);
+		cartDTO.setSize(size);
+		cartDTO.setColor(color);
+		cartService.addCart(cartDTO);
+		return "redirect:/cart";
 	}
 }

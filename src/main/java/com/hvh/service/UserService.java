@@ -1,5 +1,7 @@
 package com.hvh.service;
 
-public interface UserService {
+import com.hvh.model.UserDTO;
 
+public interface UserService {
+	public UserDTO getUserById(int user_id);
 }
