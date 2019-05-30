@@ -10,41 +10,27 @@
 							<th></th>
 							<th>Product</th>
 							<th>Price</th>
-							<th>Quanlity</th>
+							<th>Quantity</th>
 							<th>Total</th>
 						</tr>
-						<tr>
-							<td class="product">
-								<input type="submit" value="x">
-								<img src="<c:url value="/resources/images/product-4.jpg"/>" height="240px" width="auto"/>
-							</td>
-							<td class="product-title">
-								<p>YOUNG WOMAN WEARING DRESS</p>
-								<br/>
-								<p>Far far away, behind the word mountains, far from the countries</p>
-							</td>
-							<td class="price">$120.00</td>
-							<td>
-								<input type="text" name="number-product" class="quanlity">
-							</td>
-							<td class="total">$120.00</td>
-						</tr>
-						<tr>
-							<td class="product">
-								<input type="submit" value="x">
-								<img src="<c:url value="/resources/images/product-3.jpg"/>" height="240px" width="auto"/>
-							</td>
-							<td class="product-title">
-								<p>YOUNG WOMAN WEARING DRESS</p>
-								<br/>
-								<p>Far far away, behind the word mountains, far from the countries</p>
-							</td>
-							<td class="price">$120.00</td>
-							<td>
-								<input type="text" name="number-product" class="quanlity">
-							</td>
-							<td class="total">$120.00</td>
-						</tr>
+						<c:forEach items="${params}" var="s">
+							<tr>
+								<td class="product">
+									<a href="deleteCartItem?user-id=${s.get('user-id')}&&product-id=${s.get('product-id')}">x</a>
+									<img src="<c:url value="/resources/images/${s.get('image')}.jpg"/>" height="240px" width="auto"/>
+								</td>
+								<td class="product-title">
+									<p>${s.get("product-name")}</p>
+									<br/>
+									<p style="opacity:0.5;">Product classification: ${s.get("color")},${s.get("size")}</p>
+								</td>
+								<td class="price">$<input type="text" value="${s.get('price')}" class="price-product"></td>
+								<td>
+									<input type="text" name="number-product" value="${s.get('quantity')}" class="quantity" id="quantity" data-price="${s.get('price')}">
+								</td>
+								<td class="total">$<input type="text" value="${s.get('price')*s.get('quantity')}" class="total-product"></td>
+							</tr>
+						</c:forEach>
 					</table>
 				</div>
 			</div>

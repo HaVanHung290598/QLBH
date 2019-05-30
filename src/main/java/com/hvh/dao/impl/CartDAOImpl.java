@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import com.hvh.dao.CartDAO;
 import com.hvh.entity.Cart;
+import com.hvh.entity.Cart.Pk;
 
 @Repository
 @Transactional
@@ -24,6 +25,10 @@ public class CartDAOImpl implements CartDAO {
 	public void addCart(Cart cart) {
 		sessionFactory.getCurrentSession().save(cart);		
 	}
+	@Override
+	public void deleteCart(Pk pk) {
+		sessionFactory.getCurrentSession().delete(getCartById(pk));
+	}
 
 	@Override
 	public List<Cart> getListCartByUser(int user_id) {
@@ -34,5 +39,8 @@ public class CartDAOImpl implements CartDAO {
 		List<Cart> result = query.list();
 		return result;
 	}
-
+	@Override
+	public Cart getCartById(Pk pk) {
+		return sessionFactory.getCurrentSession().get(Cart.class, pk);
+	}
 }

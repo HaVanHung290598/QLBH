@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.hvh.model.CartDTO;
 import com.hvh.model.ProductAttributeDTO;
 import com.hvh.model.ProductDTO;
 import com.hvh.service.CartService;
@@ -67,29 +66,5 @@ public class HomeController {
 		model.addAttribute("home", "HOME");
 		model.addAttribute("page", "PRODUCT SINGLE");
 		return "productSingle";
-	}
-	@RequestMapping(value="/cart", method = RequestMethod.GET)
-	public String cart(Model model) {
-		model.addAttribute("head", "MY CART");
-		model.addAttribute("home", "HOME");
-		model.addAttribute("page", "CART");
-		List<CartDTO> carts = cartService.getListCartByUser(1);
-		model.addAttribute("carts", carts);
-		return "cart";
-	}
-	@RequestMapping(value="/cart", method = RequestMethod.POST)
-	public String cart(HttpServletRequest req, HttpServletResponse resp) {
-		int product_id = Integer.parseInt(req.getParameter("product-id"));
-		String color = req.getParameter("product-color");
-		String size = req.getParameter("product-size");
-		int quantity = Integer.parseInt(req.getParameter("quantity"));
-		CartDTO cartDTO = new CartDTO();
-		cartDTO.setProduct_id(product_id);
-		cartDTO.setUser_id(1);
-		cartDTO.setQuantity(quantity);
-		cartDTO.setSize(size);
-		cartDTO.setColor(color);
-		cartService.addCart(cartDTO);
-		return "redirect:/cart";
 	}
 }

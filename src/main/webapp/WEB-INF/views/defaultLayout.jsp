@@ -24,6 +24,7 @@
 	<tiles:insertAttribute name="subscribe"/>
 	<tiles:insertAttribute name="footer"/>
 <script type="text/javascript" src="<c:url value="/resources/js/scroll.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/cart.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/menu.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/numberProduct.js"/>"></script>
 </body>
