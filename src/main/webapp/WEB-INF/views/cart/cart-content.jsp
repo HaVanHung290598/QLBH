@@ -43,23 +43,22 @@
 						</tr>
 						<tr>
 							<th>Subtotal</th>
-							<td>$120.00</td>
+							<td>$<input type="text" value="" class="subtotal"></td>
 						</tr>
 						<tr>
 							<th>Delivery</th>
-							<td>$0.00</td>
+							<td>$<input type="text" value="0" class="delivery"></td>
 						</tr>
 						<tr>
 							<th>Discout</th>
-							<td>$3.00</td>
+							<td>$<input type="text" value="0" class="discount"></td>
 						</tr>
 						<tr class="total">
 							<th>TOTAL</th>
-							<td>$9.00</td>
+							<td>$<input type="text" value="0" class="total-price-cartItem"></td>
 						</tr>
 						<tr>
 							<td colspan="2"><input type="submit" name="" value="Process to Checkout"></td>
-							
 						</tr>
 					</table>
 				</div>
