@@ -43,4 +43,11 @@ public class CartDAOImpl implements CartDAO {
 	public Cart getCartById(Pk pk) {
 		return sessionFactory.getCurrentSession().get(Cart.class, pk);
 	}
+	@Override
+	public void deleteCartByUserId(int user_id) {
+		List<Cart> carts = getListCartByUser(user_id);
+		for(Cart cart : carts) {
+			sessionFactory.getCurrentSession().delete(cart);
+		}
+	}
 }

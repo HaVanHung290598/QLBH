@@ -1,37 +1,30 @@
 package com.hvh.model;
 
 import java.util.Date;
-import java.util.List;
 
 public class InvoiceItemDTO {
-	private int id;
 	private int invoice_id;
 	private int product_id;
 	private int quantity;
+	private String size;
+	private String color;
 	private int price;
 	private int discount_amount;
 	private Date created_at;
-	private List<InvoiceItemAttributeDTO> invoiceItemAttributes;
 	public InvoiceItemDTO() {
 		super();
 	}
-	public InvoiceItemDTO(int id, int invoice_id, int product_id, int quantity, int price, int discount_amount,
-			Date created_at, List<InvoiceItemAttributeDTO> invoiceItemAttributes) {
+	public InvoiceItemDTO(int invoice_id, int product_id, int quantity, String size, String color, int price,
+			int discount_amount, Date created_at) {
 		super();
-		this.id = id;
 		this.invoice_id = invoice_id;
 		this.product_id = product_id;
 		this.quantity = quantity;
+		this.size = size;
+		this.color = color;
 		this.price = price;
 		this.discount_amount = discount_amount;
 		this.created_at = created_at;
-		this.invoiceItemAttributes = invoiceItemAttributes;
-	}
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
 	}
 	public int getInvoice_id() {
 		return invoice_id;
@@ -51,6 +44,18 @@ public class InvoiceItemDTO {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
+	public String getSize() {
+		return size;
+	}
+	public void setSize(String size) {
+		this.size = size;
+	}
+	public String getColor() {
+		return color;
+	}
+	public void setColor(String color) {
+		this.color = color;
+	}
 	public int getPrice() {
 		return price;
 	}
@@ -69,10 +74,5 @@ public class InvoiceItemDTO {
 	public void setCreated_at(Date created_at) {
 		this.created_at = created_at;
 	}
-	public List<InvoiceItemAttributeDTO> getInvoiceItemAttributes() {
-		return invoiceItemAttributes;
-	}
-	public void setInvoiceItemAttributes(List<InvoiceItemAttributeDTO> invoiceItemAttributes) {
-		this.invoiceItemAttributes = invoiceItemAttributes;
-	}
+	
 }

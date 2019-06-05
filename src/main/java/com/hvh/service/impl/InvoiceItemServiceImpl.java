@@ -1,5 +1,8 @@
 package com.hvh.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -7,6 +10,7 @@ import com.hvh.dao.InvoiceDAO;
 import com.hvh.dao.InvoiceItemDAO;
 import com.hvh.dao.ProductDAO;
 import com.hvh.entity.InvoiceItem;
+import com.hvh.entity.InvoiceItem.PkInvoiceItem;
 import com.hvh.model.InvoiceItemDTO;
 import com.hvh.service.InvoiceItemService;
 
@@ -23,9 +27,13 @@ public class InvoiceItemServiceImpl implements InvoiceItemService {
 	@Override
 	public void addInvoiceItem(InvoiceItemDTO invoiceItemDTO) {
 		InvoiceItem invoiceItem = new InvoiceItem();
-		invoiceItem.setInvoice(invoiceDAO.getInvoiceById(invoiceItemDTO.getInvoice_id()));
-		invoiceItem.setProduct(productDAO.getProductById(invoiceItemDTO.getProduct_id()));
+		PkInvoiceItem pk = new PkInvoiceItem();
+		pk.setInvoice(invoiceDAO.getInvoiceById(invoiceItemDTO.getInvoice_id()));
+		pk.setProduct(productDAO.getProductById(invoiceItemDTO.getProduct_id()));
+		invoiceItem.setPk(pk);
 		invoiceItem.setQuantity(invoiceItemDTO.getQuantity());
+		invoiceItem.setSize(invoiceItemDTO.getSize());
+		invoiceItem.setColor(invoiceItemDTO.getColor());
 		invoiceItem.setPrice(invoiceItemDTO.getPrice());
 		invoiceItem.setDiscount_amount(invoiceItemDTO.getDiscount_amount());
 		invoiceItem.setCreated_at(invoiceItemDTO.getCreated_at());
@@ -33,17 +41,22 @@ public class InvoiceItemServiceImpl implements InvoiceItemService {
 	}
 
 	@Override
-	public InvoiceItemDTO getInvoiceItemById(int invoice_item_id) {
-		InvoiceItem invoiceItem = invoiceItemDAO.getInvoiceItemById(invoice_item_id);
-		InvoiceItemDTO invoiceItemDTO = new InvoiceItemDTO();
-		invoiceItemDTO.setId(invoiceItem.getId());
-		invoiceItemDTO.setInvoice_id(invoiceItem.getInvoice().getId());
-		invoiceItemDTO.setProduct_id(invoiceItem.getProduct().getId());
-		invoiceItemDTO.setQuantity(invoiceItem.getQuantity());
-		invoiceItemDTO.setPrice(invoiceItem.getPrice());
-		invoiceItemDTO.setDiscount_amount(invoiceItem.getDiscount_amount());
-		invoiceItemDTO.setCreated_at(invoiceItem.getCreated_at());
-		return invoiceItemDTO;
+	public List<InvoiceItemDTO> getInvoiceItemByInvoiceId(int invoice_id) {
+		List<InvoiceItemDTO> invoiceItemDTOs = new ArrayList<InvoiceItemDTO>();
+		List<InvoiceItem> invoiceItems = invoiceItemDAO.getInvoiceItemByInvoiceId(invoice_id);
+		for(InvoiceItem invoiceItem : invoiceItems) {
+			InvoiceItemDTO invoiceItemDTO = new InvoiceItemDTO();
+			invoiceItemDTO.setInvoice_id(invoiceItem.getPk().getInvoice().getId());
+			invoiceItemDTO.setProduct_id(invoiceItem.getPk().getProduct().getId());
+			invoiceItemDTO.setQuantity(invoiceItem.getQuantity());
+			invoiceItemDTO.setSize(invoiceItem.getSize());
+			invoiceItemDTO.setColor(invoiceItem.getColor());
+			invoiceItemDTO.setPrice(invoiceItem.getPrice());
+			invoiceItemDTO.setDiscount_amount(invoiceItem.getDiscount_amount());
+			invoiceItemDTO.setCreated_at(invoiceItem.getCreated_at());
+			invoiceItemDTOs.add(invoiceItemDTO);
+		}
+		return invoiceItemDTOs;
 	}
 
 }

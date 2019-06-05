@@ -1,8 +1,12 @@
 package com.hvh.dao.impl;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -20,8 +24,13 @@ public class InvoiceItemDAOImpl implements InvoiceItemDAO {
 		sessionFactory.getCurrentSession().save(invoiceItem);
 	}
 	@Override
-	public InvoiceItem getInvoiceItemById(int invoice_item_id) {
-		return sessionFactory.getCurrentSession().get(InvoiceItem.class, invoice_item_id);
+	public List<InvoiceItem> getInvoiceItemByInvoiceId(int invoice_id) {
+		String hql = "From InvoiceItem where invoice_id = : invoice_id";
+		Session session = sessionFactory.getCurrentSession();
+		Query<InvoiceItem> query = session.createQuery(hql, InvoiceItem.class);
+		query.setParameter("invoice_id", invoice_id);
+		List<InvoiceItem> invoiceItems = query.list();
+		return invoiceItems;
 	}
 
 }

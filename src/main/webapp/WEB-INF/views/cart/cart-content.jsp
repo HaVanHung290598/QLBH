@@ -31,37 +31,56 @@
 								<td class="total">$<input type="text" value="${s.get('price')*s.get('quantity')}" class="total-product"></td>
 							</tr>
 						</c:forEach>
+						<tr>
+							<td colspan="5">${error}</td>
+						</tr>
 					</table>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-md-5"></div>
-				<div class="col-md-6 cart-totals">
-					<table>
-						<tr>
-							<th colspan="2">CART TOTALS</th>
-						</tr>
-						<tr>
-							<th>Subtotal</th>
-							<td>$<input type="text" value="" class="subtotal"></td>
-						</tr>
-						<tr>
-							<th>Delivery</th>
-							<td>$<input type="text" value="0" class="delivery"></td>
-						</tr>
-						<tr>
-							<th>Discout</th>
-							<td>$<input type="text" value="0" class="discount"></td>
-						</tr>
-						<tr class="total">
-							<th>TOTAL</th>
-							<td>$<input type="text" value="0" class="total-price-cartItem"></td>
-						</tr>
-						<tr>
-							<td colspan="2"><input type="submit" name="" value="Process to Checkout"></td>
-						</tr>
-					</table>
-				</div>
+			<div class="row" style="display: ${params.size() == 0 ? 'none' : 'flex'};">
+				<form action="invoice" method="post" class="form-cart">
+					<div class="col-md-5">
+						<table>
+							<tr>
+								<th colspan="2">Customer information</th>
+							</tr>
+							<tr>
+								<th>Delivery address</th>
+								<td><input type="text" class="form-control" name="delivery-address"></td>
+							</tr>
+							<tr>
+								<th>Delivery phone</th>
+								<td><input type="text" class="form-control" name="delivery-phone"></td>
+							</tr>
+						</table>
+					</div>
+					<div class="col-md-6 cart-totals">
+						<table>
+							<tr>
+								<th colspan="2">CART TOTALS</th>
+							</tr>
+							<tr>
+								<th>Subtotal</th>
+								<td>$<input type="text" value="" class="subtotal"></td>
+							</tr>
+							<tr>
+								<th>Delivery</th>
+								<td>$<input type="text" value="0" class="delivery"></td>
+							</tr>
+							<tr>
+								<th>Discout</th>
+								<td>$<input type="text" value="0" class="discount"></td>
+							</tr>
+							<tr class="total">
+								<th>TOTAL</th>
+								<td>$<input type="text" name="total" class="total-price-cartItem"></td>
+							</tr>
+							<tr>
+								<td colspan="2"><input type="submit" name="" value="Process to Checkout"></td>
+							</tr>
+						</table>
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>

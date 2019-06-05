@@ -10,10 +10,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
-@Entity(name="invoice")
+@Entity
+@Table(name="invoice")
 public class Invoice {
 	@Id
 	@Column(name="id")
@@ -45,15 +47,17 @@ public class Invoice {
 	@Column(name="created_at")
 	private Date created_at;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "invoice")
-	private List<InvoiceItem> invoiceItems;
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "invoice")
+//	private List<InvoiceItem> invoiceItems;
+	@ManyToMany(mappedBy = "invoices")
+	private List<Product> products;
 	
 	public Invoice() {
 		super();
 	}
 
 	public Invoice(int id, User user, int discount_amount, int tax, int total_amount, String status,
-			String delivery_address, String delivery_phone, Date created_at, List<InvoiceItem> invoiceItems) {
+			String delivery_address, String delivery_phone, Date created_at, List<Product> products) {
 		super();
 		this.id = id;
 		this.user = user;
@@ -64,7 +68,7 @@ public class Invoice {
 		this.delivery_address = delivery_address;
 		this.delivery_phone = delivery_phone;
 		this.created_at = created_at;
-		this.invoiceItems = invoiceItems;
+		this.products = products;
 	}
 
 	public int getId() {
@@ -139,12 +143,11 @@ public class Invoice {
 		this.created_at = created_at;
 	}
 
-	public List<InvoiceItem> getInvoiceItems() {
-		return invoiceItems;
+	public List<Product> getProducts() {
+		return products;
 	}
 
-	public void setInvoiceItems(List<InvoiceItem> invoiceItems) {
-		this.invoiceItems = invoiceItems;
+	public void setProducts(List<Product> products) {
+		this.products = products;
 	}
-	
 }

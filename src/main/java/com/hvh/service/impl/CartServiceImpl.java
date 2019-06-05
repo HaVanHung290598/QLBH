@@ -78,4 +78,9 @@ public class CartServiceImpl implements CartService {
 		return cartDTO;
 	}
 
+	@Override
+	public void deleteCartByUserId(int user_id) {
+		cartDAO.deleteCartByUserId(user_id);
+	}
+
 }

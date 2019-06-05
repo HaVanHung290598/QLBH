@@ -56,8 +56,11 @@ public class Product {
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "product")
 	private List<ProductAttribute> productAttributes;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
-	private List<InvoiceItem> invoiceItems;
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
+//	private List<InvoiceItem> invoiceItems;
+	@ManyToMany
+	@JoinTable(name="invoice_item", joinColumns = @JoinColumn(name="invoice_id"), inverseJoinColumns = @JoinColumn(name="product_id"))
+	private List<Invoice> invoices;
 
 	public Product() {
 		super();
@@ -65,7 +68,7 @@ public class Product {
 
 	public Product(int id, String product_name, int unit_price, String description, String image,
 			int quantity_available, Date created_at, Date updated_at, List<User> users,
-			List<ProductAttribute> productAttributes, List<InvoiceItem> invoiceItems) {
+			List<ProductAttribute> productAttributes, List<Invoice> invoices) {
 		super();
 		this.id = id;
 		this.product_name = product_name;
@@ -77,7 +80,7 @@ public class Product {
 		this.updated_at = updated_at;
 		this.users = users;
 		this.productAttributes = productAttributes;
-		this.invoiceItems = invoiceItems;
+		this.invoices = invoices;
 	}
 
 	public int getId() {
@@ -160,11 +163,11 @@ public class Product {
 		this.productAttributes = productAttributes;
 	}
 
-	public List<InvoiceItem> getInvoiceItems() {
-		return invoiceItems;
+	public List<Invoice> getInvoices() {
+		return invoices;
 	}
 
-	public void setInvoiceItems(List<InvoiceItem> invoiceItems) {
-		this.invoiceItems = invoiceItems;
+	public void setInvoices(List<Invoice> invoices) {
+		this.invoices = invoices;
 	}
 }

@@ -1,35 +1,74 @@
 package com.hvh.entity;
 
+import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.Embeddable;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
-@Entity(name="invoice_item")
+@Entity
+@Table(name="invoice_item")
 public class InvoiceItem {
-	@Id
-	@Column(name="id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="invoice_id")
-	private Invoice invoice;
+//	@Id
+//	@Column(name="id")
+//	@GeneratedValue(strategy = GenerationType.IDENTITY)
+//	private int id;
+	@EmbeddedId
+	private PkInvoiceItem pk;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="product_id")
-	private Product product;
+	@Embeddable
+	public static class PkInvoiceItem implements Serializable {
+		private static final long serialVersionUID = 1L;
+		
+		@ManyToOne(fetch = FetchType.LAZY)
+		@JoinColumn(name="product_id")
+		private Product product;
+		
+		@ManyToOne(fetch = FetchType.LAZY)
+		@JoinColumn(name="invoice_id")
+		private Invoice invoice;
+
+		public PkInvoiceItem() {
+			super();
+		}
+
+		public PkInvoiceItem(Product product, Invoice invoice) {
+			super();
+			this.product = product;
+			this.invoice = invoice;
+		}
+
+		public Product getProduct() {
+			return product;
+		}
+
+		public void setProduct(Product product) {
+			this.product = product;
+		}
+
+		public Invoice getInvoice() {
+			return invoice;
+		}
+
+		public void setInvoice(Invoice invoice) {
+			this.invoice = invoice;
+		}
+	}
 	
 	@Column(name="quantity")
 	private int quantity;
+	
+	@Column(name="size")
+	private String size;
+	
+	@Column(name="color")
+	private String color;
 	
 	@Column(name="price")
 	private int price;
@@ -39,49 +78,30 @@ public class InvoiceItem {
 	
 	@Column(name="created_at")
 	private Date created_at;
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "invoiceItem")
-	List<InvoiceItemAttribute> invoiceItemAttributes;
-	
+
 	public InvoiceItem() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
 
-	public InvoiceItem(int id, Invoice invoice, Product product, int quantity, int price, int discount_amount,
-			Date created_at, List<InvoiceItemAttribute> invoiceItemAttributes) {
+	public InvoiceItem(PkInvoiceItem pk, int quantity, String size, String color, int price, int discount_amount,
+			Date created_at) {
 		super();
-		this.id = id;
-		this.invoice = invoice;
-		this.product = product;
+		this.pk = pk;
 		this.quantity = quantity;
+		this.size = size;
+		this.color = color;
 		this.price = price;
 		this.discount_amount = discount_amount;
 		this.created_at = created_at;
-		this.invoiceItemAttributes = invoiceItemAttributes;
 	}
 
-	public int getId() {
-		return id;
+	public PkInvoiceItem getPk() {
+		return pk;
 	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public Invoice getInvoice() {
-		return invoice;
-	}
-
-	public void setInvoice(Invoice invoice) {
-		this.invoice = invoice;
-	}
-
-	public Product getProduct() {
-		return product;
-	}
-
-	public void setProduct(Product product) {
-		this.product = product;
+	public void setPk(PkInvoiceItem pk) {
+		this.pk = pk;
 	}
 
 	public int getQuantity() {
@@ -90,6 +110,22 @@ public class InvoiceItem {
 
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
+	}
+
+	public String getSize() {
+		return size;
+	}
+
+	public void setSize(String size) {
+		this.size = size;
+	}
+
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
 	}
 
 	public int getPrice() {
@@ -114,13 +150,9 @@ public class InvoiceItem {
 
 	public void setCreated_at(Date created_at) {
 		this.created_at = created_at;
-	}
-
-	public List<InvoiceItemAttribute> getInvoiceItemAttributes() {
-		return invoiceItemAttributes;
-	}
-
-	public void setInvoiceItemAttributes(List<InvoiceItemAttribute> invoiceItemAttributes) {
-		this.invoiceItemAttributes = invoiceItemAttributes;
-	}
+	}	
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "invoiceItem")
+//	List<InvoiceItemAttribute> invoiceItemAttributes;
+	
+	
 }

@@ -47,4 +47,20 @@ public class InvoiceServiceImpl implements InvoiceService {
 		return invoiceDTO;
 	}
 
+	@Override
+	public InvoiceDTO getNewInvoice() {
+		Invoice invoice = invoiceDAO.getNewInvoice();
+		InvoiceDTO invoiceDTO = new InvoiceDTO();
+		invoiceDTO.setId(invoice.getId());
+		invoiceDTO.setUser_id(invoice.getUser().getId());
+		invoiceDTO.setDiscount_amount(invoice.getDiscount_amount());
+		invoiceDTO.setTax(invoice.getTax());
+		invoiceDTO.setTotal_amount(invoice.getTotal_amount());
+		invoiceDTO.setStatus(invoice.getStatus());
+		invoiceDTO.setDelivery_address(invoice.getDelivery_address());
+		invoiceDTO.setDelivery_phone(invoice.getDelivery_phone());
+		invoiceDTO.setCreated_at(invoice.getCreated_at());
+		return invoiceDTO;
+	}
+
 }
