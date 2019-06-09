@@ -15,6 +15,7 @@
 					</div>
 					<div class="row">
 						<div class="col-md-12">
+<%-- 							<c:url value="/admin/cart" var="url"/> --%>
 							<form action="cart" method="post">
 								<select name="product-size" class="product-size">
 									<c:forEach items="${productAttributeDTOs}" var="s">

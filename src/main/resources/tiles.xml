@@ -39,4 +39,7 @@
 		<put-attribute name="products" value="/WEB-INF/views/home/products.jsp" />
 	</definition>
 	
+	<definition name="login" template="/WEB-INF/views/login.jsp">
+	</definition>
+	
 </tiles-definitions>

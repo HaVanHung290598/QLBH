@@ -13,7 +13,8 @@ public class UserDTO {
 	private String email;
 	private Date created_at;
 	private Date updated_at;
-	private int role;
+	private String role;
+	private int enabled;
 	private List<CartDTO> carts;
 	private List<InvoiceDTO> invoices;
 	
@@ -22,7 +23,8 @@ public class UserDTO {
 	}
 
 	public UserDTO(int id, String username, String password, String fullname, String address, String phone,
-			String email, Date created_at, Date updated_at, int role, List<CartDTO> carts, List<InvoiceDTO> invoices) {
+			String email, Date created_at, Date updated_at, String role, int enabled, List<CartDTO> carts,
+			List<InvoiceDTO> invoices) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -34,6 +36,7 @@ public class UserDTO {
 		this.created_at = created_at;
 		this.updated_at = updated_at;
 		this.role = role;
+		this.enabled = enabled;
 		this.carts = carts;
 		this.invoices = invoices;
 	}
@@ -110,12 +113,20 @@ public class UserDTO {
 		this.updated_at = updated_at;
 	}
 
-	public int getRole() {
+	public String getRole() {
 		return role;
 	}
 
-	public void setRole(int role) {
+	public void setRole(String role) {
 		this.role = role;
+	}
+
+	public int getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(int enabled) {
+		this.enabled = enabled;
 	}
 
 	public List<CartDTO> getCarts() {

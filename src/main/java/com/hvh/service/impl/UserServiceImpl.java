@@ -27,6 +27,7 @@ public class UserServiceImpl implements UserService{
 		userDTO.setCreated_at(user.getCreated_at());
 		userDTO.setUpdated_at(user.getUpdated_at());
 		userDTO.setRole(user.getRole());
+		userDTO.setEnabled(user.getEnabled());
 		return userDTO;
 	}
 	

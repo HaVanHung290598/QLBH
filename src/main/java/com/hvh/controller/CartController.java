@@ -21,6 +21,7 @@ import com.hvh.service.CartService;
 import com.hvh.service.ProductService;
 
 @Controller
+//@RequestMapping(value = "/admin")
 public class CartController {
 	@Autowired
 	CartService cartService;
@@ -29,11 +30,12 @@ public class CartController {
 	ProductService productService;
 	
 	@RequestMapping(value="/cart", method = RequestMethod.GET)
-	public String cart(Model model) {
+	public String cart(Model model, HttpServletRequest req) {
 		model.addAttribute("head", "MY CART");
 		model.addAttribute("home", "HOME");
 		model.addAttribute("page", "CART");
 		model.addAttribute("display", "none");
+		model.addAttribute("color", "#f1b8c4");
 		List<Map<String, Object>> params = new ArrayList<Map<String, Object>>();
 		List<CartDTO> carts = cartService.getListCartByUser(1);
 		for(CartDTO cart : carts) {
@@ -50,6 +52,14 @@ public class CartController {
 			params.add(param);
 		}
 		model.addAttribute("params", params);
+		
+		int pages = req.getParameter("page") == null ? 1 : Integer.parseInt(req.getParameter("page"));
+		int limit = req.getParameter("limit") == null ? 8 : Integer.parseInt(req.getParameter("limit"));
+		List<ProductDTO> productDTOs = productService.getListProduct(pages,limit);
+		model.addAttribute("pages", pages);
+		model.addAttribute("limit", limit);
+		model.addAttribute("productDTOs", productDTOs);
+		model.addAttribute("display", "block");
 		return "cart";
 	}
 	@RequestMapping(value="/cart", method = RequestMethod.POST)

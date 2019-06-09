@@ -49,7 +49,10 @@ public class User {
 	private Date updated_at;
 	
 	@Column(name = "role")
-	private int role;
+	private String role;
+	
+	@Column(name = "enabled")
+	private int enabled;
 	
 	@ManyToMany(mappedBy = "users")
 	private List<Product> products;
@@ -62,7 +65,8 @@ public class User {
 	}
 
 	public User(int id, String username, String password, String fullname, String address, String phone, String email,
-			Date created_at, Date updated_at, int role, List<Product> products, List<Invoice> invoices) {
+			Date created_at, Date updated_at, String role, int enabled, List<Product> products,
+			List<Invoice> invoices) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -74,6 +78,7 @@ public class User {
 		this.created_at = created_at;
 		this.updated_at = updated_at;
 		this.role = role;
+		this.enabled = enabled;
 		this.products = products;
 		this.invoices = invoices;
 	}
@@ -150,12 +155,20 @@ public class User {
 		this.updated_at = updated_at;
 	}
 
-	public int getRole() {
+	public String getRole() {
 		return role;
 	}
 
-	public void setRole(int role) {
+	public void setRole(String role) {
 		this.role = role;
+	}
+
+	public int getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(int enabled) {
+		this.enabled = enabled;
 	}
 
 	public List<Product> getProducts() {

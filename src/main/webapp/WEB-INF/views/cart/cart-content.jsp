@@ -37,6 +37,11 @@
 					</table>
 				</div>
 			</div>
+			<div class="row" style="display: ${params.size() != 0 ? 'none' : 'flex'};">
+				<div class="col-md-12">
+					<p>Cart empty</p>
+				</div>
+			</div>
 			<div class="row" style="display: ${params.size() == 0 ? 'none' : 'flex'};">
 				<form action="invoice" method="post" class="form-cart">
 					<div class="col-md-5">

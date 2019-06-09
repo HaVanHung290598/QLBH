@@ -15,6 +15,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -57,10 +58,10 @@ public class SpringConfigure implements WebMvcConfigurer {
 	@Bean
 	public DataSource dataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-		dataSource.setUrl("jdbc:mysql://localhost:3306/qlbh");
-		dataSource.setUsername("root");
-		dataSource.setPassword("k33pgoing98");
+		dataSource.setDriverClassName(env.getProperty("jdbc.driver"));
+		dataSource.setUrl(env.getProperty("jdbc.url"));
+		dataSource.setUsername(env.getProperty("jdbc.username"));
+		dataSource.setPassword(env.getProperty("jdbc.password"));
 		return dataSource;
 	}
 	@Autowired
@@ -72,8 +73,8 @@ public class SpringConfigure implements WebMvcConfigurer {
 		bean.setPackagesToScan("com.hvh.entity");
 		
 		Properties hibernateProperties = new Properties();
-		hibernateProperties.put("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
-		hibernateProperties.put("hibernate.show_sql", "true");
+		hibernateProperties.put("hibernate.dialect", env.getProperty("hibernate.dialect"));
+		hibernateProperties.put("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
 		
 		bean.setHibernateProperties(hibernateProperties);
 		return bean;
@@ -84,5 +85,9 @@ public class SpringConfigure implements WebMvcConfigurer {
 		HibernateTransactionManager hibernateTransactionManager = new HibernateTransactionManager();
 		hibernateTransactionManager.setSessionFactory(sessionFactory);
 		return hibernateTransactionManager;
+	}
+	@Bean
+	public BCryptPasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
 	}
 }

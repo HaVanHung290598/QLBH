@@ -35,6 +35,7 @@ public class HomeController {
 		List<ProductDTO> productDTOs = productService.getListProduct(6,4);
 		model.addAttribute("productDTOs", productDTOs);
 		model.addAttribute("display", "none");
+		model.addAttribute("color", "#f1b8c4");
 		return "home";
 	}
 	@RequestMapping(value="/collection", method = RequestMethod.GET)
@@ -49,6 +50,7 @@ public class HomeController {
 		model.addAttribute("home", "HOME");
 		model.addAttribute("page", "PRODUCT");
 		model.addAttribute("display", "block");
+		model.addAttribute("color", "#f1b8c4");
 		return "collection";
 	}
 	@RequestMapping(value="/productSingle", method = RequestMethod.GET)
@@ -65,6 +67,7 @@ public class HomeController {
 		model.addAttribute("head", "PRODUCT SINGLE");
 		model.addAttribute("home", "HOME");
 		model.addAttribute("page", "PRODUCT SINGLE");
+		model.addAttribute("color", "#f1b8c4");
 		return "productSingle";
 	}
 }
