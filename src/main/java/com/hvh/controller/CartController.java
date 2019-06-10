@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,8 +19,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.hvh.model.CartDTO;
 import com.hvh.model.ProductDTO;
+import com.hvh.model.UserDTO;
 import com.hvh.service.CartService;
 import com.hvh.service.ProductService;
+import com.hvh.service.UserService;
 
 @Controller
 public class CartController {
@@ -28,6 +32,9 @@ public class CartController {
 	@Autowired
 	ProductService productService;
 	
+	@Autowired
+	UserService userService;
+	
 	@RequestMapping(value="/cart", method = RequestMethod.GET)
 	public String cart(Model model, HttpServletRequest req) {
 		model.addAttribute("head", "MY CART");
@@ -36,7 +43,13 @@ public class CartController {
 		model.addAttribute("display", "none");
 		model.addAttribute("color", "#f1b8c4");
 		List<Map<String, Object>> params = new ArrayList<Map<String, Object>>();
-		List<CartDTO> carts = cartService.getListCartByUser(1);
+		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String username = authentication.getName();
+		UserDTO userDTO = userService.getUserByUsername(username);
+		
+		model.addAttribute("userId", userDTO.getId());
+		List<CartDTO> carts = cartService.getListCartByUser(userDTO.getId());
 		for(CartDTO cart : carts) {
 			ProductDTO product = productService.getProductById(cart.getProduct_id());
 			Map<String, Object> param = new HashMap<String, Object>();
@@ -63,13 +76,17 @@ public class CartController {
 	}
 	@RequestMapping(value="/cart", method = RequestMethod.POST)
 	public String cart(HttpServletRequest req, HttpServletResponse resp) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String username = authentication.getName();
+		UserDTO userDTO = userService.getUserByUsername(username);
+		
 		int product_id = Integer.parseInt(req.getParameter("product-id"));
 		String color = req.getParameter("product-color");
 		String size = req.getParameter("product-size");
 		int quantity = Integer.parseInt(req.getParameter("quantity"));
 		CartDTO cartDTO = new CartDTO();
 		cartDTO.setProduct_id(product_id);
-		cartDTO.setUser_id(1);
+		cartDTO.setUser_id(userDTO.getId());
 		cartDTO.setQuantity(quantity);
 		cartDTO.setSize(size);
 		cartDTO.setColor(color);

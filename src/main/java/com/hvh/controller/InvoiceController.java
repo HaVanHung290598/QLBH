@@ -36,7 +36,8 @@ public class InvoiceController {
 	
 	@RequestMapping(value="/invoice", method = RequestMethod.POST)
 	public String invoice(Model model, HttpServletRequest req, HttpServletResponse resp) {
-		int userId = 1; //sau lay = session
+		int userId = Integer.parseInt(req.getParameter("userId"));
+		System.out.println(userId);
 		int discountAmount = 0;
 		int tax = 0;
 		int total = Integer.parseInt(req.getParameter("total"));

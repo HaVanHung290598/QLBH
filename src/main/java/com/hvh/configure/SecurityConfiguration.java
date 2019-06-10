@@ -50,6 +50,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.exceptionHandling()
 		.accessDeniedPage("/login?error=deny")
 		;
+		http.sessionManagement().sessionFixation().newSession()
+		.invalidSessionUrl("/login?message=timeout")
+		.maximumSessions(1)
+		.expiredUrl("/login?message=max_session")
+		.maxSessionsPreventsLogin(true);
 	}
 	@Override
 	public void configure(WebSecurity web) throws Exception {

@@ -81,7 +81,10 @@
 								<td>$<input type="text" name="total" class="total-price-cartItem"></td>
 							</tr>
 							<tr>
-								<td colspan="2"><input type="submit" name="" value="Process to Checkout"></td>
+								<td colspan="2">
+									<input type="hidden" name="userId" value="${userId}"/>
+									<input type="submit" name="" value="Process to Checkout">
+								</td>
 							</tr>
 						</table>
 					</div>

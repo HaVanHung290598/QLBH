@@ -4,6 +4,7 @@
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
 	<definition name="home" template="/WEB-INF/views/home.jsp">
+		<put-attribute name="overlay" value="/WEB-INF/views/home/overlay.jsp" />
  		<put-attribute name="header" value="/WEB-INF/views/home/header.jsp" />
  		<put-attribute name="trending-product" value="/WEB-INF/views/home/trending-product.jsp" />
  		<put-attribute name="products" value="/WEB-INF/views/home/products.jsp" />
