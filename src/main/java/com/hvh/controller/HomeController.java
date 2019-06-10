@@ -30,7 +30,7 @@ public class HomeController {
 	@Autowired
 	CartService cartService;
 	
-	@RequestMapping(value= {"/","home"}, method = RequestMethod.GET)
+	@RequestMapping(value= {"/","/home"}, method = RequestMethod.GET)
 	public String home(Model model) {
 		List<ProductDTO> productDTOs = productService.getListProduct(6,4);
 		model.addAttribute("productDTOs", productDTOs);

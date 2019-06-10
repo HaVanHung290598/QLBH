@@ -43,8 +43,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.failureUrl("/login?error=failed")
 		.permitAll()
 		.and()
+		.logout()
+		.logoutUrl("/logout")
+		.logoutSuccessUrl("/home")
+		.and()
 		.exceptionHandling()
-		.accessDeniedPage("/login?error=deny");
+		.accessDeniedPage("/login?error=deny")
+		;
 	}
 	@Override
 	public void configure(WebSecurity web) throws Exception {

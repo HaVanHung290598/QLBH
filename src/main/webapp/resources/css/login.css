@@ -1,0 +1,73 @@
+@charset "ISO-8859-1";
+body {
+	background-image: url(../images/bg_4.jpg);
+	background-size: cover;
+	background-position: inherit;
+}
+.over {
+    top: 0;
+    z-index: 999;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    left: 0;
+    opacity: 0.2;
+}
+.login {
+	z-index: 99999;
+	position: fixed;
+/* 	background: #fff; */
+/*     width: 35%; */
+/*     margin-top: 15%; */
+/*     padding: 30px; */
+}
+.login .container {
+	width: 40%;
+    margin-top: 10%;
+}
+.login .logo {
+	background-color: #fff;
+}
+.login .logo>div {
+	padding: 15px;
+}
+.login .logo a {
+	color: #000;
+	letter-spacing: 2px;
+	font-weight: 100;
+	text-decoration: none;
+}
+.login .logo p {
+	margin: 0px;
+	opacity: 0.6;
+}
+.login .logo > div:last-child {
+	text-align: right;
+}
+.login .logo > div:last-child i {
+	font-size: 75px;
+    color: #ccc;
+}
+.login .form {
+	background-color: #e4e4e4;
+}
+.login .form>div {
+	padding: 20px 15px;
+}
+.login .form form input {
+	margin-bottom: 10px;
+	padding: 12px;
+    height: 45px;
+}
+.login .form form .form-control {
+	border-radius: 0px;
+}
+.login .form form input:last-child {
+	letter-spacing: 1px;
+    color: #fff;
+    background-color: #1d841d;
+}
+.login .form .signUp {
+	float: right;
+}

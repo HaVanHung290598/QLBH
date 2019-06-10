@@ -21,7 +21,6 @@
 <script type="text/javascript" src="<c:url value="/resources/js/jquery-3.4.1.js"/>"></script>
 </head>
 <body style="position: relative;">
-	<tiles:insertAttribute name="check"/>
 	<tiles:insertAttribute name="header"/>
 	<tiles:insertAttribute name="trending-product"/>
 	<tiles:insertAttribute name="products"/>

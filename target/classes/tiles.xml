@@ -4,7 +4,6 @@
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
 	<definition name="home" template="/WEB-INF/views/home.jsp">
-		<put-attribute name="check" value="/WEB-INF/views/home/check.jsp" />
  		<put-attribute name="header" value="/WEB-INF/views/home/header.jsp" />
  		<put-attribute name="trending-product" value="/WEB-INF/views/home/trending-product.jsp" />
  		<put-attribute name="products" value="/WEB-INF/views/home/products.jsp" />
@@ -40,6 +39,8 @@
 	</definition>
 	
 	<definition name="login" template="/WEB-INF/views/login.jsp">
+	</definition>
+	<definition name="signUp" template="/WEB-INF/views/signUp.jsp">
 	</definition>
 	
 </tiles-definitions>

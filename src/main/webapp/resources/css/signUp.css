@@ -1,0 +1,66 @@
+@charset "ISO-8859-1";
+body {
+	background-image: url(../images/bg_5.jpg);
+	background-size: cover;
+	background-position: inherit;
+}
+.over {
+    top: 0;
+    z-index: 999;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: #583758;
+    left: 0;
+    opacity: 0.5;
+}
+.signUp {
+	z-index: 99999;
+	position: fixed;
+/* 	background: #fff; */
+/*     width: 35%; */
+/*     margin-top: 15%; */
+/*     padding: 30px; */
+}
+.signUp .container {
+	width: 35%;
+    margin: 50px 100px;
+}
+.signUp .logo {
+	background-color: #fff;
+}
+.signUp .logo>div {
+	padding: 15px;
+}
+.signUp .logo a {
+	color: #000;
+	letter-spacing: 2px;
+	font-weight: 100;
+	text-decoration: none;
+}
+.signUp .logo p {
+	margin: 0px;
+	opacity: 0.6;
+}
+.signUp .form {
+	background-color: #e4e4e4;
+}
+.signUp .form>div {
+	padding: 20px 15px;
+}
+.signUp .form form input {
+	margin-bottom: 10px;
+	padding: 12px;
+    height: 45px;
+}
+.signUp .form form .form-control {
+	border-radius: 0px;
+}
+.signUp .form form input:last-child {
+	letter-spacing: 1px;
+    color: #fff;
+    background-color: #1d841d;
+}
+.signUp .form .signIn {
+	float: right;
+}

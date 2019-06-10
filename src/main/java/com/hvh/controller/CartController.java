@@ -21,7 +21,6 @@ import com.hvh.service.CartService;
 import com.hvh.service.ProductService;
 
 @Controller
-//@RequestMapping(value = "/admin")
 public class CartController {
 	@Autowired
 	CartService cartService;

@@ -59,13 +59,14 @@
 										</ul>
 									</li>
 									<li>
-										<p>${user.username} |</p><a href="logout">Log out</a>
+										<c:url value="/logout" var="url"/>
+										<p>${user.username} |</p><a href="${url}">Log out</a>
 									</li>
 								</c:when>
 								<c:when test="${empty user.username}">
 									<li>
-										<a href="">Sign in</a>|
-										<a href="">Sign up</a>
+										<a href="login">Sign in</a>|
+										<a href="signUp">Sign up</a>
 									</li>
 								</c:when>
 							</c:choose>
