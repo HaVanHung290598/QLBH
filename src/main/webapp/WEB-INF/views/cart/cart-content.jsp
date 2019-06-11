@@ -24,11 +24,11 @@
 									<br/>
 									<p style="opacity:0.5;">Product classification: ${s.get("color")},${s.get("size")}</p>
 								</td>
-								<td class="price">$<input type="text" value="${s.get('price')}" class="price-product"></td>
+								<td class="price">$<input type="text" value="${s.get('price')}" class="price-product" readonly></td>
 								<td>
-									<input type="text" name="number-product" value="${s.get('quantity')}" class="quantity" id="quantity" data-price="${s.get('price')}">
+									<input type="number" name="number-product" value="${s.get('quantity')}" class="quantity" id="quantity" data-price="${s.get('price')}" step="1">
 								</td>
-								<td class="total">$<input type="text" value="${s.get('price')*s.get('quantity')}" class="total-product"></td>
+								<td class="total">$<input type="text" value="${s.get('price')*s.get('quantity')}" class="total-product" readonly></td>
 							</tr>
 						</c:forEach>
 						<tr>
@@ -66,19 +66,19 @@
 							</tr>
 							<tr>
 								<th>Subtotal</th>
-								<td>$<input type="text" value="" class="subtotal"></td>
+								<td>$<input type="text" value="" class="subtotal" readonly></td>
 							</tr>
 							<tr>
 								<th>Delivery</th>
-								<td>$<input type="text" value="0" class="delivery"></td>
+								<td>$<input type="text" value="0" class="delivery" readonly></td>
 							</tr>
 							<tr>
 								<th>Discout</th>
-								<td>$<input type="text" value="0" class="discount"></td>
+								<td>$<input type="text" value="0" class="discount" readonly></td>
 							</tr>
 							<tr class="total">
 								<th>TOTAL</th>
-								<td>$<input type="text" name="total" class="total-price-cartItem"></td>
+								<td>$<input type="text" name="total" class="total-price-cartItem" readonly></td>
 							</tr>
 							<tr>
 								<td colspan="2">

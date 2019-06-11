@@ -8,6 +8,9 @@ $(document).ready(function(){
 	};
 	total_price();
 	
+	var total_price_cartItem = parseInt($('.subtotal').val()) + parseInt($('.delivery').val()) + parseInt($('.discount').val());
+	$('.total-price-cartItem').val(total_price_cartItem);
+	
 	$('.quantity').change(function(){
 //c1:		var price = $('.price-product', $(this).closest('tr')).val();
 //c2:		alert("gia tri la "+ $(this).data("price"));
@@ -16,8 +19,7 @@ $(document).ready(function(){
 		var total = parseInt(price) * parseInt(quantity);
 		$('.total-product', $(this).closest('tr')).val(total);
 		total_price();
+		var total_price_cartItem = parseInt($('.subtotal').val()) + parseInt($('.delivery').val()) + parseInt($('.discount').val());
+		$('.total-price-cartItem').val(total_price_cartItem);
 	});
-	
-	var total_price_cartItem = parseInt($('.subtotal').val()) + parseInt($('.delivery').val()) + parseInt($('.discount').val());
-	$('.total-price-cartItem').val(total_price_cartItem);
 });
