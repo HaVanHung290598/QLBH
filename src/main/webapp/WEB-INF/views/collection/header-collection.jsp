@@ -26,35 +26,31 @@
 						</security:authorize>
 						<c:choose>
 							<c:when test="${not empty user.username}">
-								<li><a href=""><i class="fas fa-shopping-cart"></i>[0]</a>
+								<li><a href=""><i class="fas fa-shopping-cart"></i>[${params.size()}]</a>
 									<ul class="submenu2">
 										<li>New products</li>
-										<li>
-											<div class="row">
-												<div class="col-md-2"><img src="<c:url value="/resources/images/product-4.jpg"/>" width="40px" height="auto"/></div>
-												<div class="col-md-6 list-products">
-													<p>Young Woman Wearing Dress</p>
-													<p>SIZE: SMALL</p>
+										<c:forEach items="${params}" var="s">
+											<li>
+												<div class="row">
+													<div class="col-md-2"><img src="<c:url value="/resources/images/${s.get('image')}.jpg"/>" width="40px" height="auto"/></div>
+													<div class="col-md-10">
+														<div class="row">
+															<div class="col-md-8 list-products">
+																<p>${s.get("product-name")}</p>
+															</div>
+															<div class="col-md-4">
+																<p>$${s.get("price")}</p>
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-md-12 proc-classification">
+																<p>Product classification: ${s.get("size")},${s.get("color")}</p>
+															</div>
+														</div>
+													</div>
 												</div>
-												<div class="col-md-4">
-													<p>$120.00</p>
-													<a href="" class="delete-product">Delete</a>
-												</div>
-											</div>
-										</li>
-										<li>
-											<div class="row">
-												<div class="col-md-2"><img src="<c:url value="/resources/images/product-5.jpg"/>" width="40px" height="auto"/></div>
-												<div class="col-md-6 list-products">
-													<p>Young Woman Wearing Dress</p>
-													<p>SIZE: SMALL</p>
-												</div>
-												<div class="col-md-4">
-													<p>$120.00</p>
-													<a href="" class="delete-product">Delete</a>
-												</div>
-											</div>
-										</li>
+											</li>
+										</c:forEach>
 										<li class="carts"><a href="cart">VIEW CART</a></li>
 									</ul>
 								</li>
