@@ -1,5 +1,6 @@
 package com.hvh.controller;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -45,37 +46,54 @@ public class HomeController {
 		List<Map<String, Object>> params = new ArrayList<Map<String, Object>>();
 		
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		String username = authentication.getName();
-		UserDTO userDTO = userService.getUserByUsername(username);
-		
-		List<CartDTO> carts = cartService.getListCartByUser(userDTO.getId());
-		for(CartDTO cart : carts) {
-			ProductDTO product = productService.getProductById(cart.getProduct_id());
-			Map<String, Object> param = new HashMap<String, Object>();
-			param.put("product-id", cart.getProduct_id());
-			param.put("user-id", cart.getUser_id());
-			param.put("color", cart.getColor());
-			param.put("size", cart.getSize());
-			param.put("quantity", cart.getQuantity());
-			param.put("product-name", product.getProduct_name());
-			param.put("image", product.getImage());
-			param.put("price", product.getUnit_price());
-			params.add(param);
+		if (authentication.isAuthenticated()) {
+			String username = authentication.getName();
+			UserDTO userDTO = userService.getUserByUsername(username);
+			
+			List<CartDTO> carts = cartService.getListCartByUser(userDTO.getId());
+			for(CartDTO cart : carts) {
+				ProductDTO product = productService.getProductById(cart.getProduct_id());
+				Map<String, Object> param = new HashMap<String, Object>();
+				param.put("product-id", cart.getProduct_id());
+				param.put("user-id", cart.getUser_id());
+				param.put("color", cart.getColor());
+				param.put("size", cart.getSize());
+				param.put("quantity", cart.getQuantity());
+				param.put("product-name", product.getProduct_name());
+				param.put("image", product.getImage());
+				param.put("price", product.getUnit_price());
+				params.add(param);
+			}
 		}
 		return params;
 	}
 	
 	@RequestMapping(value= {"/","/home"}, method = RequestMethod.GET)
-	public String home(Model model) {
+	public String home(Model model, Principal principal, HttpServletRequest req) {
 		List<ProductDTO> productDTOs = productService.getListProduct(6,4);
 		model.addAttribute("productDTOs", productDTOs);
 		model.addAttribute("display", "none");
 		model.addAttribute("color", "#f1b8c4");		
-		model.addAttribute("params", getListCart());		
+		if (principal != null) {
+			model.addAttribute("params", getListCart());	
+		}
+		
+//		int page = req.getParameter("page") != null ? Integer.parseInt(req.getParameter("page")) : 1;
+//		int limit = req.getParameter("limit") != null ? Integer.parseInt(req.getParameter("limit")) : 5;
+//		
+//		Map<String, String> params = new HashMap<String, String>();
+//		params.put("product_name", req.getParameter("product_name") != null ? req.getParameter("product_name") : "dress");
+//		params.put("price_from", req.getParameter("price_from") != null ? req.getParameter("price_from") : "150");
+//		params.put("price_to", req.getParameter("price_to") != null ? req.getParameter("price_to") : "");
+//		System.out.println("danh sach search: ");
+//		for(ProductDTO productDTO : productService.searchProduct(params, page, limit)) {
+//			System.out.println(productDTO.getId());
+//		}
+		
 		return "home";
 	}
 	@RequestMapping(value="/collection", method = RequestMethod.GET)
-	public String collection(Model model, HttpServletRequest req, HttpServletResponse resp) {
+	public String collection(Model model, HttpServletRequest req, HttpServletResponse resp, Principal principal) {
 		int pages = req.getParameter("page") == null ? 1 : Integer.parseInt(req.getParameter("page"));
 		int limit = req.getParameter("limit") == null ? 8 : Integer.parseInt(req.getParameter("limit"));
 		List<ProductDTO> productDTOs = productService.getListProduct(pages,limit);
@@ -87,11 +105,13 @@ public class HomeController {
 		model.addAttribute("page", "PRODUCT");
 		model.addAttribute("display", "block");
 		model.addAttribute("color", "#f1b8c4");
-		model.addAttribute("params", getListCart());
+		if (principal != null) {
+			model.addAttribute("params", getListCart());	
+		}
 		return "collection";
 	}
 	@RequestMapping(value="/productSingle", method = RequestMethod.GET)
-	public String ProductSingle(Model model, @RequestParam(name="productId", required = false) Integer productId) {
+	public String ProductSingle(Model model, @RequestParam(name="productId", required = false) Integer productId, Principal principal) {
 		if(productId != null) {
 			ProductDTO productDTO = productService.getProductById(productId);
 			model.addAttribute("productDTO", productDTO);
@@ -105,7 +125,11 @@ public class HomeController {
 		model.addAttribute("home", "HOME");
 		model.addAttribute("page", "PRODUCT SINGLE");
 		model.addAttribute("color", "#f1b8c4");
-		model.addAttribute("params", getListCart());
+
+		if (principal != null) {
+			model.addAttribute("params", getListCart());	
+		}
+		
 		return "productSingle";
 	}
 }
