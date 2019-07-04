@@ -9,6 +9,22 @@
 					<h2 class="small">OUR PRODUCT</h2>
 				</div>
 			</div>
+			<form action="search" method="get">
+				<div class="row" style="display: ${display};">
+					<div class="col-md-4">
+						<input class="form-control" type="text" name="productName" placeholder="Product Name" value="${paramSearch.get('product_name') != null ? paramSearch.get('product_name') : ''}"/>
+					</div>
+					<div class="col-md-3">
+						<input class="form-control" type="number" name="price_from" placeholder="Price From" value="${paramSearch.get('price_from') != null ? paramSearch.get('price_from') : ''}"/>
+					</div>
+					<div class="col-md-3">
+						<input class="form-control" type="number" name="price_to" placeholder="Price To" value="${paramSearch.get('price_to') != null ? paramSearch.get('price_to') : ''}"/>
+					</div>
+					<div class="col-md-2">
+						<input class="form-control" type="submit" value="Search"/>
+					</div>
+				</div>
+			</form>
 			<div class="row">
 				<c:forEach items="${productDTOs}" var="s">
 					<div class="col-md-3 col-sm-6 products-content">
@@ -23,16 +39,30 @@
 						<p class="tym"><i class="far fa-heart"></i></p>
 					</div>
 				</c:forEach>
-				<div class="row" style="display: ${display};">
-					<div class="col-md-12" style="margin-top: 20px;">
-						<nav aria-label="Page navigation example">
-						  <ul class="pagination">
-						    <li class="page-item ${pages-1 < 1 ? 'disabled' : ''}"><a class="page-link" href="collection?page=${pages-1}">Previous</a></li>
-						    <li class="page-item ${productDTOs.size() < 8 ? 'disabled' : ''}"><a class="page-link" href="collection?page=${pages+1}">Next</a></li>
-						  </ul>
-						</nav>
-					</div>
-				</div>
+			</div>
+			<div class="row" style="display: ${display};">
+				<c:choose>
+					<c:when test="${empty paramSearch}">
+						<div class="col-md-12" style="margin-top: 20px;">
+							<nav aria-label="Page navigation example">
+							  <ul class="pagination">
+							    <li class="page-item ${pages-1 < 1 ? 'disabled' : ''}"><a class="page-link" href="collection?page=${pages-1}">Previous</a></li>
+							    <li class="page-item ${pages == Math.ceil(size/8) ? 'disabled' : ''}"><a class="page-link" href="collection?page=${pages+1}">Next</a></li>
+							  </ul>
+							</nav>
+						</div>
+					</c:when>
+					<c:when test="${not empty paramSearch}">
+						<div class="col-md-12" style="margin-top: 20px;">
+							<nav aria-label="Page navigation example">
+							  <ul class="pagination">
+							    <li class="page-item ${pages-1 < 1 ? 'disabled' : ''}"><a class="page-link" href="search?page=${pages-1}&productName=${paramSearch.get('product_name')}&price_from=${paramSearch.get('price_from')}&price_to=${paramSearch.get('price_to')}">Previous</a></li>
+							    <li class="page-item ${pages == Math.ceil(size/8) ? 'disabled' : ''}"><a class="page-link" href="search?page=${pages+1}&productName=${paramSearch.get('product_name')}&price_from=${paramSearch.get('price_from')}&price_to=${paramSearch.get('price_to')}">Next</a></li>
+							  </ul>
+							</nav>
+						</div>
+					</c:when>
+				</c:choose>
 			</div>
 		</div>
 	</div>

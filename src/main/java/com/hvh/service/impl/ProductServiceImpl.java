@@ -54,17 +54,17 @@ public class ProductServiceImpl implements ProductService {
 		return arrProductDTO;
 	}
 
-	@Override
-	public List<ProductDTO> searchProduct(String productName) {
-		List<Product> arrProduct = new ArrayList<Product>();
-		arrProduct = productDAO.searchProduct(productName);
-		List<ProductDTO> arrProductDTO = new ArrayList<ProductDTO>();
-		for(Product product : arrProduct) {
-			ProductDTO productDTO = convert(product);
-			arrProductDTO.add(productDTO);
-		}
-		return arrProductDTO;
-	}
+//	@Override
+//	public List<ProductDTO> searchProduct(String productName) {
+//		List<Product> arrProduct = new ArrayList<Product>();
+//		arrProduct = productDAO.searchProduct(productName);
+//		List<ProductDTO> arrProductDTO = new ArrayList<ProductDTO>();
+//		for(Product product : arrProduct) {
+//			ProductDTO productDTO = convert(product);
+//			arrProductDTO.add(productDTO);
+//		}
+//		return arrProductDTO;
+//	}
 
 	@Override
 	public List<ProductDTO> searchProduct(Map<String, String> params, int page, int limit) {

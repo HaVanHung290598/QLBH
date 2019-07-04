@@ -78,18 +78,6 @@ public class HomeController {
 			model.addAttribute("params", getListCart());	
 		}
 		
-//		int page = req.getParameter("page") != null ? Integer.parseInt(req.getParameter("page")) : 1;
-//		int limit = req.getParameter("limit") != null ? Integer.parseInt(req.getParameter("limit")) : 5;
-//		
-//		Map<String, String> params = new HashMap<String, String>();
-//		params.put("product_name", req.getParameter("product_name") != null ? req.getParameter("product_name") : "dress");
-//		params.put("price_from", req.getParameter("price_from") != null ? req.getParameter("price_from") : "150");
-//		params.put("price_to", req.getParameter("price_to") != null ? req.getParameter("price_to") : "");
-//		System.out.println("danh sach search: ");
-//		for(ProductDTO productDTO : productService.searchProduct(params, page, limit)) {
-//			System.out.println(productDTO.getId());
-//		}
-		
 		return "home";
 	}
 	@RequestMapping(value="/collection", method = RequestMethod.GET)
@@ -97,6 +85,8 @@ public class HomeController {
 		int pages = req.getParameter("page") == null ? 1 : Integer.parseInt(req.getParameter("page"));
 		int limit = req.getParameter("limit") == null ? 8 : Integer.parseInt(req.getParameter("limit"));
 		List<ProductDTO> productDTOs = productService.getListProduct(pages,limit);
+		int size = productService.getListProduct(1, 1000).size();
+		model.addAttribute("size", size);
 		model.addAttribute("pages", pages);
 		model.addAttribute("limit", limit);
 		model.addAttribute("productDTOs", productDTOs);
@@ -131,5 +121,32 @@ public class HomeController {
 		}
 		
 		return "productSingle";
+	}
+	@RequestMapping(value="/search", method = RequestMethod.GET)
+	public String searchProduct(Model model, HttpServletRequest req, Principal principal) {
+		int page = req.getParameter("page") != null ? Integer.parseInt(req.getParameter("page")) : 1;
+		int limit = req.getParameter("limit") != null ? Integer.parseInt(req.getParameter("limit")) : 8;
+		
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("product_name", req.getParameter("productName") != null ? req.getParameter("productName") : "");
+		params.put("price_from", req.getParameter("price_from") != null ? req.getParameter("price_from") : "");
+		params.put("price_to", req.getParameter("price_to") != null ? req.getParameter("price_to") : "");
+		
+		List<ProductDTO> productDTOs = productService.searchProduct(params, page, limit);
+		int size = productService.searchProduct(params, 1, 1000).size();
+		model.addAttribute("size", size);
+		model.addAttribute("pages", page);
+		model.addAttribute("limit", limit);
+		model.addAttribute("productDTOs", productDTOs);
+		model.addAttribute("paramSearch", params);
+		model.addAttribute("head", "COLLECTION");
+		model.addAttribute("home", "HOME");
+		model.addAttribute("page", "PRODUCT");
+		model.addAttribute("display", "block");
+		model.addAttribute("color", "#f1b8c4");
+		if (principal != null) {
+			model.addAttribute("params", getListCart());	
+		}
+		return "collection";
 	}
 }

@@ -27,7 +27,7 @@ public class ProductAttributeDAOImpl implements ProductAttributeDAO {
 
 	@Override
 	public List<ProductAttribute> getListProductAttributeByProduct(int product_id) {
-		String hql = "From ProductAttribute where product_id = : product_id";
+		String hql = "From ProductAttribute where product_id = :product_id";
 		Session session = SessionFactory.getCurrentSession();
 		Query<ProductAttribute> query = session.createQuery(hql, ProductAttribute.class);
 		query.setParameter("product_id", product_id);

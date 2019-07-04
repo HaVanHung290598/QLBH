@@ -11,6 +11,5 @@ public interface ProductDAO {
 	public void deleteProduct(int id);
 	public Product getProductById(int id);
 	public List<Product> getListProduct(int page, int limit);
-	public List<Product> searchProduct(String productName);
 	public List<Product> searchProduct(Map<String, String> params, int page, int limit);
 }
