@@ -21,6 +21,7 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name="product")
 public class Product {
+
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,7 +51,7 @@ public class Product {
 	private Date updated_at;
 	
 	@ManyToMany
-	@JoinTable(name="cart", joinColumns = @JoinColumn(name="product_id"), inverseJoinColumns = @JoinColumn(name="user_id"))
+	@JoinTable(name="cart_item", joinColumns = @JoinColumn(name="product_id"), inverseJoinColumns = @JoinColumn(name="user_id"))
 	private List<User> users;
 	
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "product")

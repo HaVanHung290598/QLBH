@@ -19,6 +19,35 @@ public class InvoiceServiceImpl implements InvoiceService {
 	
 	@Override
 	public void addInvoice(InvoiceDTO invoiceDTO) {
+		invoiceDAO.addInvoice(convert(invoiceDTO));
+	}
+
+	@Override
+	public InvoiceDTO getInvoiceById(int invoice_id) {
+		Invoice invoice = invoiceDAO.getInvoiceById(invoice_id);
+		return convert(invoice);
+	}
+
+	@Override
+	public InvoiceDTO getNewInvoice() {
+		Invoice invoice = invoiceDAO.getNewInvoice();
+		return convert(invoice);
+	}
+	
+	private InvoiceDTO convert(Invoice invoice) {
+		InvoiceDTO invoiceDTO = new InvoiceDTO();
+		invoiceDTO.setId(invoice.getId());
+		invoiceDTO.setUser_id(invoice.getUser().getId());
+		invoiceDTO.setDiscount_amount(invoice.getDiscount_amount());
+		invoiceDTO.setTax(invoice.getTax());
+		invoiceDTO.setTotal_amount(invoice.getTotal_amount());
+		invoiceDTO.setStatus(invoice.getStatus());
+		invoiceDTO.setDelivery_address(invoice.getDelivery_address());
+		invoiceDTO.setDelivery_phone(invoice.getDelivery_phone());
+		invoiceDTO.setCreated_at(invoice.getCreated_at());
+		return invoiceDTO;
+	}
+	private Invoice convert(InvoiceDTO invoiceDTO) {
 		Invoice invoice = new Invoice();
 		invoice.setUser(userDAO.getUserById(invoiceDTO.getUser_id()));
 		invoice.setDiscount_amount(invoiceDTO.getDiscount_amount());
@@ -28,39 +57,6 @@ public class InvoiceServiceImpl implements InvoiceService {
 		invoice.setDelivery_address(invoiceDTO.getDelivery_address());
 		invoice.setDelivery_phone(invoiceDTO.getDelivery_phone());
 		invoice.setCreated_at(invoiceDTO.getCreated_at());
-		invoiceDAO.addInvoice(invoice);
+		return invoice;
 	}
-
-	@Override
-	public InvoiceDTO getInvoiceById(int invoice_id) {
-		Invoice invoice = invoiceDAO.getInvoiceById(invoice_id);
-		InvoiceDTO invoiceDTO = new InvoiceDTO();
-		invoiceDTO.setId(invoice.getId());
-		invoiceDTO.setUser_id(invoice.getUser().getId());
-		invoiceDTO.setDiscount_amount(invoice.getDiscount_amount());
-		invoiceDTO.setTax(invoice.getTax());
-		invoiceDTO.setTotal_amount(invoice.getTotal_amount());
-		invoiceDTO.setStatus(invoice.getStatus());
-		invoiceDTO.setDelivery_address(invoice.getDelivery_address());
-		invoiceDTO.setDelivery_phone(invoice.getDelivery_phone());
-		invoiceDTO.setCreated_at(invoice.getCreated_at());
-		return invoiceDTO;
-	}
-
-	@Override
-	public InvoiceDTO getNewInvoice() {
-		Invoice invoice = invoiceDAO.getNewInvoice();
-		InvoiceDTO invoiceDTO = new InvoiceDTO();
-		invoiceDTO.setId(invoice.getId());
-		invoiceDTO.setUser_id(invoice.getUser().getId());
-		invoiceDTO.setDiscount_amount(invoice.getDiscount_amount());
-		invoiceDTO.setTax(invoice.getTax());
-		invoiceDTO.setTotal_amount(invoice.getTotal_amount());
-		invoiceDTO.setStatus(invoice.getStatus());
-		invoiceDTO.setDelivery_address(invoice.getDelivery_address());
-		invoiceDTO.setDelivery_phone(invoice.getDelivery_phone());
-		invoiceDTO.setCreated_at(invoice.getCreated_at());
-		return invoiceDTO;
-	}
-
 }

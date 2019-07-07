@@ -50,4 +50,8 @@ public class CartDAOImpl implements CartDAO {
 			sessionFactory.getCurrentSession().delete(cart);
 		}
 	}
+	@Override
+	public void updateCart(Cart cart) {
+		sessionFactory.getCurrentSession().merge(cart);
+	}
 }

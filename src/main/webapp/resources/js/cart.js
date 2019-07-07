@@ -15,11 +15,25 @@ $(document).ready(function(){
 //c1:		var price = $('.price-product', $(this).closest('tr')).val();
 //c2:		alert("gia tri la "+ $(this).data("price"));
 		var price = $(this).data("price");
+		var productId = $('.productId').val();
+		var userId = $('.userId').val();
 		var quantity = $(this).val();
 		var total = parseInt(price) * parseInt(quantity);
 		$('.total-product', $(this).closest('tr')).val(total);
 		total_price();
 		var total_price_cartItem = parseInt($('.subtotal').val()) + parseInt($('.delivery').val()) + parseInt($('.discount').val());
 		$('.total-price-cartItem').val(total_price_cartItem);
+		//===========================================
+		//===========================================
+		$.ajax({
+			url: 'cartItem',
+			type: 'GET',
+			dataType: 'html',
+			data: {
+				qtt: quantity,
+				productId: productId,
+				userId: userId
+			}
+		});
 	});
 });

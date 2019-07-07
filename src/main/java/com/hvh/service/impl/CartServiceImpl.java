@@ -28,15 +28,7 @@ public class CartServiceImpl implements CartService {
 	
 	@Override
 	public void addCart(CartDTO cartDTO) {
-		Cart cart = new Cart();
-		Pk pk = new Pk();
-		pk.setProduct(productDAO.getProductById(cartDTO.getProduct_id()));
-		pk.setUser(userDAO.getUserById(cartDTO.getUser_id()));
-		cart.setPk(pk);
-		cart.setQuantity(cartDTO.getQuantity());
-		cart.setSize(cartDTO.getSize());
-		cart.setColor(cartDTO.getColor());
-		cartDAO.addCart(cart);
+		cartDAO.addCart(convert(cartDTO));
 	}
 
 	@Override
@@ -83,4 +75,20 @@ public class CartServiceImpl implements CartService {
 		cartDAO.deleteCartByUserId(user_id);
 	}
 
+	@Override
+	public void updateCart(CartDTO cartDTO) {
+		cartDAO.updateCart(convert(cartDTO));		
+	}
+	
+	private Cart convert(CartDTO cartDTO) {
+		Pk pk = new Pk();
+		pk.setProduct(productDAO.getProductById(cartDTO.getProduct_id()));
+		pk.setUser(userDAO.getUserById(cartDTO.getUser_id()));
+		Cart cart = new Cart();
+		cart.setPk(pk);
+		cart.setQuantity(cartDTO.getQuantity());
+		cart.setColor(cartDTO.getColor());
+		cart.setSize(cartDTO.getSize());
+		return cart;
+	}
 }

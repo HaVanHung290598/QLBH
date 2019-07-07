@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hvh.model.CartDTO;
 import com.hvh.model.ProductDTO;
@@ -26,6 +27,7 @@ import com.hvh.service.UserService;
 
 @Controller
 public class CartController {
+	
 	@Autowired
 	CartService cartService;
 	
@@ -101,5 +103,22 @@ public class CartController {
 	public String deleteCartItem(Model model, @RequestParam(name="user-id")int user_id, @RequestParam(name="product-id")int product_id) {
 		cartService.deleteCart(user_id, product_id);
 		return "redirect:/cart";
+	}
+	
+	@RequestMapping(value="/cartItem", method = RequestMethod.GET)
+	public @ResponseBody String updateCartItem(Model model, HttpServletRequest req) {
+		int quantity = Integer.parseInt(req.getParameter("qtt"));
+		int productId = Integer.parseInt(req.getParameter("productId"));
+		int userId = Integer.parseInt(req.getParameter("userId"));
+		
+		CartDTO cart = cartService.getCartById(userId, productId);
+		CartDTO cartNew = new CartDTO();
+		cartNew.setUser_id(userId);
+		cartNew.setProduct_id(productId);
+		cartNew.setQuantity(quantity);
+		cartNew.setColor(cart.getColor());
+		cartNew.setSize(cart.getSize());
+		cartService.updateCart(cartNew);
+		return null;
 	}
 }

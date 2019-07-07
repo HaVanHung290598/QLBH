@@ -77,7 +77,6 @@ public class HomeController {
 		if (principal != null) {
 			model.addAttribute("params", getListCart());	
 		}
-		
 		return "home";
 	}
 	@RequestMapping(value="/collection", method = RequestMethod.GET)
@@ -93,7 +92,7 @@ public class HomeController {
 		model.addAttribute("head", "COLLECTION");
 		model.addAttribute("home", "HOME");
 		model.addAttribute("page", "PRODUCT");
-		model.addAttribute("display", "block");
+		model.addAttribute("display", "flex");
 		model.addAttribute("color", "#f1b8c4");
 		if (principal != null) {
 			model.addAttribute("params", getListCart());	
@@ -105,7 +104,7 @@ public class HomeController {
 		if(productId != null) {
 			ProductDTO productDTO = productService.getProductById(productId);
 			model.addAttribute("productDTO", productDTO);
-			model.addAttribute("display", "block");
+			model.addAttribute("display", "flex");
 			List<ProductAttributeDTO> productAttributeDTOs = productAtttributeService.getProductAttributeByProduct(productId);
 			model.addAttribute("productAttributeDTOs", productAttributeDTOs);			
 		} else {
@@ -142,7 +141,7 @@ public class HomeController {
 		model.addAttribute("head", "COLLECTION");
 		model.addAttribute("home", "HOME");
 		model.addAttribute("page", "PRODUCT");
-		model.addAttribute("display", "block");
+		model.addAttribute("display", "flex");
 		model.addAttribute("color", "#f1b8c4");
 		if (principal != null) {
 			model.addAttribute("params", getListCart());	

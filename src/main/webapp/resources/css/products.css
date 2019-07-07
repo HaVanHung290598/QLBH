@@ -7,6 +7,9 @@
 	text-align: center;
 	position: relative;
 }
+.products .search div:last-child > input {
+	background-color: #759bff;
+}
 .products .big {
 	padding-top: 60px;
 	padding-bottom: 20px;

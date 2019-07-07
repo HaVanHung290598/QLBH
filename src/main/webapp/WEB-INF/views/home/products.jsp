@@ -10,7 +10,7 @@
 				</div>
 			</div>
 			<form action="search" method="get">
-				<div class="row" style="display: ${display};">
+				<div class="row search" style="display: ${display};">
 					<div class="col-md-4">
 						<input class="form-control" type="text" name="productName" placeholder="Product Name" value="${paramSearch.get('product_name') != null ? paramSearch.get('product_name') : ''}"/>
 					</div>
@@ -35,7 +35,7 @@
 							<p class="star"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></p>
 						</div>
 						<hr/>
-						<a href="" class="add-cart">ADD TO CART+</a>
+						<a href="productSingle?productId=${s.id}" class="add-cart">ADD TO CART+</a>
 						<p class="tym"><i class="far fa-heart"></i></p>
 					</div>
 				</c:forEach>

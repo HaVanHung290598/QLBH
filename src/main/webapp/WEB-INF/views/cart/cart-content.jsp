@@ -27,13 +27,12 @@
 								<td class="price">$<input type="text" value="${s.get('price')}" class="price-product" readonly></td>
 								<td>
 									<input type="number" name="number-product" value="${s.get('quantity')}" class="quantity" id="quantity" data-price="${s.get('price')}" step="1">
+									<input type="hidden" value="${s.get('user-id')}" class="userId"/>
+									<input type="hidden" value="${s.get('product-id')}" class="productId"/>
 								</td>
 								<td class="total">$<input type="text" value="${s.get('price')*s.get('quantity')}" class="total-product" readonly></td>
 							</tr>
 						</c:forEach>
-						<tr>
-							<td colspan="5">${error}</td>
-						</tr>
 					</table>
 				</div>
 			</div>

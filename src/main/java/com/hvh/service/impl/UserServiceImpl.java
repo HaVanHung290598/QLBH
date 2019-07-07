@@ -16,6 +16,21 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public UserDTO getUserById(int user_id) {
 		User user = userDAO.getUserById(user_id);
+		return convert(user);
+	}
+
+	@Override
+	public void addUser(UserDTO userDTO) {
+		userDAO.addUser(convert(userDTO));
+	}
+
+	@Override
+	public UserDTO getUserByUsername(String username) {
+		User user = userDAO.getUserByUsername(username);
+		return convert(user);
+	}
+	
+	private UserDTO convert(User user) {
 		UserDTO userDTO = new UserDTO();
 		userDTO.setId(user.getId());
 		userDTO.setUsername(user.getUsername());
@@ -30,9 +45,7 @@ public class UserServiceImpl implements UserService{
 		userDTO.setEnabled(user.getEnabled());
 		return userDTO;
 	}
-
-	@Override
-	public void addUser(UserDTO userDTO) {
+	private User convert(UserDTO userDTO) {
 		User user = new User();
 		user.setUsername(userDTO.getUsername());
 		user.setPassword(userDTO.getPassword());
@@ -44,25 +57,6 @@ public class UserServiceImpl implements UserService{
 		user.setUpdated_at(userDTO.getUpdated_at());
 		user.setRole(userDTO.getRole());
 		user.setEnabled(userDTO.getEnabled());
-		userDAO.addUser(user);
+		return user;
 	}
-
-	@Override
-	public UserDTO getUserByUsername(String username) {
-		User user = userDAO.getUserByUsername(username);
-		UserDTO userDTO = new UserDTO();
-		userDTO.setId(user.getId());
-		userDTO.setUsername(user.getUsername());
-		userDTO.setPassword(user.getPassword());
-		userDTO.setFullname(user.getFullname());
-		userDTO.setAddress(user.getAddress());
-		userDTO.setEmail(user.getEmail());
-		userDTO.setPhone(user.getPhone());
-		userDTO.setCreated_at(user.getCreated_at());
-		userDTO.setUpdated_at(user.getUpdated_at());
-		userDTO.setRole(user.getRole());
-		userDTO.setEnabled(user.getEnabled());
-		return userDTO;
-	}
-	
 }
