@@ -23,9 +23,6 @@
  		<put-attribute name="footer" value="/WEB-INF/views/home/footer.jsp" />
 	</definition>
 	
-	
-	
-	
 	<definition name="collection" extends="base-definition">
 		<put-attribute name="content" value="/WEB-INF/views/home/products.jsp" />
 	</definition>
@@ -42,6 +39,15 @@
 	<definition name="login" template="/WEB-INF/views/login.jsp">
 	</definition>
 	<definition name="signUp" template="/WEB-INF/views/signUp.jsp">
+	</definition>
+	
+	<definition name="base-definition-admin" template="/WEB-INF/views/admin/defaultLayoutAdmin.jsp">
+		<put-attribute name="headerAdmin" value="/WEB-INF/views/admin/headerAdmin.jsp"></put-attribute>
+		<put-attribute name="menuAdmin" value="/WEB-INF/views/admin/menuAdmin.jsp"></put-attribute>
+		<put-attribute name="contentAdmin" value=""></put-attribute>
+	</definition>
+	<definition name="homeAdmin" extends="base-definition-admin">
+		<put-attribute name="contentAdmin" value="/WEB-INF/views/admin/contentAdmin.jsp"></put-attribute>
 	</definition>
 	
 </tiles-definitions>

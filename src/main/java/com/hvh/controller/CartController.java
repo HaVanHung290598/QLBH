@@ -42,7 +42,6 @@ public class CartController {
 		model.addAttribute("head", "MY CART");
 		model.addAttribute("home", "HOME");
 		model.addAttribute("page", "CART");
-		model.addAttribute("display", "none");
 		model.addAttribute("color", "#f1b8c4");
 		List<Map<String, Object>> params = new ArrayList<Map<String, Object>>();
 		
@@ -73,7 +72,7 @@ public class CartController {
 		model.addAttribute("pages", pages);
 		model.addAttribute("limit", limit);
 		model.addAttribute("productDTOs", productDTOs);
-		model.addAttribute("display", "block");
+		model.addAttribute("display", "flex");
 		return "cart";
 	}
 	@RequestMapping(value="/cart", method = RequestMethod.POST)

@@ -17,6 +17,10 @@ $(document).ready(function(){
 		var price = $(this).data("price");
 		var productId = $('.productId').val();
 		var userId = $('.userId').val();
+		if($(this).val() < 1){
+			alert("Invalid value!!!");
+			$(this).val("1");
+		}
 		var quantity = $(this).val();
 		var total = parseInt(price) * parseInt(quantity);
 		$('.total-product', $(this).closest('tr')).val(total);
