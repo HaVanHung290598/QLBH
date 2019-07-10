@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <header class="container-fluid">
 	<div class="row">
 		<div class="col-md-2 col-sm-12 logo">
@@ -24,8 +25,9 @@
 	</div>
 	<div class="row app-search">
 		<div class="col-md-11 col-sm-11 header-search">
-			<form action="" method="get">
-				<input type="text" placeholder="Search & enter">
+			<c:url value="/admin/search" var="url"/>
+			<form action="${url}" method="get">
+				<input type="text" name="productName" placeholder="Search & enter">
 			</form>
 		</div>
 		<div class="col-md-1 col-sm-1 close-search">

@@ -47,7 +47,7 @@
 		<put-attribute name="contentAdmin" value=""></put-attribute>
 	</definition>
 	<definition name="homeAdmin" extends="base-definition-admin">
-		<put-attribute name="contentAdmin" value="/WEB-INF/views/admin/contentAdmin.jsp"></put-attribute>
+		<put-attribute name="contentAdmin" value="/WEB-INF/views/admin/collectionAdmin.jsp"></put-attribute>
 	</definition>
 	
 </tiles-definitions>

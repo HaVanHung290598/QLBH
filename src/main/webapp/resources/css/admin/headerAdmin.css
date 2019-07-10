@@ -113,6 +113,27 @@ header .app-search {
 .displayBlock {
 	display: block;
 }
+@media (min-width: 1170px) {
+	header .header-right {
+		display: block !important;
+	}
+}
+@media (max-width: 1170px) and (min-width: 768px) {
+	header .logo {
+		display: none;
+	}
+	header .header-right {
+		max-width: 100% !important;
+		flex: 0 0 100%;
+		display: block !important;
+	}
+	header .search ul {
+		margin-right: 86%;
+	}
+	header .search a {
+		padding: 0 10px;
+	}
+}
 @media (max-width: 768px) {
 	header .logo {
 		text-align: center;
@@ -128,21 +149,6 @@ header .app-search {
 	}
 	header .logo .show-search {
 		display: block;
-	}
-}
-@media (max-width: 1170px) and (min-width: 768px) {
-	header .logo {
-		display: none;
-	}
-	header .header-right {
-		max-width: 100% !important;
-		flex: 0 0 100%;
-	}
-	header .search ul {
-		margin-right: 86%;
-	}
-	header .search a {
-		padding: 0 10px;
 	}
 }
 @media (max-width: 576px) {

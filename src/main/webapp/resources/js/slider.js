@@ -2,9 +2,6 @@
  * 
  */
 $(document).ready(function(){
-	$('#home').click(function(){
-		alert("Hello Jquery");
-	});
 	
 	function startSlider(){
 		interval = setInterval(function(){

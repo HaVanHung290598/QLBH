@@ -1,0 +1,12 @@
+@charset "ISO-8859-1";
+.content {
+	background-color: #e8e8e8;
+    padding: 30px;
+}
+.content .collection {
+	background-color: #fff;
+    padding: 0;
+}
+.content .collection table {
+	text-align: center;
+}
