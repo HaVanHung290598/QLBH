@@ -3,6 +3,21 @@
 	background-color: #e8e8e8;
     padding: 30px;
 }
+.content .form-search {
+	padding: 20px 0px;
+    background-color: #fff;
+}
+.content .form-search > div {
+	padding-bottom: 10px;
+}
+.content .form-search label {
+	margin-bottom: 5px;
+}
+.content .form-search .form-control {
+}
+.content .form-search > div:last-child input {
+	width: 100%;
+}
 .content .collection {
 	background-color: #fff;
     padding: 0;

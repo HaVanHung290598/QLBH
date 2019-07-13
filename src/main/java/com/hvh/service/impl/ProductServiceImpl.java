@@ -102,4 +102,16 @@ public class ProductServiceImpl implements ProductService {
 		product.setUpdated_at(productDTO.getUpdated_at());
 		return product;
 	}
+
+	@Override
+	public List<ProductDTO> searchProductAdmin(Map<String, String> params, int page, int limit) {
+		List<Product> arrProduct = new ArrayList<Product>();
+		arrProduct = productDAO.searchProductAdmin(params, page, limit);
+		List<ProductDTO> arrProductDTO = new ArrayList<ProductDTO>();
+		for(Product product : arrProduct) {
+			ProductDTO productDTO = convert(product);
+			arrProductDTO.add(productDTO);
+		}
+		return arrProductDTO;
+	}
 }

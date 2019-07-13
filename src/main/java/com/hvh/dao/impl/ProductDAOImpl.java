@@ -70,4 +70,28 @@ public class ProductDAOImpl implements ProductDAO {
 		query.setMaxResults(limit);
 		return query.list();
 	}
+
+	@Override
+	public List<Product> searchProductAdmin(Map<String, String> params, int page, int limit) {
+		String hql = "from Product where";
+		if(params.get("created_at") != "") {
+			hql += " created_at='"+params.get("created_at")+"' and";
+		}
+		if(params.get("updated_at") != "") {
+			hql += " updated_at='"+params.get("updated_at")+"' and";
+		}
+		hql += " 1=1 ORDER BY";
+		if(params.get("sortPrice") != "") {
+			hql += " unit_price "+params.get("sortPrice")+" ,";
+		}
+		if(params.get("sortQuantity") != "") {
+			hql += " quantity_available "+params.get("sortQuantity") +" ,";
+		}
+		hql += " 1";
+		Session session = sessionFactory.getCurrentSession();
+		Query<Product> query = session.createQuery(hql, Product.class);
+		query.setFirstResult((page-1)*limit);
+		query.setMaxResults(limit);
+		return query.list();
+	}
 }

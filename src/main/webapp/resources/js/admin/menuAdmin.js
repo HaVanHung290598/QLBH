@@ -17,11 +17,13 @@ $(document).ready(function(){
 
 			$('.menu').hover(function(){
 				$('.menu').css('max-width','');
+				$('.content').css('max-width','');
 				$('.menu').addClass('col-md-3');
 				$('.content').addClass('col-md-9');
 			},function(){
 				$('.menu').removeClass('col-md-3');
 				$('.content').removeClass('col-md-9');
+				$('.content').css('max-width', width-70);
 			});
 		} else {
 			$('.menu').off( "mouseenter mouseleave" );

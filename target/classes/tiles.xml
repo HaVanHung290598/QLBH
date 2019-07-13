@@ -49,5 +49,8 @@
 	<definition name="homeAdmin" extends="base-definition-admin">
 		<put-attribute name="contentAdmin" value="/WEB-INF/views/admin/collectionAdmin.jsp"></put-attribute>
 	</definition>
+	<definition name="productAdmin" extends="base-definition-admin">
+		<put-attribute name="contentAdmin" value="/WEB-INF/views/admin/productAdmin.jsp"></put-attribute>
+	</definition>
 	
 </tiles-definitions>
