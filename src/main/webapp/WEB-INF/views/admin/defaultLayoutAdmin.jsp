@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="<c:url value="/resources/css/admin/headerAdmin.css"/>"/>
 <link rel="stylesheet" href="<c:url value="/resources/css/admin/menuAdmin.css"/>"/>
 <link rel="stylesheet" href="<c:url value="/resources/css/admin/collectionAdmin.css"/>"/>
+<link rel="stylesheet" href="<c:url value="/resources/css/admin/productAdmin.css"/>"/>
 <script type="text/javascript" src="<c:url value="/resources/js/jquery-3.4.1.js"/>"></script>
 </head>
 <body>

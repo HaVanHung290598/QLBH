@@ -14,11 +14,13 @@ public class ProductDTO {
 	private int quantity_available;
 	private Date created_at;
 	private Date updated_at;
+
 	private List<ProductAttributeDTO> productAttributes;
 	private List<CartDTO> carts;
 	private List<InvoiceItem> invoiceItems;
 	public ProductDTO() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
 	public ProductDTO(int id, String product_name, int unit_price, String description, String image,
 			int quantity_available, Date created_at, Date updated_at, List<ProductAttributeDTO> productAttributes,
@@ -101,5 +103,5 @@ public class ProductDTO {
 	}
 	public void setInvoiceItems(List<InvoiceItem> invoiceItems) {
 		this.invoiceItems = invoiceItems;
-	}
+	}	
 }

@@ -54,7 +54,8 @@
 					<td>${s.created_at}</td>
 					<td>${s.updated_at}</td>
 					<td>
-						<a href=""><i class="fas fa-recycle"></i></a>
+						<c:url value="/admin/repairProduct?id=${s.id}" var="url8"/>
+						<a href="${url8}"><i class="fas fa-recycle"></i></a>
 						<a href=""><i class="far fa-trash-alt"></i></a>
 					</td>
 				</tr>

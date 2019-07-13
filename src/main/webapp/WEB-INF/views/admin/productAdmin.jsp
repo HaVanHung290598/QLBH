@@ -1,22 +1,37 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <c:url value="/admin/${url}" var="action"/>
-<form:form modelAttribute="product" action="${action}" method="post">
-	<form:label path="">Product Name</form:label>
-	<form:input class="form-control" path="product_name"/><br/>
-	<form:label path="">Price</form:label>
-	<form:input class="form-control" path="unit_price" type="number"/><br/>
-	<form:label path="">Description</form:label>
-	<form:textarea class="form-control" path="description"/><br/>
-	<form:label path="">Imange</form:label>
-	<form:input class="form-control" path="image"/><br/>
-	<form:label path="">Quantity</form:label>
-	<form:input class="form-control" path="quantity_available" type="number"/>
-	<form:label path="">Created_at</form:label>
-	<form:input class="form-control" path="created_at" type="date"/><br/>
-	<form:label path="">Updated_at</form:label>
-	<form:input class="form-control" path="updated_at" type="date"/><br/>
-	<form:button class="form-control">Submit</form:button>
-</form:form>
+<form action="${action}" method="post" enctype="multipart/form-data" class="form-product">
+	<table class="table">
+		<tr>
+			<th colspan="2">${header}</th>
+		</tr>
+		<tr>
+			<td>Product Name</td>
+			<td>
+				<input type="hidden" name="id" value="${product.id}"/>
+				<input type="text" name="product_name" class="form-control" placeholder="Product Name" value="${product.product_name}"/>
+			</td>
+		</tr>
+		<tr>
+			<td>Price</td>
+			<td><input type="number" name="unit_price" class="form-control" placeholder="Price" value="${product.unit_price}"/></td>
+		</tr>
+		<tr>
+			<td>Description</td>
+			<td><textarea rows="" cols="" name="description" class="form-control" placeholder="Description">${product.description}</textarea></td>
+		</tr>
+		<tr>
+			<td>Quantity</td>
+			<td><input type="number" name="quantity_available" class="form-control" placeholder="Quantity" value="${product.quantity_available}"/></td>
+		</tr>
+		<tr>
+			<td>Image</td>
+			<td colspan="1"><input type="file" name="file"/></td>
+		</tr>
+		<tr>
+			<td colspan="2"><input type="submit" value="Submit" class="form-control"/></td>
+		</tr>
+	</table>	
+</form>
