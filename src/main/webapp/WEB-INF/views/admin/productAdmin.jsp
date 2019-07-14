@@ -5,7 +5,7 @@
 <form action="${action}" method="post" enctype="multipart/form-data" class="form-product">
 	<table class="table">
 		<tr>
-			<th colspan="2">${header}</th>
+			<th><h2>${headerPage}</h2></th>
 		</tr>
 		<tr>
 			<td>Product Name</td>

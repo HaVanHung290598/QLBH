@@ -77,7 +77,7 @@ public class AdminController {
 	public String addProduct(Model model) {
 		model.addAttribute("product", new ProductDTO());
 		model.addAttribute("url", "addProduct");
-		model.addAttribute("header", "Create Product");
+		model.addAttribute("headerPage", "Create Product");
 		return "productAdmin";
 	}
 
@@ -112,7 +112,7 @@ public class AdminController {
 		ProductDTO product = productService.getProductById(productId);
 		model.addAttribute("product", product);
 		model.addAttribute("url", "repairProduct");
-		model.addAttribute("header", "Repair Product");
+		model.addAttribute("headerPage", "Repair Product");
 		return "productAdmin";
 	}
 
@@ -133,6 +133,12 @@ public class AdminController {
 		product.setCreated_at(productService.getProductById(productId).getCreated_at());
 		product.setUpdated_at(updated_at);
 		productService.updateProduct(product);
+		return "redirect:/admin/product";
+	}
+	@RequestMapping(value="/deleteProduct", method = RequestMethod.GET)
+	public String deleteProduct(Model model, HttpServletRequest req) {
+		int productId = Integer.parseInt(req.getParameter("id"));
+		productService.deleteProduct(productId);
 		return "redirect:/admin/product";
 	}
 //	@InitBinder

@@ -23,6 +23,7 @@ import com.hvh.model.ProductAttributeDTO;
 import com.hvh.model.ProductDTO;
 import com.hvh.model.UserDTO;
 import com.hvh.service.CartService;
+import com.hvh.service.InvoiceItemService;
 import com.hvh.service.ProductAttributeService;
 import com.hvh.service.ProductService;
 import com.hvh.service.UserService;
@@ -41,6 +42,9 @@ public class HomeController {
 	
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	InvoiceItemService invoiceItemService;
 	
 	public List<Map<String, Object>> getListCart() {
 		List<Map<String, Object>> params = new ArrayList<Map<String, Object>>();
@@ -72,6 +76,7 @@ public class HomeController {
 	public String home(Model model, Principal principal, HttpServletRequest req) {
 		List<ProductDTO> productDTOs = productService.getListProduct(6,4);
 		model.addAttribute("productDTOs", productDTOs);
+		model.addAttribute("Top5Product", productService.getTop5Product());
 		model.addAttribute("display", "none");
 		model.addAttribute("color", "#f1b8c4");		
 		if (principal != null) {

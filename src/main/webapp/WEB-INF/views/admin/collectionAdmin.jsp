@@ -55,8 +55,9 @@
 					<td>${s.updated_at}</td>
 					<td>
 						<c:url value="/admin/repairProduct?id=${s.id}" var="url8"/>
+						<c:url value="/admin/deleteProduct?id=${s.id}" var="url9"/>
 						<a href="${url8}"><i class="fas fa-recycle"></i></a>
-						<a href=""><i class="far fa-trash-alt"></i></a>
+						<a href="${url9}"><i class="far fa-trash-alt"></i></a>
 					</td>
 				</tr>
 			</c:forEach>

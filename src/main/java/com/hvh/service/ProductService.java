@@ -14,4 +14,5 @@ public interface ProductService {
 //	public List<ProductDTO> searchProduct(String productName);
 	public List<ProductDTO> searchProduct(Map<String, String> params, int page, int limit);
 	public List<ProductDTO> searchProductAdmin(Map<String, String> params, int page, int limit);
+	public List<ProductDTO> getTop5Product();
 }

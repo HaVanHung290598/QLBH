@@ -7,8 +7,10 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hvh.dao.InvoiceItemDAO;
 import com.hvh.dao.ProductDAO;
 import com.hvh.entity.Product;
+import com.hvh.entity.InvoiceItem.PkInvoiceItem;
 import com.hvh.model.ProductDTO;
 import com.hvh.service.ProductService;
 
@@ -16,6 +18,9 @@ import com.hvh.service.ProductService;
 public class ProductServiceImpl implements ProductService {
 	@Autowired
 	ProductDAO productDAO;
+	
+	@Autowired
+	InvoiceItemDAO invoiceItemDAO;
 
 	@Override
 	public void addProduct(ProductDTO productDTO) {
@@ -113,5 +118,17 @@ public class ProductServiceImpl implements ProductService {
 			arrProductDTO.add(productDTO);
 		}
 		return arrProductDTO;
+	}
+	public List<ProductDTO> getTop5Product() {
+		List<PkInvoiceItem> list = invoiceItemDAO.getTop5Product();
+		List<Product> products = new ArrayList<Product>();
+		for(PkInvoiceItem pkInvoiceItem : list) {
+			products.add(productDAO.getProductById(pkInvoiceItem.getProduct().getId()));
+		}
+		List<ProductDTO> productDTOs = new ArrayList<ProductDTO>();
+		for(Product product : products) {
+			productDTOs.add(convert(product));
+		}
+		return productDTOs;
 	}
 }

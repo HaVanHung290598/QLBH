@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import com.hvh.dao.InvoiceItemDAO;
 import com.hvh.entity.InvoiceItem;
+import com.hvh.entity.InvoiceItem.PkInvoiceItem;
 
 @Repository
 @Transactional
@@ -31,6 +32,14 @@ public class InvoiceItemDAOImpl implements InvoiceItemDAO {
 		query.setParameter("invoice_id", invoice_id);
 		List<InvoiceItem> invoiceItems = query.list();
 		return invoiceItems;
+	}
+	public List<PkInvoiceItem> getTop5Product() {
+		String hql = "select pk from InvoiceItem group by product_id order by sum(quantity) desc";
+		Session session = sessionFactory.getCurrentSession();
+		Query<PkInvoiceItem> query = session.createQuery(hql, PkInvoiceItem.class);
+		query.setFirstResult(0);
+		query.setMaxResults(5);		
+		return query.list();
 	}
 
 }

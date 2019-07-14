@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ taglib uri="http://java.sun.com/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 	<div class="container-fluid trending-product">
 		<div class="container">
 			<div class="row">
@@ -10,36 +10,14 @@
 				</div>
 			</div>
 			<div class="row" id="show-trending-content">
-				<div class="col-md-4 col-sm-6 trending-content">
-					<img src="<c:url value="/resources/images/product-1.jpg"/>" width="100%" height="auto"/>
-					<p class="name">Young Woman Wearing Dress</p>
-					<p class="price">$120.00</p>
-					<p class="star"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></p>
-				</div>
-				<div class="col-md-4 col-sm-6 trending-content">
-					<img src="<c:url value="/resources/images/product-2.jpg"/>" width="100%" height="auto"/>
-					<p class="name">Young Woman Wearing Dress</p>
-					<p class="price">$120.00</p>
-					<p class="star"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></p>
-				</div>
-				<div class="col-md-4 col-sm-6 trending-content">
-					<img src="<c:url value="/resources/images/product-3.jpg"/>" width="100%" height="auto"/>
-					<p class="name">Young Woman Wearing Dress</p>
-					<p class="price">$120.00</p>
-					<p class="star"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></p>
-				</div>
-				<div class="col-md-4 col-sm-6 trending-content">
-					<img src="<c:url value="/resources/images/product-5.jpg"/>" width="100%" height="auto"/>
-					<p class="name">Young Woman Wearing Dress</p>
-					<p class="price">$120.00</p>
-					<p class="star"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></p>
-				</div>
-				<div class="col-md-4 col-sm-6 trending-content">
-					<img src="<c:url value="/resources/images/product-6.jpg"/>" width="100%" height="auto"/>
-					<p class="name">Young Woman Wearing Dress</p>
-					<p class="price">$120.00</p>
-					<p class="star"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></p>
-				</div>
-			</div>
+				<c:forEach items="${Top5Product}" var="s">
+					<div class="col-md-4 col-sm-6 trending-content">
+						<img src="<c:url value="/resources/images/${s.image}.jpg"/>" width="100%" height="85%"/>
+						<p class="name">${s.product_name}</p>
+						<p class="price">$${s.unit_price}</p>
+						<p class="star"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></p>
+					</div>
+				</c:forEach>
+			</div>				
 		</div>
 	</div>

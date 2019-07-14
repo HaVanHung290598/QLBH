@@ -2,3 +2,9 @@
 .content .form-product {
 	padding: 20px 100px;
 }
+.content .form-product table tr td:first-child {
+	width: 30%;
+}
+.content .form-product table tr:last-child td input:hover {
+	border-color: #afb8f9;
+}
