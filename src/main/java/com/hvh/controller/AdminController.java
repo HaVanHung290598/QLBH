@@ -2,6 +2,7 @@ package com.hvh.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,13 +18,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.hvh.model.InvoiceDTO;
+import com.hvh.model.InvoiceItemDTO;
 import com.hvh.model.ProductDTO;
+import com.hvh.model.UserDTO;
+import com.hvh.service.InvoiceItemService;
 import com.hvh.service.InvoiceService;
 import com.hvh.service.ProductService;
+import com.hvh.service.UserService;
 
 @Controller
 @RequestMapping(value = "/admin")
 public class AdminController {
+	
 	long millis = System.currentTimeMillis();
 	java.util.Date created_at = new java.util.Date(millis);
 	java.util.Date updated_at = new java.util.Date(millis);
@@ -33,6 +39,12 @@ public class AdminController {
 	
 	@Autowired
 	InvoiceService invoiceService;
+	
+	@Autowired
+	UserService userService;
+	
+	@Autowired
+	InvoiceItemService invoiceItemService;
 
 	@RequestMapping(value = "/product", method = RequestMethod.GET)
 	public String getProduct(Model model, HttpServletRequest req) {
@@ -177,5 +189,27 @@ public class AdminController {
 		model.addAttribute("size", invoiceService.searchInvoice(params, 1, 10000).size());
 		model.addAttribute("params", params);
 		return "invoiceAdmin";
+	}
+	@RequestMapping(value="/invoiceDetails", method = RequestMethod.GET)
+	public String invoiceDetails(Model model, HttpServletRequest req) {
+		int invoiceId = Integer.parseInt(req.getParameter("id"));
+		int userId = Integer.parseInt(req.getParameter("userId"));
+		InvoiceDTO invoiceDTO = invoiceService.getInvoiceById(invoiceId);
+		UserDTO userDTO = userService.getUserById(userId);
+		List<InvoiceItemDTO> invoiceItemDTOs = invoiceItemService.getInvoiceItemByInvoiceId(invoiceId);
+		List<Map<String, Object>> informationInvoices = new ArrayList<Map<String, Object>>(); 
+		for(InvoiceItemDTO invoiceItemDTO : invoiceItemDTOs) {
+			Map<String, Object> params = new HashMap<String, Object>();
+			params.put("invoiceItem", invoiceItemDTO);
+			params.put("product", productService.getProductById(invoiceItemDTO.getProduct_id()));
+			informationInvoices.add(params);
+		}
+		model.addAttribute("invoiceDTO", invoiceDTO);
+		model.addAttribute("userDTO", userDTO);
+		model.addAttribute("informationInvoice", informationInvoices);
+		for(Map<String, Object> infor : informationInvoices) {
+			System.out.println(((ProductDTO) infor.get("product")).getId());
+		}
+		return "invoiceDetailsAdmin";
 	}
 }

@@ -55,4 +55,7 @@
 	<definition name="invoiceAdmin" extends="base-definition-admin">
 		<put-attribute name="contentAdmin" value="/WEB-INF/views/admin/invoiceAdmin.jsp"></put-attribute>
 	</definition>
+	<definition name="invoiceDetailsAdmin" extends="base-definition-admin">
+		<put-attribute name="contentAdmin" value="/WEB-INF/views/admin/invoiceDetailsAdmin.jsp"></put-attribute>
+	</definition>
 </tiles-definitions>

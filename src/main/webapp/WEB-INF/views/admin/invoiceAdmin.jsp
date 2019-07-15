@@ -38,7 +38,8 @@
 					<td>${s.total_amount}</td>
 					<td>${s.status}</td>
 					<td>${s.created_at}</td>
-					<td><a href="#"><i class="fas fa-info"></i></a></td>
+					<c:url value="/admin/invoiceDetails?id=${s.id}&&userId=${s.user_id}" var="url6"/>
+					<td><a href="${url6}"><i class="fas fa-info"></i></a></td>
 				</tr>
 			</c:forEach>
 		</table>

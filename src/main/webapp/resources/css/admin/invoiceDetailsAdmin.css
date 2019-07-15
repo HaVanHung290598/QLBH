@@ -1,0 +1,16 @@
+@charset "ISO-8859-1";
+.content .inforInvoice {
+	background-color: #fff;
+	padding-top: 15px;
+}
+.content .inforInvoice>div {
+	margin-bottom : 15px;
+}
+.content .inforInvoice div:first-child div:last-child h1 {
+	font-weight: 100;
+    letter-spacing: 5px;
+    float: right;
+}
+.content .inforInvoice .inforProducts {
+	text-align: center;
+}
