@@ -1,5 +1,9 @@
 package com.hvh.dao.impl;
 
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 import javax.transaction.Transactional;
 
 import org.hibernate.Session;
@@ -29,12 +33,36 @@ public class InvoiceDAOImpl implements InvoiceDAO {
 	}
 
 	@Override
-	public Invoice getNewInvoice() {
+	public Invoice getNewInvoice(int limit, int page) {
 		String hql = "From Invoice order by id DESC";
 		Session session = sessionFactory.getCurrentSession();
 		Query<Invoice> query = session.createQuery(hql, Invoice.class);
-		query.setFirstResult(0);
-		query.setMaxResults(1);
+		query.setFirstResult((page-1)*limit);
+		query.setMaxResults(limit);
 		return query.getSingleResult();
+	}
+	public List<Invoice> getListInvoice(int limit, int page) {
+		String hql = "From Invoice order by id DESC";
+		Session session = sessionFactory.getCurrentSession();
+		Query<Invoice> query = session.createQuery(hql, Invoice.class);
+		query.setFirstResult((page-1)*limit);
+		query.setMaxResults(limit);
+		return query.list();
+	}
+	
+	public List<Invoice> searchInvoice(Map<String, String> params, int page, int limit) {
+		String hql = "from Invoice where";
+		Set<String> keys = params.keySet();
+		for(String key : keys) {
+			if(params.get(key) != "") {
+				hql += " "+key+"(created_at)="+params.get(key)+" and";
+			}
+		}
+		hql += " 1=1 order by created_at DESC";
+		Session session = sessionFactory.getCurrentSession();
+		Query<Invoice> query = session.createQuery(hql, Invoice.class);
+		query.setFirstResult((page-1)*limit);
+		query.setMaxResults(limit);
+		return query.list();
 	}
 }

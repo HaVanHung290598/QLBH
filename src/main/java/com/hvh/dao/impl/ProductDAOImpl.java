@@ -94,4 +94,12 @@ public class ProductDAOImpl implements ProductDAO {
 		query.setMaxResults(limit);
 		return query.list();
 	}
+	public void updateQuantityProduct(int id ,int quantity) {
+		String hql = "update Product set quantity_available=:quantity where id=:id";
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery(hql);
+		query.setParameter("quantity", quantity);
+		query.setParameter("id", id);
+		query.executeUpdate();
+	}
 }

@@ -1,5 +1,9 @@
 package com.hvh.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,8 +33,8 @@ public class InvoiceServiceImpl implements InvoiceService {
 	}
 
 	@Override
-	public InvoiceDTO getNewInvoice() {
-		Invoice invoice = invoiceDAO.getNewInvoice();
+	public InvoiceDTO getNewInvoice(int limit, int page) {
+		Invoice invoice = invoiceDAO.getNewInvoice(limit, page);
 		return convert(invoice);
 	}
 	
@@ -58,5 +62,25 @@ public class InvoiceServiceImpl implements InvoiceService {
 		invoice.setDelivery_phone(invoiceDTO.getDelivery_phone());
 		invoice.setCreated_at(invoiceDTO.getCreated_at());
 		return invoice;
+	}
+
+	@Override
+	public List<InvoiceDTO> getListInvoice(int limit, int page) {
+		List<Invoice> invoices = invoiceDAO.getListInvoice(limit, page);
+		List<InvoiceDTO> invoiceDTOs = new ArrayList<InvoiceDTO>();
+		for(Invoice invoice : invoices) {
+			invoiceDTOs.add(convert(invoice));
+		}
+		return invoiceDTOs;
+	}
+
+	@Override
+	public List<InvoiceDTO> searchInvoice(Map<String, String> params, int page, int limit) {
+		List<Invoice> invoices = invoiceDAO.searchInvoice(params, page, limit);
+		List<InvoiceDTO> invoiceDTOs = new ArrayList<InvoiceDTO>();
+		for(Invoice invoice : invoices) {
+			invoiceDTOs.add(convert(invoice));
+		}
+		return invoiceDTOs;
 	}
 }

@@ -131,4 +131,9 @@ public class ProductServiceImpl implements ProductService {
 		}
 		return productDTOs;
 	}
+
+	@Override
+	public void updateQuantityProduct(int id, int quantity) {
+		productDAO.updateQuantityProduct(id, quantity);
+	}
 }

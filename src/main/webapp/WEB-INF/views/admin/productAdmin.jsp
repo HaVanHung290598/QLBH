@@ -20,13 +20,13 @@
 		</tr>
 		<tr>
 			<td>Description</td>
-			<td><textarea rows="" cols="" name="description" class="form-control" placeholder="Description">${product.description}</textarea></td>
+			<td><textarea rows="4" cols="" name="description" class="form-control" placeholder="Description">${product.description}</textarea></td>
 		</tr>
 		<tr>
 			<td>Quantity</td>
 			<td><input type="number" name="quantity_available" class="form-control" placeholder="Quantity" value="${product.quantity_available}"/></td>
 		</tr>
-		<tr>
+		<tr style="display:${display}">
 			<td>Image</td>
 			<td colspan="1"><input type="file" name="file"/></td>
 		</tr>

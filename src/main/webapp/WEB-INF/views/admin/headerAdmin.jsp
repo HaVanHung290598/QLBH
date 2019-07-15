@@ -13,7 +13,7 @@
 				<div class="col-md-11 col-sm-10 search">
 					<ul>
 						<li>
-							<a href="#"><i class="fas fa-search"></i> Search</a>							
+							<a href="javascript:void(0)"><i class="fas fa-search"></i> Search</a>							
 						</li>
 					</ul>
 				</div>

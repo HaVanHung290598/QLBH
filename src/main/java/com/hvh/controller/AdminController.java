@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.hvh.model.InvoiceDTO;
 import com.hvh.model.ProductDTO;
+import com.hvh.service.InvoiceService;
 import com.hvh.service.ProductService;
 
 @Controller
@@ -28,6 +30,9 @@ public class AdminController {
 	
 	@Autowired
 	ProductService productService;
+	
+	@Autowired
+	InvoiceService invoiceService;
 
 	@RequestMapping(value = "/product", method = RequestMethod.GET)
 	public String getProduct(Model model, HttpServletRequest req) {
@@ -113,6 +118,7 @@ public class AdminController {
 		model.addAttribute("product", product);
 		model.addAttribute("url", "repairProduct");
 		model.addAttribute("headerPage", "Repair Product");
+		model.addAttribute("display", "none");
 		return "productAdmin";
 	}
 
@@ -147,4 +153,29 @@ public class AdminController {
 //		sdf.setLenient(true);
 //		binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
 //	}
+	@RequestMapping(value="/invoiceAdmin", method = RequestMethod.GET)
+	public String invoice(Model model, HttpServletRequest req) {
+		int limit = req.getParameter("limit") == null ? 10 : Integer.parseInt(req.getParameter("limit"));
+		int page = req.getParameter("page") == null ? 1 : Integer.parseInt(req.getParameter("page"));
+		List<InvoiceDTO> invoiceDTOs = invoiceService.getListInvoice(limit, page);
+		model.addAttribute("page", page);
+		model.addAttribute("invoiceDTOs", invoiceDTOs);
+		model.addAttribute("size", invoiceService.getListInvoice(10000, 1).size());
+		return "invoiceAdmin";
+	}
+	@RequestMapping(value="/searchInvoiceAdmin", method = RequestMethod.GET)
+	public String searchInvoice(Model model, HttpServletRequest req) {
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("day", req.getParameter("day") == null ? "" : req.getParameter("day"));
+		params.put("month", req.getParameter("month") == null ? "" : req.getParameter("month"));
+		params.put("year", req.getParameter("year") == null ? "" : req.getParameter("year"));
+		int limit = req.getParameter("limit") == null ? 10 : Integer.parseInt(req.getParameter("limit"));
+		int page = req.getParameter("page") == null ? 1 : Integer.parseInt(req.getParameter("page"));
+		List<InvoiceDTO> invoiceDTOs = invoiceService.searchInvoice(params, page, limit);
+		model.addAttribute("page", page);
+		model.addAttribute("invoiceDTOs", invoiceDTOs);
+		model.addAttribute("size", invoiceService.searchInvoice(params, 1, 10000).size());
+		model.addAttribute("params", params);
+		return "invoiceAdmin";
+	}
 }

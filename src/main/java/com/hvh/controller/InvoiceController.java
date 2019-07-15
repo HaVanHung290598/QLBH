@@ -54,17 +54,19 @@ public class InvoiceController {
 		invoiceDTO.setDelivery_phone(deliveryPhone);
 		invoiceDTO.setCreated_at(created_at);
 		invoiceService.addInvoice(invoiceDTO);
-		List<CartDTO> cartDTOs = cartService.getListCartByUser(invoiceService.getNewInvoice().getUser_id());
+		List<CartDTO> cartDTOs = cartService.getListCartByUser(invoiceService.getNewInvoice(1,1).getUser_id());
 		for(CartDTO cartDTO : cartDTOs) {
 			InvoiceItemDTO invoiceItemDTO = new InvoiceItemDTO();
-			invoiceItemDTO.setInvoice_id(invoiceService.getNewInvoice().getId());
-			invoiceItemDTO.setProduct_id(cartDTO.getProduct_id());
+			invoiceItemDTO.setInvoice_id(invoiceService.getNewInvoice(1,1).getId());
+			int productId = cartDTO.getProduct_id();
+			invoiceItemDTO.setProduct_id(productId);
 			invoiceItemDTO.setQuantity(cartDTO.getQuantity());
 			invoiceItemDTO.setSize(cartDTO.getSize());
 			invoiceItemDTO.setColor(cartDTO.getColor());
 			invoiceItemDTO.setPrice(productService.getProductById(cartDTO.getProduct_id()).getUnit_price());
 			invoiceItemDTO.setCreated_at(created_at);
 			invoiceItemService.addInvoiceItem(invoiceItemDTO);
+			productService.updateQuantityProduct(productId, productService.getProductById(productId).getQuantity_available() - cartDTO.getQuantity());
 		}
 		cartService.deleteCartByUserId(userId);
 		return "redirect:/cart";

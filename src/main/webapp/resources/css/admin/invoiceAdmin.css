@@ -1,0 +1,16 @@
+@charset "ISO-8859-1";
+.content .form-search-invoice {
+	margin-bottom: 20px;
+}
+.content .form-search-invoice div:last-child input:hover {
+	border-color: #8fa2ff;
+}
+.content .form-invoice {
+	background-color: #fff;
+}
+.content .form-invoice table {
+	text-align: center;
+}
+.content .form-invoice table tr:first-child th {
+	border-top: none;
+}
