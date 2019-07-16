@@ -12,7 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
-@EnableWebSecurity
+@EnableWebSecurity//kích hoạt việc tích hợp spring security vs spring mvc
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Autowired
 	DataSource dataSource;
@@ -26,14 +26,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.passwordEncoder(bCryptPasswordEncoder);
 	}
 	@Override
-	protected void configure(HttpSecurity http) throws Exception {
+	protected void configure(HttpSecurity http) throws Exception {		
 		http.csrf().disable()
 		.authorizeRequests()
-//		.antMatchers("/admin/**").hasRole("ADMIN")
-//		.and()
-//		.authorizeRequests()
-		.antMatchers("/cart/**").hasRole("USER")
-		.anyRequest().permitAll()
+		.antMatchers("/admin/**").hasRole("ADMIN")
+		.and()
+		.authorizeRequests()
+		.antMatchers("/cart/**").hasRole("USER")//antMatchers--khai báo đường dẫn trang web.....
+		.anyRequest().permitAll()//permitall--cho phép tất cả các user đc truy cập
 		.and()
 		.formLogin()
 		.loginPage("/login")
@@ -47,8 +47,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.logoutUrl("/logout")
 		.logoutSuccessUrl("/home")
 		.and()
-		.exceptionHandling()
-		.accessDeniedPage("/login?error=deny")
+		.exceptionHandling()//truy cap ko dung quyen
+		.accessDeniedPage("/error")
 		;
 //		http.sessionManagement().sessionFixation().newSession()
 //		.invalidSessionUrl("/login?message=timeout")

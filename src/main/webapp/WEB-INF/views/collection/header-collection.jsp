@@ -24,9 +24,15 @@
 						<security:authorize access="isAuthenticated()">
 							<security:authentication property="principal" var="user"/>
 						</security:authorize>
-						<c:choose>
-							<c:when test="${not empty user.username}">
-								<li><a href=""><i class="fas fa-shopping-cart"></i>[${params.size()}]</a>
+						<security:authorize access="hasRole('ADMIN')">
+							<li>
+								<c:url value="/logout" var="url"/>
+								<c:url value="/admin/" var="url10"/>
+								<a href="${url10}">${user.username}</a>|<a href="${url}">Log out</a>
+							</li>
+						</security:authorize>
+						<security:authorize access="hasRole('USER')">
+							<li><a href=""><i class="fas fa-shopping-cart"></i>[${params.size()}]</a>
 									<ul class="submenu2">
 										<li>New products</li>
 										<c:forEach items="${params}" var="s">
@@ -56,16 +62,15 @@
 								</li>
 								<li>
 									<c:url value="/logout" var="url"/>
-									<p>${user.username} |</p><a href="${url}">Log out</a>
-								</li>
-							</c:when>
-							<c:when test="${empty user.username}">
-								<li>
-									<a href="login">Sign in</a>|
-									<a href="signUp">Sign up</a>
-								</li>
-							</c:when>
-						</c:choose>
+								<p>${user.username} |</p><a href="${url}">Log out</a>
+							</li>
+						</security:authorize>
+						<c:if test="${empty user}">
+							<li>
+								<a href="login">Sign in</a>|
+								<a href="signUp">Sign up</a>
+							</li>
+						</c:if>
 					</ul>
 				</div>
 			</div>

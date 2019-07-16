@@ -153,4 +153,8 @@ public class HomeController {
 		}
 		return "collection";
 	}
+	@RequestMapping(value="/error", method = RequestMethod.GET)
+	public String error() {
+		return "404";
+	}
 }

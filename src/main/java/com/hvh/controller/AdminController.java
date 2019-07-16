@@ -46,7 +46,7 @@ public class AdminController {
 	@Autowired
 	InvoiceItemService invoiceItemService;
 
-	@RequestMapping(value = "/product", method = RequestMethod.GET)
+	@RequestMapping(value = {"/product","/"}, method = RequestMethod.GET)
 	public String getProduct(Model model, HttpServletRequest req) {
 		int pages = req.getParameter("pages") == null ? 1 : Integer.parseInt(req.getParameter("pages"));
 		int limit = req.getParameter("limit") == null ? 8 : Integer.parseInt(req.getParameter("limit"));

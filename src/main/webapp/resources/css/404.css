@@ -1,0 +1,24 @@
+@charset "ISO-8859-1";
+html {
+	background-color: #ccc;
+}
+.error {
+	width: 30%;
+    text-align: center;
+    margin: 12% auto;
+}
+.error h1 {
+	color: #f3f3f3;
+    font-size: 130px;
+    margin-bottom: 0;
+}
+.error h2 {
+	font-size: 30px;
+    margin-bottom: 0;
+}
+.error p {
+	margin: 0;
+}
+.error a:hover {
+	color: red;
+}

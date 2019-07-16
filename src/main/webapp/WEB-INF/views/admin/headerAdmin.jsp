@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security"%>
+<security:authorize access="isAuthenticated()">
+	<security:authentication property="principal" var="admin"/>
+</security:authorize>
 <header class="container-fluid">
 	<div class="row">
 		<div class="col-md-2 col-sm-12 logo">
@@ -10,15 +14,17 @@
 		</div>
 		<div class="col-md-10 col-sm-12 header-right">
 			<div class="row">
-				<div class="col-md-11 col-sm-10 search">
+				<div class="col-md-10 col-sm-10 search">
 					<ul>
 						<li>
 							<a href="javascript:void(0)"><i class="fas fa-search"></i> Search</a>							
 						</li>
 					</ul>
 				</div>
-				<div class="col-md-1 col-sm-2 admin">
-					<a href="#">Admin</a>
+				<div class="col-md-2 col-sm-2 admin">
+					<c:url value="/logout" var="url2"/>
+					<p>${admin.username}</p>
+					<a href="${url2}">Log out</a>
 				</div>
 			</div>
 		</div>

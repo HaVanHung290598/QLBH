@@ -70,12 +70,23 @@ header .search a:hover {
 	background-color: #dcdcdc;
 	transition: 0.5s;
 }
+/* header .admin a { */
+/* 	text-decoration: none; */
+/* 	color: #000; */
+/* 	display: block; */
+/* 	line-height: 57px; */
+/* 	height: 100%; */
+/* } */
+header .admin {
+	text-align: center;
+}
+header .admin p {
+	margin-bottom: 0;
+	margin-top: 10px;
+}
 header .admin a {
-	text-decoration: none;
-	color: #000;
-	display: block;
-	line-height: 57px;
-	height: 100%;
+	font-size: 14px;
+    text-decoration: none;
 }
 header .header-search {
 	height: 64px;
