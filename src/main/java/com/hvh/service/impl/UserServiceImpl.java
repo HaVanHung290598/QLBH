@@ -1,5 +1,8 @@
 package com.hvh.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -58,5 +61,30 @@ public class UserServiceImpl implements UserService{
 		user.setRole(userDTO.getRole());
 		user.setEnabled(userDTO.getEnabled());
 		return user;
+	}
+
+	@Override
+	public List<UserDTO> getListUser(int page, int limit) {
+		List<User> users = userDAO.getListUser(page, limit);
+		List<UserDTO> userDTOs = new ArrayList<UserDTO>();
+		for(User user : users) {
+			userDTOs.add(convert(user));
+		}
+		return userDTOs;
+	}
+
+	@Override
+	public void updateUser(UserDTO userDTO) {
+		userDAO.updateUser(convert(userDTO));
+	}
+
+	@Override
+	public List<UserDTO> searchUser(String username, int page, int limit) {
+		List<User> users = userDAO.searchUser(username, page, limit);
+		List<UserDTO> userDTOs = new ArrayList<UserDTO>();
+		for(User user : users) {
+			userDTOs.add(convert(user));
+		}
+		return userDTOs;
 	}
 }

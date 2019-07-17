@@ -28,7 +28,23 @@
 		</tr>
 		<tr style="display:${display}">
 			<td>Image</td>
-			<td colspan="1"><input type="file" name="file"/></td>
+			<td colspan="1"><input type="file" name="file" multiple="multiple"/></td>
+		</tr>
+		<tr>
+			<td>Color</td>
+			<td>
+				<select name="color" multiple="multiple">
+				   <option value="1">SMALL</option>
+				   <option value="2">NORMAL</option>
+				   <option value="3">LARGE</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>Size</td>
+			<td>
+				<input type="text" multiple="multiple">
+			</td>
 		</tr>
 		<tr>
 			<td colspan="2"><input type="submit" value="Submit" class="form-control"/></td>

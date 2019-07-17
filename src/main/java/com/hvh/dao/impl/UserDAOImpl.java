@@ -1,5 +1,7 @@
 package com.hvh.dao.impl;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.hibernate.Session;
@@ -38,5 +40,30 @@ public class UserDAOImpl implements UserDAO {
 		query.setMaxResults(1);
 		return query.getSingleResult();
 	}
+	@Override
+	public List<User> getListUser(int page, int limit) {
+		String hql = "from User order by id DESC";
+		Session session = sessionFactory.getCurrentSession();
+		Query<User> query = session.createQuery(hql, User.class);
+		query.setFirstResult((page-1)*limit);
+		query.setMaxResults(limit);
+		return query.list();
+	}
+
+	@Override
+	public void updateUser(User user) {
+		sessionFactory.getCurrentSession().merge(user);
+	}
+
+	@Override
+	public List<User> searchUser(String username, int page, int limit) {
+		String hql = "from User where username like '%"+username+"%'";
+		Session session = sessionFactory.getCurrentSession();
+		Query<User> query = session.createQuery(hql, User.class);
+		query.setFirstResult((page-1)*limit);
+		query.setMaxResults(limit);
+		return query.list();
+	}
+	
 
 }

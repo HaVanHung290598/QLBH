@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,6 +25,7 @@ import com.hvh.model.UserDTO;
 import com.hvh.service.InvoiceItemService;
 import com.hvh.service.InvoiceService;
 import com.hvh.service.ProductService;
+import com.hvh.service.SettingService;
 import com.hvh.service.UserService;
 
 @Controller
@@ -46,6 +48,9 @@ public class AdminController {
 	@Autowired
 	InvoiceItemService invoiceItemService;
 
+	@Autowired
+	SettingService settingService;
+	
 	@RequestMapping(value = {"/product","/"}, method = RequestMethod.GET)
 	public String getProduct(Model model, HttpServletRequest req) {
 		int pages = req.getParameter("pages") == null ? 1 : Integer.parseInt(req.getParameter("pages"));
@@ -207,9 +212,44 @@ public class AdminController {
 		model.addAttribute("invoiceDTO", invoiceDTO);
 		model.addAttribute("userDTO", userDTO);
 		model.addAttribute("informationInvoice", informationInvoices);
-		for(Map<String, Object> infor : informationInvoices) {
-			System.out.println(((ProductDTO) infor.get("product")).getId());
-		}
 		return "invoiceDetailsAdmin";
+	}
+	@RequestMapping(value="/user", method = RequestMethod.GET)
+	public String getUser(Model model, HttpServletRequest req) {
+		int page = req.getParameter("page") == null ? 1 : Integer.parseInt(req.getParameter("page"));
+		int limit = req.getParameter("limit") == null ? 10 : Integer.parseInt(req.getParameter("limit"));
+		List<UserDTO> userDTOs = userService.getListUser(page, limit);
+		model.addAttribute("page", page);
+		model.addAttribute("userDTOs", userDTOs);
+		model.addAttribute("size", userService.getListUser(1, 10000).size());
+		return "userAdmin";
+	}
+	//loi modelAttribute
+	@RequestMapping(value="/repairUser", method = RequestMethod.GET)
+	public String repairUser(Model model, @RequestParam(name = "id")int id) {
+		UserDTO userDTO = userService.getUserById(id);
+		model.addAttribute("userDTO", userDTO);
+		return "repairUserAdmin";
+	}
+	@RequestMapping(value="/repairUser", method = RequestMethod.POST)
+	public String repairUser(Model model, @ModelAttribute(name="userDTO")UserDTO userDTO) {
+		System.out.println(userDTO.getId());
+		System.out.println(userDTO.getFullname());
+		return "redirect:/admin/user";
+	}
+	
+	//chua phan trang
+	@RequestMapping(value="/searchUser", method = RequestMethod.GET)
+	public String searchUser(Model model, @RequestParam(name="userName")String userName, HttpServletRequest req) {
+		int page = req.getParameter("page") == null ? 1 : Integer.parseInt(req.getParameter("page"));
+		int limit = req.getParameter("limit") == null ? 10 : Integer.parseInt(req.getParameter("limit"));
+		List<UserDTO> userDTOs = userService.searchUser(userName, page, limit);
+		model.addAttribute("userDTOs", userDTOs);
+		return "userAdmin";
+	}
+	@RequestMapping(value="/setting", method = RequestMethod.GET)
+	public String setting(Model model) {
+		model.addAttribute("setting", settingService.getSettingById(1));
+		return "settingAdmin";
 	}
 }
