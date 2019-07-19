@@ -4,22 +4,33 @@
 <c:url value="/admin/searchInvoiceAdmin" var="url5"/>
 <form action="${url5}" method="get">
 	<div class="row form-search-invoice">
-		<div class="col-md-3">			
+		<div class="col-md-4 col-sm-4">
+			<label>Status</label>
+			<select name="status" class="form-control">
+				<option value=""></option>
+				<option value="pending" ${params.get('status') == 'pending' ? 'selected' : ''}>pending</option>
+				<option value="delivering" ${params.get('status') == 'delivering' ? 'selected' : ''}>delivering</option>
+				<option value="success" ${params.get('status') != 'success' ? '' : 'selected'}>success</option>
+				<option value="refunded" ${params.get('status') != 'refunded' ? '' : 'selected'}>refunded</option>
+				<option value="canceled" ${params.get('status') != 'canceled' ? '' : 'selected'}>canceled</option>
+			</select>
+		</div>
+		<div class="col-md-2 col-sm-2">			
 			<input class="form-control" type="text" name="day" placeholder="Day" value="${params.get('day')}"/>		
 		</div>
-		<div class="col-md-3">			
+		<div class="col-md-2 col-sm-2">			
 			<input class="form-control" type="text" name="month" placeholder="Month" value="${params.get('month')}"/>	
 		</div>
-		<div class="col-md-3">			
+		<div class="col-md-2 col-sm-2">			
 			<input class="form-control" type="text" name="year" placeholder="Year" value="${params.get('year')}"/>		
 		</div>
-		<div class="col-md-3">			
+		<div class="col-md-2 col-sm-2">			
 			<input class="form-control" type="submit" value="submit"/>			
 		</div>
 	</div>
 </form>
 <div class="row form-invoice">
-	<div class="col-md-12">
+	<div class="col-md-12 col-sm-12">
 		<table class="table">
 			<tr>
 				<th>Invoice Id</th>
@@ -33,17 +44,16 @@
 			<c:forEach items="${invoiceDTOs}" var="s">
 				<tr>
 					<td class="invoiceId">${s.id}</td>
-					<td>${s.discount_amount}</td>
-					<td>${s.tax}</td>
+					<td>${s.discount_amount}%</td>
+					<td>$${s.tax}</td>
 					<td>${s.total_amount}</td>
 					<td>
 						<select name="status" class="form-control status" disabled="disabled">
-							<option value="${status}">${s.status}</option>
-							<option value="pending">pending</option>
-							<option value="delivering">delivering</option>
-							<option value="success">success</option>
-							<option value="refunded">refunded</option>
-							<option value="canceled">canceled</option>
+							<option value="pending" ${s.status == 'pending' ? 'selected' : ''}>pending</option>
+							<option value="delivering" ${s.status == 'delivering' ? 'selected' : ''}>delivering</option>
+							<option value="success" ${s.status == 'success' ? 'selected' : ''}>success</option>
+							<option value="refunded" ${s.status == 'refunded' ? 'selected' : ''}>refunded</option>
+							<option value="canceled" ${s.status == 'canceled' ? 'selected' : ''}>canceled</option>
 						</select>
 					</td>
 					<td>${s.created_at}</td>
@@ -60,7 +70,7 @@
 <div class="row">
 	<c:choose>
 		<c:when test="${empty params}">
-			<div class="col-md-12" style="margin-top: 20px;">
+			<div class="col-md-12 col-sm-12" style="margin-top: 20px;">
 				<nav aria-label="Page navigation example">
 				  <ul class="pagination">
 				  	<c:url value="/admin/invoiceAdmin?page=${page-1}" var="url1"/>
@@ -72,7 +82,7 @@
 			</div>
 		</c:when>
 		<c:when test="${not empty params}">
-			<div class="col-md-12" style="margin-top: 20px;">
+			<div class="col-md-12 col-sm-12" style="margin-top: 20px;">
 				<nav aria-label="Page navigation example">
 				  <ul class="pagination">
 				  	<c:url value="/admin/searchInvoiceAdmin?page=${page-1}&&day=${params.get('day')}&&month=${params.get('month')}&&year=${parmas.get('year')}" var="url3"/>

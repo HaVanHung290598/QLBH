@@ -5,6 +5,11 @@
 .content .form-search-invoice div:last-child input:hover {
 	border-color: #8fa2ff;
 }
+.content .form-search-invoice>div:first-child select {
+	width: 80%;
+	display: inline-block;
+}
+
 .content .form-invoice {
 	background-color: #fff;
 }

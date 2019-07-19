@@ -184,6 +184,7 @@ public class AdminController {
 	@RequestMapping(value="/searchInvoiceAdmin", method = RequestMethod.GET)
 	public String searchInvoice(Model model, HttpServletRequest req) {
 		Map<String, String> params = new HashMap<String, String>();
+		params.put("status", req.getParameter("status") == null ? "" : req.getParameter("status"));
 		params.put("day", req.getParameter("day") == null ? "" : req.getParameter("day"));
 		params.put("month", req.getParameter("month") == null ? "" : req.getParameter("month"));
 		params.put("year", req.getParameter("year") == null ? "" : req.getParameter("year"));

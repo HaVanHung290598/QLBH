@@ -54,9 +54,12 @@ public class InvoiceDAOImpl implements InvoiceDAO {
 		String hql = "from Invoice where";
 		Set<String> keys = params.keySet();
 		for(String key : keys) {
-			if(params.get(key) != "") {
+			if(params.get(key) != "" && key != "status") {
 				hql += " "+key+"(created_at)="+params.get(key)+" and";
 			}
+		}
+		if(params.get("status") != "") {
+			hql += " status='"+params.get("status")+"' and";
 		}
 		hql += " 1=1 order by created_at DESC";
 		Session session = sessionFactory.getCurrentSession();
