@@ -83,4 +83,9 @@ public class InvoiceServiceImpl implements InvoiceService {
 		}
 		return invoiceDTOs;
 	}
+
+	@Override
+	public void updateStatusInvoiceById(int id, String status) {
+		invoiceDAO.updateStatusInvoiceById(id, status);
+	}
 }

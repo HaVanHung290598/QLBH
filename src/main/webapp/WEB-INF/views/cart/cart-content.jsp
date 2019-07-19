@@ -68,12 +68,12 @@
 								<td>$<input type="text" value="" class="subtotal" readonly></td>
 							</tr>
 							<tr>
-								<th>Delivery</th>
-								<td>$<input type="text" value="0" class="delivery" readonly></td>
+								<th>Tax</th>
+								<td>$<input type="text" value="${setting.tax}" class="tax" readonly></td>
 							</tr>
 							<tr>
 								<th>Discout</th>
-								<td>$<input type="text" value="0" class="discount" readonly></td>
+								<td><input type="text" value="${setting.discount_amount}" class="discount" readonly>%</td>
 							</tr>
 							<tr class="total">
 								<th>TOTAL</th>

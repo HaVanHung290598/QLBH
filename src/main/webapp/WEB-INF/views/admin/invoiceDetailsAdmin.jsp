@@ -68,11 +68,11 @@
 				<table class="table">
 					<tr>
 						<th>Discount amount:</th>
-						<td>${invoiceDTO.discount_amount}</td>
+						<td>${invoiceDTO.discount_amount}%</td>
 					</tr>
 					<tr>
 						<th>Tax:</th>
-						<td>${invoiceDTO.tax}</td>
+						<td>$${invoiceDTO.tax}</td>
 					</tr>
 					<tr>
 						<th>Total amount:</th>

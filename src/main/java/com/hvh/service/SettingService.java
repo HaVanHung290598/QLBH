@@ -7,4 +7,5 @@ public interface SettingService {
 	public void updateSetting(SettingDTO settingDTO);
 	public void deleteSetting(int id);
 	public SettingDTO getSettingById(int id);
+	
 }

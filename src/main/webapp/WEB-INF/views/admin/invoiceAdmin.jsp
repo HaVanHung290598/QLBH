@@ -32,14 +32,26 @@
 			</tr>
 			<c:forEach items="${invoiceDTOs}" var="s">
 				<tr>
-					<td>${s.id}</td>
+					<td class="invoiceId">${s.id}</td>
 					<td>${s.discount_amount}</td>
 					<td>${s.tax}</td>
 					<td>${s.total_amount}</td>
-					<td>${s.status}</td>
+					<td>
+						<select name="status" class="form-control status" disabled="disabled">
+							<option value="${status}">${s.status}</option>
+							<option value="pending">pending</option>
+							<option value="delivering">delivering</option>
+							<option value="success">success</option>
+							<option value="refunded">refunded</option>
+							<option value="canceled">canceled</option>
+						</select>
+					</td>
 					<td>${s.created_at}</td>
 					<c:url value="/admin/invoiceDetails?id=${s.id}&&userId=${s.user_id}" var="url6"/>
-					<td><a href="${url6}"><i class="fas fa-info"></i></a></td>
+					<td>
+						<a href="${url6}"><i class="fas fa-info"></i></a>
+						<a href="javascript:void(0)" class="repairStatus"><i class="fas fa-recycle"></i></a>
+					</td>
 				</tr>
 			</c:forEach>
 		</table>

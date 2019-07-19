@@ -8,7 +8,7 @@ $(document).ready(function(){
 	};
 	total_price();
 	
-	var total_price_cartItem = parseInt($('.subtotal').val()) + parseInt($('.delivery').val()) + parseInt($('.discount').val());
+	var total_price_cartItem = parseInt($('.subtotal').val()) - (parseInt($('.subtotal').val()) * parseInt($('.discount').val()))/100 + parseInt($('.tax').val());
 	$('.total-price-cartItem').val(total_price_cartItem);
 	
 	$('.quantity').change(function(){
@@ -25,7 +25,7 @@ $(document).ready(function(){
 		var total = parseInt(price) * parseInt(quantity);
 		$('.total-product', $(this).closest('tr')).val(total);
 		total_price();
-		var total_price_cartItem = parseInt($('.subtotal').val()) + parseInt($('.delivery').val()) + parseInt($('.discount').val());
+		var total_price_cartItem = parseInt($('.subtotal').val()) - (parseInt($('.subtotal').val()) * parseInt($('.discount').val()))/100 + parseInt($('.tax').val());
 		$('.total-price-cartItem').val(total_price_cartItem);
 		//===========================================
 		//===========================================

@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.hvh.model.CartDTO;
 import com.hvh.model.InvoiceDTO;
 import com.hvh.model.InvoiceItemDTO;
+import com.hvh.model.SettingDTO;
 import com.hvh.service.CartService;
 import com.hvh.service.InvoiceItemService;
 import com.hvh.service.InvoiceService;
 import com.hvh.service.ProductService;
+import com.hvh.service.SettingService;
 
 @Controller
 public class InvoiceController {
@@ -33,15 +35,18 @@ public class InvoiceController {
 	ProductService productService;
 	@Autowired
 	InvoiceItemService invoiceItemService;
+	@Autowired
+	SettingService settingService;
+	
 	
 	@RequestMapping(value="/invoice", method = RequestMethod.POST)
 	public String invoice(Model model, HttpServletRequest req, HttpServletResponse resp) {
 		int userId = Integer.parseInt(req.getParameter("userId"));
-		System.out.println(userId);
-		int discountAmount = 0;
-		int tax = 0;
+		SettingDTO settingDTO = settingService.getSettingById(1);
+		int discountAmount = settingDTO.getDiscount_amount();
+		int tax = settingDTO.getTax();
 		int total = Integer.parseInt(req.getParameter("total"));
-		String status = "paid";
+		String status = "pending";
 		String deliveryAddress = req.getParameter("delivery-address");
 		String deliveryPhone = req.getParameter("delivery-phone");
 		InvoiceDTO invoiceDTO = new InvoiceDTO();

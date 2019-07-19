@@ -11,4 +11,5 @@ public interface InvoiceDAO {
 	public Invoice getInvoiceById(int invoice_id);
 	public List<Invoice> getListInvoice(int limit, int page);
 	public List<Invoice> searchInvoice(Map<String, String> params, int page, int limit);
+	public void updateStatusInvoiceById(int id, String status);
 }

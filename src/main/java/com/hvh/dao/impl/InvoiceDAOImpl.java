@@ -65,4 +65,14 @@ public class InvoiceDAOImpl implements InvoiceDAO {
 		query.setMaxResults(limit);
 		return query.list();
 	}
+
+	@Override
+	public void updateStatusInvoiceById(int id, String status) {
+		String hql = "update from Invoice set status=:status where id=:id";
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery(hql);
+		query.setParameter("status", status);
+		query.setParameter("id", id);
+		query.executeUpdate();
+	}
 }

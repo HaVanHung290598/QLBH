@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.hvh.model.InvoiceDTO;
@@ -214,6 +215,13 @@ public class AdminController {
 		model.addAttribute("informationInvoice", informationInvoices);
 		return "invoiceDetailsAdmin";
 	}
+	@RequestMapping(value="/updateInvoice", method = RequestMethod.POST)
+	public @ResponseBody String updateInvoiceAdmin(Model model, HttpServletRequest req) {
+		int id = Integer.parseInt(req.getParameter("id"));
+		String status = req.getParameter("invoiceStatus");
+		invoiceService.updateStatusInvoiceById(id, status);
+		return null;		
+	}
 	@RequestMapping(value="/user", method = RequestMethod.GET)
 	public String getUser(Model model, HttpServletRequest req) {
 		int page = req.getParameter("page") == null ? 1 : Integer.parseInt(req.getParameter("page"));
@@ -250,6 +258,7 @@ public class AdminController {
 	@RequestMapping(value="/setting", method = RequestMethod.GET)
 	public String setting(Model model) {
 		model.addAttribute("setting", settingService.getSettingById(1));
+		System.out.println(settingService.getSettingById(1).getTitle());
 		return "settingAdmin";
 	}
 }

@@ -23,6 +23,7 @@ import com.hvh.model.ProductDTO;
 import com.hvh.model.UserDTO;
 import com.hvh.service.CartService;
 import com.hvh.service.ProductService;
+import com.hvh.service.SettingService;
 import com.hvh.service.UserService;
 
 @Controller
@@ -36,6 +37,9 @@ public class CartController {
 	
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	SettingService settingService;
 	
 	@RequestMapping(value="/cart", method = RequestMethod.GET)
 	public String cart(Model model, HttpServletRequest req) {
@@ -65,6 +69,7 @@ public class CartController {
 			params.add(param);
 		}
 		model.addAttribute("params", params);
+		model.addAttribute("setting", settingService.getSettingById(1));
 		
 		int pages = req.getParameter("page") == null ? 1 : Integer.parseInt(req.getParameter("page"));
 		int limit = req.getParameter("limit") == null ? 8 : Integer.parseInt(req.getParameter("limit"));

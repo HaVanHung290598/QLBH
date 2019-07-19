@@ -11,4 +11,5 @@ public interface InvoiceService {
 	public InvoiceDTO getInvoiceById(int invoice_id);
 	public List<InvoiceDTO> getListInvoice(int limit, int page);
 	public List<InvoiceDTO> searchInvoice(Map<String, String> params, int page, int limit);
+	public void updateStatusInvoiceById(int id, String status);
 }

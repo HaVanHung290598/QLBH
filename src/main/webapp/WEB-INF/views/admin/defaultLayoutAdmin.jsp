@@ -32,5 +32,6 @@
 	</div>
 	<script type="text/javascript" src="<c:url value="/resources/js/admin/headerAdmin.js"/>"></script>
 	<script type="text/javascript" src="<c:url value="/resources/js/admin/menuAdmin.js"/>"></script>
+	<script type="text/javascript" src="<c:url value="/resources/js/admin/invoiceAdmin.js"/>"></script>
 </body>
 </html>
