@@ -1,0 +1,16 @@
+@charset "ISO-8859-1";
+.content .setting {
+	background-color: #fff;
+}
+.content .setting .information {
+	margin-bottom: 20px;
+}
+.content .setting .information table tr:first-child th {
+	border-top: none;	
+}
+.content .setting .form-update-setting {
+	display: none;
+}
+.content .setting .form-update-setting table tr th {
+	width: 20%;
+}

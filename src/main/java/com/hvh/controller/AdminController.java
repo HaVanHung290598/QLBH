@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.hvh.model.InvoiceDTO;
 import com.hvh.model.InvoiceItemDTO;
 import com.hvh.model.ProductDTO;
+import com.hvh.model.SettingDTO;
 import com.hvh.model.UserDTO;
 import com.hvh.service.InvoiceItemService;
 import com.hvh.service.InvoiceService;
@@ -259,7 +260,19 @@ public class AdminController {
 	@RequestMapping(value="/setting", method = RequestMethod.GET)
 	public String setting(Model model) {
 		model.addAttribute("setting", settingService.getSettingById(1));
-		System.out.println(settingService.getSettingById(1).getTitle());
 		return "settingAdmin";
+	}
+	@RequestMapping(value="/setting", method = RequestMethod.POST)
+	public String setting(Model model, HttpServletRequest req) {
+		int id = Integer.parseInt(req.getParameter("settingId"));
+		String title = req.getParameter("title");
+		String description = req.getParameter("description");
+		String keywords = req.getParameter("keywords");
+		String author = req.getParameter("author");
+		int discountAmount = Integer.parseInt(req.getParameter("discount_amount"));
+		int tax = Integer.parseInt(req.getParameter("tax"));
+		SettingDTO settingDTO = new SettingDTO(id, title, description, keywords, author, discountAmount, tax);
+		settingService.updateSetting(settingDTO);		
+		return "redirect:/admin/setting";
 	}
 }

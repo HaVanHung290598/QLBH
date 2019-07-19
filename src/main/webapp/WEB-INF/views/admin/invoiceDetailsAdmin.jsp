@@ -2,7 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <div class="row">
-	<div class="col-md-12 inforInvoice">
+	<div class="col-md-12 col-sm-12 inforInvoice">
 		<div class="row">
 			<div class="col-md-8 col-sm-8">
 				<h1>Code invoice: ${invoiceDTO.id}</h1>

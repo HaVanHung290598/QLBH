@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="<c:url value="/resources/css/admin/productAdmin.css"/>"/>
 <link rel="stylesheet" href="<c:url value="/resources/css/admin/invoiceAdmin.css"/>"/>
 <link rel="stylesheet" href="<c:url value="/resources/css/admin/userAdmin.css"/>"/>
+<link rel="stylesheet" href="<c:url value="/resources/css/admin/settingAdmin.css"/>"/>
 <link rel="stylesheet" href="<c:url value="/resources/css/admin/invoiceDetailsAdmin.css"/>"/>
 <script type="text/javascript" src="<c:url value="/resources/js/jquery-3.4.1.js"/>"></script>
 </head>
@@ -31,6 +32,7 @@
 		</div>
 	</div>
 	<script type="text/javascript" src="<c:url value="/resources/js/admin/headerAdmin.js"/>"></script>
+	<script type="text/javascript" src="<c:url value="/resources/js/admin/settingAdmin.js"/>"></script>
 	<script type="text/javascript" src="<c:url value="/resources/js/admin/menuAdmin.js"/>"></script>
 	<script type="text/javascript" src="<c:url value="/resources/js/admin/invoiceAdmin.js"/>"></script>
 </body>

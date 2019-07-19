@@ -29,6 +29,7 @@ public class SettingServiceImpl implements SettingService {
 	@Override
 	public void updateSetting(SettingDTO settingDTO) {
 		Setting setting = new Setting();
+		setting.setId(settingDTO.getId());
 		setting.setDescription(settingDTO.getDescription());
 		setting.setKeywords(settingDTO.getKeywords());
 		setting.setTitle(settingDTO.getTitle());
