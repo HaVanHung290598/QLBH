@@ -78,4 +78,22 @@ public class InvoiceDAOImpl implements InvoiceDAO {
 		query.setParameter("id", id);
 		query.executeUpdate();
 	}
+
+	@Override
+	public void deleteInvoiceByUserId(int userId) {
+		String hql = "delete from Invoice where user_id=:userId";
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery(hql);
+		query.setParameter("userId", userId);
+		query.executeUpdate();
+	}
+
+	@Override
+	public List<Invoice> getListInvoiceByUserId(int userId) {
+		String hql = "from Invoice where user_id=:userId";
+		Session session = sessionFactory.getCurrentSession();
+		Query<Invoice> query = session.createQuery(hql, Invoice.class);
+		query.setParameter("userId", userId);
+		return query.list();
+	}
 }

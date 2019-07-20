@@ -41,5 +41,13 @@ public class InvoiceItemDAOImpl implements InvoiceItemDAO {
 		query.setMaxResults(5);		
 		return query.list();
 	}
+	@Override
+	public void deleteInvoiceItemByInvoiceId(int invoiceId) {
+		String hql = "delete from InvoiceItem where invoice_id=:invoiceId";
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery(hql);
+		query.setParameter("invoiceId", invoiceId);
+		query.executeUpdate();
+	}
 
 }

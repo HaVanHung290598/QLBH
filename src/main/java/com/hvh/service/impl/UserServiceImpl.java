@@ -50,6 +50,7 @@ public class UserServiceImpl implements UserService{
 	}
 	private User convert(UserDTO userDTO) {
 		User user = new User();
+		user.setId(userDTO.getId());
 		user.setUsername(userDTO.getUsername());
 		user.setPassword(userDTO.getPassword());
 		user.setFullname(userDTO.getFullname());
@@ -86,5 +87,10 @@ public class UserServiceImpl implements UserService{
 			userDTOs.add(convert(user));
 		}
 		return userDTOs;
+	}
+
+	@Override
+	public void deleteUser(int id) {
+		userDAO.deleteUser(id);
 	}
 }

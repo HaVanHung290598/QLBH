@@ -7,8 +7,10 @@ import com.hvh.entity.Invoice;
 
 public interface InvoiceDAO {
 	public void addInvoice(Invoice invoice);
+	public void deleteInvoiceByUserId(int userId);
 	public Invoice getNewInvoice(int limit, int page);
 	public Invoice getInvoiceById(int invoice_id);
+	public List<Invoice> getListInvoiceByUserId(int userId);
 	public List<Invoice> getListInvoice(int limit, int page);
 	public List<Invoice> searchInvoice(Map<String, String> params, int page, int limit);
 	public void updateStatusInvoiceById(int id, String status);

@@ -58,4 +58,9 @@ public class InvoiceItemServiceImpl implements InvoiceItemService {
 		}
 		return invoiceItemDTOs;
 	}
+
+	@Override
+	public void deleteInvoiceItemByInvoiceId(int invoiceId) {
+		invoiceItemDAO.deleteInvoiceItemByInvoiceId(invoiceId);
+	}
 }

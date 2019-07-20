@@ -64,6 +64,9 @@ public class UserDAOImpl implements UserDAO {
 		query.setMaxResults(limit);
 		return query.list();
 	}
-	
 
+	@Override
+	public void deleteUser(int id) {
+		sessionFactory.getCurrentSession().delete(getUserById(id));
+	}
 }

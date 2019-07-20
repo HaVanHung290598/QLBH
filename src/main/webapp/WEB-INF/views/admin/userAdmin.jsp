@@ -35,8 +35,9 @@
 							<td>${s.role == "ROLE_USER" ? "USER" : "ADMIN"}</td>
 							<td>
 								<c:url value="/admin/repairUser?id=${s.id}" var="url3"/>
+								<c:url value="/admin/deleteUser?id=${s.id}" var="url4"/>
 								<a href="${url3}"><i class="fas fa-recycle"></i></a>
-								<a href=""><i class="far fa-trash-alt"></i></a>
+								<a href="${url4}"><i class="far fa-trash-alt"></i></a>
 							</td>
 						</tr>
 					</c:forEach>

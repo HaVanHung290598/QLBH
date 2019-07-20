@@ -7,6 +7,8 @@ import com.hvh.model.InvoiceDTO;
 
 public interface InvoiceService {
 	public void addInvoice(InvoiceDTO invoiceDTO);
+	public void deleteInvoiceByUserId(int userId);
+	public List<InvoiceDTO> getListInvoiceByUserId(int userId);
 	public InvoiceDTO getNewInvoice(int limit, int page);
 	public InvoiceDTO getInvoiceById(int invoice_id);
 	public List<InvoiceDTO> getListInvoice(int limit, int page);

@@ -4,75 +4,43 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <div class="row">
 	<div class="col-md-12">
-<%-- 		<form action="" method="post"> --%>
-<!-- 			<table> -->
-<!-- 				<tr> -->
-<!-- 					<th>Username:</th> -->
-<%-- 					<td><input class="form-control" type="text" name="username" value="${userDTO.username}" placeholder="Username"/></td> --%>
-<!-- 				</tr> -->
-<!-- 				<tr> -->
-<!-- 					<th>Address:</th> -->
-<%-- 					<td><input class="form-control" type="text" name="address" value="${userDTO.address}" placeholder="Address"/></td> --%>
-<!-- 				</tr> -->
-<!-- 				<tr> -->
-<!-- 					<th>Phone:</th> -->
-<!-- 					<td><input class="form-control" type="text" name="phone" value="" placeholder="Phone number"/></td> -->
-<!-- 				</tr> -->
-<!-- 				<tr> -->
-<!-- 					<th>Email:</th> -->
-<!-- 					<td><input class="form-control" type="email" name="email" placeholder="Email"/></td> -->
-<!-- 				</tr> -->
-<!-- 				<tr> -->
-<!-- 					<th>Role:</th> -->
-<!-- 					<td><input class="form-control" type="text" name="role" placeholder="Role"/></td> -->
-<!-- 				</tr> -->
-<!-- 				<tr> -->
-<!-- 					<th>Enabled:</th> -->
-<!-- 					<td><input class="form-control" type="number" name="enabled" placeholder="Enabled" min="0" max="1"/></td> -->
-<!-- 				</tr> -->
-<!-- 				<tr> -->
-<!-- 					<td colspan="2"><input class="form-control" type="submit" value="Submit"/></td> -->
-<!-- 				</tr> -->
-<!-- 			</table> -->
-<%-- 		</form> --%>
 		<c:url value="/admin/repairUser" var="url1"/>
-		<form:form action="${url1}" method="post" modelAttribute="userDTO">
-			<form:input type="hidden" path="id"/>
-			<form:input type="hidden" path="fullname"/>
-			<form:input type="hidden" path="password"/>
-			<form:input type="hidden" path="created_at"/>
-			<form:input type="hidden" path="updated_at"/>
-			<form:input type="hidden" path="carts"/>
-			<form:input type="hidden" path="invoices"/>
-			<table>
+		<form action="${url1}" method="post">
+			<table class="table">
 				<tr>
-					<th>Username:</th>
-					<td><form:input path="username"/></td>
+					<th>Fullname:</th>
+					<td><input class="form-control" type="text" name="fullname" value="${userDTO.fullname}" placeholder="Username"/></td>
 				</tr>
 				<tr>
 					<th>Address:</th>
-					<td><form:input path="address"/></td>
+					<td><input class="form-control" type="text" name="address" value="${userDTO.address}" placeholder="Address"/></td>
 				</tr>
 				<tr>
 					<th>Phone:</th>
-					<td><form:input path="phone"/></td>
+					<td><input class="form-control" type="text" name="phone" value="${userDTO.phone}" placeholder="Phone number"/></td>
 				</tr>
 				<tr>
 					<th>Email:</th>
-					<td><form:input path="email"/></td>
+					<td><input class="form-control" type="email" name="email" value="${userDTO.email}" placeholder="Email"/></td>
 				</tr>
 				<tr>
 					<th>Role:</th>
-					<td><form:input path="role"/></td>
+					<td><input class="form-control" type="text" name="role" value="${userDTO.role }" placeholder="Role"/></td>
 				</tr>
 				<tr>
 					<th>Enabled:</th>
-					<td><form:input path="enabled"/></td>
+					<td><input class="form-control" type="number" name="enabled" value="${userDTO.enabled }" placeholder="Enabled" min="0" max="1"/></td>
 				</tr>
 				<tr>
-					<td colspan="2"><input type="submit" value="Submit"/></td>
+					<td colspan="2">
+						<input type="hidden" name="username" value="${userDTO.username}"/>
+						<input type="hidden" name="password" value="${userDTO.password}"/>
+						<input type="hidden" name="created_at" value="${userDTO.created_at}"/>
+						<input type="hidden" name="userId" value="${userDTO.id}"/>
+						<input class="form-control" type="submit" value="Submit"/>
+					</td>
 				</tr>
 			</table>
-		</form:form>
+		</form>
 	</div>
 </div>

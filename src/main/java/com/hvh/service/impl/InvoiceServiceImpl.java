@@ -88,4 +88,19 @@ public class InvoiceServiceImpl implements InvoiceService {
 	public void updateStatusInvoiceById(int id, String status) {
 		invoiceDAO.updateStatusInvoiceById(id, status);
 	}
+
+	@Override
+	public void deleteInvoiceByUserId(int userId) {
+		invoiceDAO.deleteInvoiceByUserId(userId);
+	}
+
+	@Override
+	public List<InvoiceDTO> getListInvoiceByUserId(int userId) {
+		List<Invoice> invoices = invoiceDAO.getListInvoiceByUserId(userId);
+		List<InvoiceDTO> invoiceDTOs = new ArrayList<InvoiceDTO>();
+		for(Invoice invoice : invoices) {
+			invoiceDTOs.add(convert(invoice));
+		}
+		return invoiceDTOs;
+	}
 }

@@ -3,6 +3,7 @@ package com.hvh.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,6 +24,7 @@ import com.hvh.model.InvoiceItemDTO;
 import com.hvh.model.ProductDTO;
 import com.hvh.model.SettingDTO;
 import com.hvh.model.UserDTO;
+import com.hvh.service.CartService;
 import com.hvh.service.InvoiceItemService;
 import com.hvh.service.InvoiceService;
 import com.hvh.service.ProductService;
@@ -52,6 +53,9 @@ public class AdminController {
 
 	@Autowired
 	SettingService settingService;
+	
+	@Autowired
+	CartService cartService;
 	
 	@RequestMapping(value = {"/product","/"}, method = RequestMethod.GET)
 	public String getProduct(Model model, HttpServletRequest req) {
@@ -234,7 +238,7 @@ public class AdminController {
 		model.addAttribute("size", userService.getListUser(1, 10000).size());
 		return "userAdmin";
 	}
-	//loi modelAttribute
+	
 	@RequestMapping(value="/repairUser", method = RequestMethod.GET)
 	public String repairUser(Model model, @RequestParam(name = "id")int id) {
 		UserDTO userDTO = userService.getUserById(id);
@@ -242,9 +246,29 @@ public class AdminController {
 		return "repairUserAdmin";
 	}
 	@RequestMapping(value="/repairUser", method = RequestMethod.POST)
-	public String repairUser(Model model, @ModelAttribute(name="userDTO")UserDTO userDTO) {
-		System.out.println(userDTO.getId());
-		System.out.println(userDTO.getFullname());
+	public String repairUser(Model model, HttpServletRequest req) {
+		int id = Integer.parseInt(req.getParameter("userId"));
+		String username = req.getParameter("username");
+		String password = req.getParameter("password");
+		String fullname = req.getParameter("fullname");
+		String address = req.getParameter("address");
+		String phone = req.getParameter("phone");
+		String email = req.getParameter("email");
+		Date created_at = userService.getUserById(id).getCreated_at();
+		String role = req.getParameter("role");
+		int enabled = Integer.parseInt(req.getParameter("enabled"));
+		UserDTO userDTO = new UserDTO(id, username, password, fullname, address, phone, email, created_at, updated_at, role, enabled, null, null);
+		userService.updateUser(userDTO);
+		return "redirect:/admin/user";
+	}
+	@RequestMapping(value="deleteUser", method = RequestMethod.GET)
+	public String deleteUser(Model model, @RequestParam(name = "id") int id) {
+		cartService.deleteCartByUserId(id);
+		for(InvoiceDTO invoiceDTO : invoiceService.getListInvoiceByUserId(id)) {
+			invoiceItemService.deleteInvoiceItemByInvoiceId(invoiceDTO.getId());
+		}
+		invoiceService.deleteInvoiceByUserId(id);
+		userService.deleteUser(id);
 		return "redirect:/admin/user";
 	}
 	
