@@ -69,11 +69,11 @@
 							</tr>
 							<tr>
 								<th>Tax</th>
-								<td>$<input type="text" value="${setting.tax}" class="tax" readonly></td>
+								<td>$<input type="text" value="${tax}" class="tax" readonly></td>
 							</tr>
 							<tr>
 								<th>Discout</th>
-								<td><input type="text" value="${setting.discount_amount}" class="discount" readonly>%</td>
+								<td><input type="text" value="${discount_amount}" class="discount" readonly>%</td>
 							</tr>
 							<tr class="total">
 								<th>TOTAL</th>

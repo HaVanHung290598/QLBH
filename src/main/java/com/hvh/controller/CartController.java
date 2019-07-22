@@ -69,7 +69,8 @@ public class CartController {
 			params.add(param);
 		}
 		model.addAttribute("params", params);
-		model.addAttribute("setting", settingService.getSettingById(1));
+		model.addAttribute("discount_amount", settingService.getSettingByName("discount amount").getValue());
+		model.addAttribute("tax", settingService.getSettingByName("tax").getValue());
 		
 		int pages = req.getParameter("page") == null ? 1 : Integer.parseInt(req.getParameter("page"));
 		int limit = req.getParameter("limit") == null ? 8 : Integer.parseInt(req.getParameter("limit"));

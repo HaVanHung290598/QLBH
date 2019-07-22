@@ -33,11 +33,7 @@
 		<tr>
 			<td>Color</td>
 			<td>
-				<select name="color" multiple="multiple">
-				   <option value="1">SMALL</option>
-				   <option value="2">NORMAL</option>
-				   <option value="3">LARGE</option>
-				</select>
+				<input type="text" name="color" />
 			</td>
 		</tr>
 		<tr>

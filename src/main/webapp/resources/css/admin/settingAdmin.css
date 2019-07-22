@@ -14,3 +14,21 @@
 .content .setting .form-update-setting table tr th {
 	width: 20%;
 }
+.content .setting .form-search-setting > div {
+	padding-top: 20px;
+	padding-bottom: 30px;
+}
+.content .setting .form-search-setting > div div {
+	margin-top: 5px;
+}
+.content .setting .create-setting a {
+	display: block;
+	text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 7px;
+    text-decoration: none;
+}
+.content .setting .create-setting {
+	margin-bottom: 10px;
+}

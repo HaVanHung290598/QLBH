@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -281,22 +282,70 @@ public class AdminController {
 		model.addAttribute("userDTOs", userDTOs);
 		return "userAdmin";
 	}
+	
+	
 	@RequestMapping(value="/setting", method = RequestMethod.GET)
-	public String setting(Model model) {
-		model.addAttribute("setting", settingService.getSettingById(1));
+	public String setting(Model model, HttpServletRequest req, HttpServletResponse resp) {
+		int page = req.getParameter("page") == null ? 1 : Integer.parseInt(req.getParameter("page"));
+		int limit = req.getParameter("limit") == null ? 8 : Integer.parseInt(req.getParameter("limit"));
+		List<SettingDTO> settingDTOs = settingService.getListSetting(page, limit);
+		model.addAttribute("settingDTOs", settingDTOs);
+		model.addAttribute("page", page);
+		model.addAttribute("size", settingService.getListSetting(1, 10000).size());
 		return "settingAdmin";
 	}
-	@RequestMapping(value="/setting", method = RequestMethod.POST)
+	@RequestMapping(value="/createSetting", method = RequestMethod.POST)
 	public String setting(Model model, HttpServletRequest req) {
-		int id = Integer.parseInt(req.getParameter("settingId"));
-		String title = req.getParameter("title");
-		String description = req.getParameter("description");
-		String keywords = req.getParameter("keywords");
-		String author = req.getParameter("author");
-		int discountAmount = Integer.parseInt(req.getParameter("discount_amount"));
-		int tax = Integer.parseInt(req.getParameter("tax"));
-		SettingDTO settingDTO = new SettingDTO(id, title, description, keywords, author, discountAmount, tax);
-		settingService.updateSetting(settingDTO);		
+		String settingName = req.getParameter("settingName");
+		if(settingService.getSettingByName(settingName) == null) {
+			String value = req.getParameter("value");
+			SettingDTO settingDTO = new SettingDTO();
+			settingDTO.setSetting_name(settingName);
+			settingDTO.setValue(value);
+			settingDTO.setCreated_at(created_at);
+			settingService.addSetting(settingDTO);
+		}else {
+//			model.addAttribute("error", "Setting exist!!!");
+		}
+		
 		return "redirect:/admin/setting";
+	}
+	@RequestMapping(value="/deleteSetting", method = RequestMethod.GET)
+	public String deleteSetting(HttpServletRequest req) {
+		int settingId = Integer.parseInt(req.getParameter("id"));
+		settingService.deleteSetting(settingId);
+		return "redirect:/admin/setting";
+	}
+	@RequestMapping(value="/repairSetting", method = RequestMethod.GET)
+	public String repairSetting(Model model, HttpServletRequest req) {
+		int settingId = Integer.parseInt(req.getParameter("id"));
+		model.addAttribute("settingDTO", settingService.getSettingById(settingId));
+		return "repairSettingAdmin";
+	}
+	@RequestMapping(value="/repairSetting", method = RequestMethod.POST)
+	public String repairSetting(HttpServletRequest req) {
+		int settingId = Integer.parseInt(req.getParameter("id"));
+		String settingName = req.getParameter("settingName");
+		String value = req.getParameter("value");
+		SettingDTO settingDTO = new SettingDTO(settingId, settingName, value, settingService.getSettingById(settingId).getCreated_at(), updated_at);
+		settingService.updateSetting(settingDTO);
+		return "redirect:/admin/setting";
+	}
+	@RequestMapping(value="/searchSetting", method = RequestMethod.GET)
+	public String searchSetting(Model model, HttpServletRequest req) {
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("setting_name", req.getParameter("setting_name") == null ? "" : req.getParameter("setting_name"));
+		params.put("created_at_from", req.getParameter("created_at_from") == null ? "" : req.getParameter("created_at_from"));
+		params.put("created_at_to", req.getParameter("created_at_to") == null ? "" : req.getParameter("created_at_to"));
+		params.put("updated_at_from", req.getParameter("updated_at_from") == null ? "" : req.getParameter("updated_at_from"));
+		params.put("updated_at_to", req.getParameter("updated_at_to") == null ? "" : req.getParameter("updated_at_to"));
+		int page = req.getParameter("page") == null ? 1 : Integer.parseInt(req.getParameter("page"));
+		int limit = req.getParameter("limit") == null ? 8 : Integer.parseInt(req.getParameter("limit"));
+		List<SettingDTO> settingDTOs = settingService.searchSetting(params, page, limit);
+		model.addAttribute("params", params);
+		model.addAttribute("page", page);
+		model.addAttribute("settingDTOs", settingDTOs);
+		model.addAttribute("size", settingService.searchSetting(params, 1, 10000).size());
+		return "settingAdmin";
 	}
 }

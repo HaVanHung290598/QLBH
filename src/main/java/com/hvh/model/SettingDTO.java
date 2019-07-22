@@ -1,26 +1,23 @@
 package com.hvh.model;
 
+import java.util.Date;
+
 public class SettingDTO {
 	private int id;
-	private String title;
-	private String description;
-	private String keywords;
-	private String author;
-	private int discount_amount;
-	private int tax;
+	private String setting_name;
+	private String value;
+	private Date created_at;
+	private Date updated_at;
 	public SettingDTO() {
-		
+		super();
 	}
-	public SettingDTO(int id, String title, String description, String keywords, String author, int discount_amount,
-			int tax) {
+	public SettingDTO(int id, String setting_name, String value, Date created_at, Date updated_at) {
 		super();
 		this.id = id;
-		this.title = title;
-		this.description = description;
-		this.keywords = keywords;
-		this.author = author;
-		this.discount_amount = discount_amount;
-		this.tax = tax;
+		this.setting_name = setting_name;
+		this.value = value;
+		this.created_at = created_at;
+		this.updated_at = updated_at;
 	}
 	public int getId() {
 		return id;
@@ -28,40 +25,28 @@ public class SettingDTO {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getTitle() {
-		return title;
+	public String getSetting_name() {
+		return setting_name;
 	}
-	public void setTitle(String title) {
-		this.title = title;
+	public void setSetting_name(String setting_name) {
+		this.setting_name = setting_name;
 	}
-	public String getDescription() {
-		return description;
+	public String getValue() {
+		return value;
 	}
-	public void setDescription(String description) {
-		this.description = description;
+	public void setValue(String value) {
+		this.value = value;
 	}
-	public String getKeywords() {
-		return keywords;
+	public Date getCreated_at() {
+		return created_at;
 	}
-	public void setKeywords(String keywords) {
-		this.keywords = keywords;
+	public void setCreated_at(Date created_at) {
+		this.created_at = created_at;
 	}
-	public String getAuthor() {
-		return author;
+	public Date getUpdated_at() {
+		return updated_at;
 	}
-	public void setAuthor(String author) {
-		this.author = author;
-	}
-	public int getDiscount_amount() {
-		return discount_amount;
-	}
-	public void setDiscount_amount(int discount_amount) {
-		this.discount_amount = discount_amount;
-	}
-	public int getTax() {
-		return tax;
-	}
-	public void setTax(int tax) {
-		this.tax = tax;
+	public void setUpdated_at(Date updated_at) {
+		this.updated_at = updated_at;
 	}
 }

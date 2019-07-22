@@ -67,6 +67,9 @@
 	<definition name="settingAdmin" extends="base-definition-admin">
 		<put-attribute name="contentAdmin" value="/WEB-INF/views/admin/settingAdmin.jsp"></put-attribute>
 	</definition>
+	<definition name="repairSettingAdmin" extends="base-definition-admin">
+		<put-attribute name="contentAdmin" value="/WEB-INF/views/admin/repairSettingAdmin.jsp"></put-attribute>
+	</definition>
 	
 	<definition name="404" template="/WEB-INF/views/404.jsp">
 	</definition>

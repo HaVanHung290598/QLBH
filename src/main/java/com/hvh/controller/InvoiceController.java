@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.hvh.model.CartDTO;
 import com.hvh.model.InvoiceDTO;
 import com.hvh.model.InvoiceItemDTO;
-import com.hvh.model.SettingDTO;
 import com.hvh.service.CartService;
 import com.hvh.service.InvoiceItemService;
 import com.hvh.service.InvoiceService;
@@ -42,9 +41,8 @@ public class InvoiceController {
 	@RequestMapping(value="/invoice", method = RequestMethod.POST)
 	public String invoice(Model model, HttpServletRequest req, HttpServletResponse resp) {
 		int userId = Integer.parseInt(req.getParameter("userId"));
-		SettingDTO settingDTO = settingService.getSettingById(1);
-		int discountAmount = settingDTO.getDiscount_amount();
-		int tax = settingDTO.getTax();
+		int discountAmount = Integer.parseInt(settingService.getSettingByName("discount amount").getValue());
+		int tax = Integer.parseInt(settingService.getSettingByName("tax").getValue());
 		int total = Integer.parseInt(req.getParameter("total"));
 		String status = "pending";
 		String deliveryAddress = req.getParameter("delivery-address");
