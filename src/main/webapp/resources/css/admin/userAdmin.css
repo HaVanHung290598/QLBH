@@ -6,3 +6,15 @@
 /* 	margin-top: 30px; */
 /* 	margin-bottom: 30px; */
 }
+.content .list-user .create-user a {
+	display: block;
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    margin-bottom: 10px;
+    text-decoration: none;
+}
+.content .list-user .form-search-user > div > div:last-child input:hover {
+    color: #007bff;
+}

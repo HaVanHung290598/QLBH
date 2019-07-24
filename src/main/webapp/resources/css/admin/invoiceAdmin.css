@@ -5,7 +5,10 @@
 .content .form-search-invoice div:last-child input:hover {
 	border-color: #8fa2ff;
 }
-.content .form-search-invoice>div:first-child select {
+.content .form-search-invoice div:last-child {
+	margin-top: 5px;
+}
+.content .form-search-invoice .status-invoice {
 	width: 80%;
 	display: inline-block;
 }

@@ -2,17 +2,35 @@
     pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <div class="row">
-	<div class="col-md-12 list-user">
-		<div class="row form-search">
-			<div class="col-md-12">
-				<c:url value="/admin/searchUser" var="url"/>
-				<form action="${url}" method="get">
-					<input class="form-control" type="search" placeholder="Username" name="userName">
-				</form>
+	<div class="col-md-12 col-sm-12 list-user">
+		<c:url value="/admin/searchUser" var="url"/>
+		<form action="${url}" method="get" class="form-search-user">
+			<div class="row form-search">
+				<div class="col-md-2 col-sm-2">
+					<input type="text" name="username" value="${params.get('username')}" placeholder="Username" class="form-control"/>
+				</div>
+				<div class="col-md-3 col-sm-3">
+					<input type="email" name="email" value="${params.get('email')}" placeholder="Email" class="form-control"/>
+				</div>
+				<div class="col-md-2 col-sm-2">
+					<input type="text" name="phone" value="${params.get('phone')}" placeholder="Phone" class="form-control"/>
+				</div>
+				<div class="col-md-3 col-sm-3">
+					<input type="date" name="created_at" value="${params.get('created_at')}" placeholder="Created at" class="form-control"/>
+				</div>
+				<div class="col-md-2 col-sm-2">
+					<input type="submit" value="Submit" class="form-control"/>
+				</div>
+			</div>
+		</form>
+		<div class="row create-user">
+			<div class="col-md-2 col-sm-2">
+				<c:url value="/admin/createUser" var="url1"/>
+				<a href="${url1}">Create User</a>
 			</div>
 		</div>
 		<div class="row infor">
-			<div class="col-md-12">
+			<div class="col-md-12 col-sm-12">
 				<table class="table">
 					<tr>
 						<th>Username</th>
@@ -36,8 +54,8 @@
 							<td>
 								<c:url value="/admin/repairUser?id=${s.id}" var="url3"/>
 								<c:url value="/admin/deleteUser?id=${s.id}" var="url4"/>
-								<a href="${url3}"><i class="fas fa-recycle"></i></a>
-								<a href="${url4}"><i class="far fa-trash-alt"></i></a>
+								<a href="${url3}" title="repair"><i class="fas fa-pencil-alt"></i></a>
+								<a href="${url4}" title="delete"><i class="far fa-trash-alt"></i></a>
 							</td>
 						</tr>
 					</c:forEach>
@@ -45,7 +63,7 @@
 			</div>
 		</div>
 		<div class="row pages">
-			<div class="col-md-12" style="margin-top: 20px;">
+			<div class="col-md-12 col-sm-12" style="margin-top: 20px;">
 				<nav aria-label="Page navigation example">
 				  <ul class="pagination">
 				  	<c:url value="/admin/user?page=${page-1}" var="url1"/>

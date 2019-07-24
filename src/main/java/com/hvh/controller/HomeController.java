@@ -53,6 +53,9 @@ public class HomeController {
 		if (authentication.isAuthenticated()) {
 			String username = authentication.getName();
 			UserDTO userDTO = userService.getUserByUsername(username);
+			System.out.println("thong tin nguoi dung..............");
+			System.out.println(userDTO.getUsername());
+			System.out.println(userDTO.getEmail());
 			
 			List<CartDTO> carts = cartService.getListCartByUser(userDTO.getId());
 			for(CartDTO cart : carts) {

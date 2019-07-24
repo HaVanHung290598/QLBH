@@ -28,7 +28,7 @@
 			<label>Updated_at</label>
 			<input class="form-control" type="date" name="updated_at" value="${params.get('updated_at')}" placeholder="Updated_at"/>
 		</div>
-		<div class="col-md-2 col-sm-3">
+		<div class="col-md-4 col-sm-4">
 			<input class="form-control" type="submit" value="Search"/>
 		</div>	
 	</div>
@@ -56,8 +56,8 @@
 					<td>
 						<c:url value="/admin/repairProduct?id=${s.id}" var="url8"/>
 						<c:url value="/admin/deleteProduct?id=${s.id}" var="url9"/>
-						<a href="${url8}"><i class="fas fa-recycle"></i></a>
-						<a href="${url9}"><i class="far fa-trash-alt"></i></a>
+						<a href="${url8}" title="repair"><i class="fas fa-pencil-alt"></i></a>
+						<a href="${url9}" title="delete"><i class="far fa-trash-alt"></i></a>
 					</td>
 				</tr>
 			</c:forEach>

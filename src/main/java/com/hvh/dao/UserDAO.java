@@ -1,6 +1,7 @@
 package com.hvh.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.hvh.entity.User;
 
@@ -12,4 +13,6 @@ public interface UserDAO {
 	public User getUserByUsername(String username);
 	public List<User> getListUser(int page, int limit);
 	public List<User> searchUser(String username, int page, int limit);
+	public Boolean getUserByInforUser(String username, String phone, String email);
+	public List<User> searchUser(Map<String, String> params, int page, int limit);
 }

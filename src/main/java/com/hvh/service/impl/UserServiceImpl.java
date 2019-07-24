@@ -2,6 +2,7 @@ package com.hvh.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -92,5 +93,20 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public void deleteUser(int id) {
 		userDAO.deleteUser(id);
+	}
+
+	@Override
+	public List<UserDTO> searchUser(Map<String, String> params, int page, int limit) {
+		List<User> users = userDAO.searchUser(params, page, limit);
+		List<UserDTO> userDTOs = new ArrayList<UserDTO>();
+		for(User user : users) {
+			userDTOs.add(convert(user));
+		}
+		return userDTOs;
+	}
+
+	@Override
+	public Boolean getUserByInforUser(String username, String phone, String email) {
+		return userDAO.getUserByInforUser(username, phone, email);
 	}
 }

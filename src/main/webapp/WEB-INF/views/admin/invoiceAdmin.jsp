@@ -4,9 +4,12 @@
 <c:url value="/admin/searchInvoiceAdmin" var="url5"/>
 <form action="${url5}" method="get">
 	<div class="row form-search-invoice">
+		<div class="col-md-2 col-sm-2">
+			<input type="text" name="id" value="${params.get('id')}" placeholder="Invoice id" class="form-control"/>
+		</div>
 		<div class="col-md-4 col-sm-4">
 			<label>Status</label>
-			<select name="status" class="form-control">
+			<select name="status" class="form-control status-invoice">
 				<option value=""></option>
 				<option value="pending" ${params.get('status') == 'pending' ? 'selected' : ''}>pending</option>
 				<option value="delivering" ${params.get('status') == 'delivering' ? 'selected' : ''}>delivering</option>
@@ -24,7 +27,7 @@
 		<div class="col-md-2 col-sm-2">			
 			<input class="form-control" type="text" name="year" placeholder="Year" value="${params.get('year')}"/>		
 		</div>
-		<div class="col-md-2 col-sm-2">			
+		<div class="col-md-4 col-sm-4">			
 			<input class="form-control" type="submit" value="submit"/>			
 		</div>
 	</div>
@@ -59,8 +62,8 @@
 					<td>${s.created_at}</td>
 					<c:url value="/admin/invoiceDetails?id=${s.id}&&userId=${s.user_id}" var="url6"/>
 					<td>
-						<a href="${url6}"><i class="fas fa-info"></i></a>
-						<a href="javascript:void(0)" class="repairStatus"><i class="fas fa-recycle"></i></a>
+						<a href="javascript:void(0)" class="repairStatus" title="repair"><i class="fas fa-pencil-alt"></i></a>
+						<a href="${url6}" title="detail"><i class="fas fa-info"></i></a>
 					</td>
 				</tr>
 			</c:forEach>
@@ -85,8 +88,8 @@
 			<div class="col-md-12 col-sm-12" style="margin-top: 20px;">
 				<nav aria-label="Page navigation example">
 				  <ul class="pagination">
-				  	<c:url value="/admin/searchInvoiceAdmin?page=${page-1}&&day=${params.get('day')}&&month=${params.get('month')}&&year=${parmas.get('year')}" var="url3"/>
-				  	<c:url value="/admin/searchInvoiceAdmin?page=${page+1}&&day=${params.get('day')}&&month=${params.get('month')}&&year=${parmas.get('year')}" var="url4"/>
+				  	<c:url value="/admin/searchInvoiceAdmin?page=${page-1}&&id=${params.get('id')}&&day=${params.get('day')}&&month=${params.get('month')}&&year=${parmas.get('year')}" var="url3"/>
+				  	<c:url value="/admin/searchInvoiceAdmin?page=${page+1}&&id=${params.get('id')}&&day=${params.get('day')}&&month=${params.get('month')}&&year=${parmas.get('year')}" var="url4"/>
 				    <li class="page-item ${page-1 < 1 ? 'disabled' : ''}"><a class="page-link" href="${url3}">Previous</a></li>
 				    <li class="page-item ${page == Math.ceil(size/10) ? 'disabled' : ''}"><a class="page-link" href="${url4}">Next</a></li>
 				  </ul>

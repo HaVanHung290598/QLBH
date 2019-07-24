@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -57,6 +58,9 @@ public class AdminController {
 	
 	@Autowired
 	CartService cartService;
+	
+	@Autowired
+	BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	@RequestMapping(value = {"/product","/"}, method = RequestMethod.GET)
 	public String getProduct(Model model, HttpServletRequest req) {
@@ -190,6 +194,7 @@ public class AdminController {
 	@RequestMapping(value="/searchInvoiceAdmin", method = RequestMethod.GET)
 	public String searchInvoice(Model model, HttpServletRequest req) {
 		Map<String, String> params = new HashMap<String, String>();
+		params.put("id", req.getParameter("id") == null ? "" : req.getParameter("id"));
 		params.put("status", req.getParameter("status") == null ? "" : req.getParameter("status"));
 		params.put("day", req.getParameter("day") == null ? "" : req.getParameter("day"));
 		params.put("month", req.getParameter("month") == null ? "" : req.getParameter("month"));
@@ -240,22 +245,61 @@ public class AdminController {
 		return "userAdmin";
 	}
 	
+	@RequestMapping(value="/createUser", method = RequestMethod.GET)
+	public String createdUser(Model model) {
+		model.addAttribute("display", "none");
+		model.addAttribute("url", "createUser");
+		return "repairUserAdmin";
+	}
+	
+	@RequestMapping(value="/createUser", method = RequestMethod.POST)
+	public String createUser(Model model, HttpServletRequest req) {		
+		String username = req.getParameter("username");
+		String password = req.getParameter("password");
+		String retypePassword = req.getParameter("retypePassword");
+		String email = req.getParameter("email");
+		String phone = req.getParameter("phone");
+		if(password.equals(retypePassword) && userService.getUserByInforUser(username, phone, email)) {
+			UserDTO userDTO = new UserDTO();
+			userDTO.setUsername(username);
+			userDTO.setPassword(bCryptPasswordEncoder.encode(password));
+			userDTO.setFullname(req.getParameter("fullname"));
+			userDTO.setAddress(req.getParameter("address"));
+			userDTO.setEmail(email);
+			userDTO.setPhone(phone);
+			userDTO.setCreated_at(created_at);
+			userDTO.setUpdated_at(updated_at);
+			userDTO.setRole(req.getParameter("enabled"));
+			userDTO.setEnabled(Integer.parseInt(req.getParameter("enabled")));
+			userService.addUser(userDTO);
+			return "redirect:/admin/user";
+		} else {
+			model.addAttribute("error", "Password does not match or The username is the same");
+			return "redirect:/admin/user"; ////xu ly sau
+		}	
+	}
+	
 	@RequestMapping(value="/repairUser", method = RequestMethod.GET)
 	public String repairUser(Model model, @RequestParam(name = "id")int id) {
 		UserDTO userDTO = userService.getUserById(id);
+		model.addAttribute("disabled", "disabled");
+		model.addAttribute("display", "table-row");
+		model.addAttribute("display2", "none");
 		model.addAttribute("userDTO", userDTO);
+		model.addAttribute("url", "repairUser");
 		return "repairUserAdmin";
 	}
 	@RequestMapping(value="/repairUser", method = RequestMethod.POST)
-	public String repairUser(Model model, HttpServletRequest req) {
+	public String repairUser(Model model, HttpServletRequest req) {		
 		int id = Integer.parseInt(req.getParameter("userId"));
-		String username = req.getParameter("username");
+		UserDTO userDTOcurrent = userService.getUserById(id);
+		String username = userDTOcurrent.getUsername();
 		String password = req.getParameter("password");
 		String fullname = req.getParameter("fullname");
 		String address = req.getParameter("address");
 		String phone = req.getParameter("phone");
 		String email = req.getParameter("email");
-		Date created_at = userService.getUserById(id).getCreated_at();
+		Date created_at = userDTOcurrent.getCreated_at();
 		String role = req.getParameter("role");
 		int enabled = Integer.parseInt(req.getParameter("enabled"));
 		UserDTO userDTO = new UserDTO(id, username, password, fullname, address, phone, email, created_at, updated_at, role, enabled, null, null);
@@ -275,11 +319,17 @@ public class AdminController {
 	
 	//chua phan trang
 	@RequestMapping(value="/searchUser", method = RequestMethod.GET)
-	public String searchUser(Model model, @RequestParam(name="userName")String userName, HttpServletRequest req) {
+	public String searchUser(Model model, HttpServletRequest req) {
 		int page = req.getParameter("page") == null ? 1 : Integer.parseInt(req.getParameter("page"));
 		int limit = req.getParameter("limit") == null ? 10 : Integer.parseInt(req.getParameter("limit"));
-		List<UserDTO> userDTOs = userService.searchUser(userName, page, limit);
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("username", req.getParameter("username") == null ? "" : req.getParameter("username"));
+		params.put("email", req.getParameter("email") == null ? "" : req.getParameter("email"));
+		params.put("phone", req.getParameter("phone") == null ? "" : req.getParameter("phone"));
+		params.put("created_at", req.getParameter("created_at") == null ? "" : req.getParameter("created_at"));
+		List<UserDTO> userDTOs = userService.searchUser(params, page, limit);
 		model.addAttribute("userDTOs", userDTOs);
+		model.addAttribute("params", params);
 		return "userAdmin";
 	}
 	
@@ -306,6 +356,7 @@ public class AdminController {
 			settingService.addSetting(settingDTO);
 		}else {
 //			model.addAttribute("error", "Setting exist!!!");
+			//xu ly thong bao loi sau
 		}
 		
 		return "redirect:/admin/setting";
