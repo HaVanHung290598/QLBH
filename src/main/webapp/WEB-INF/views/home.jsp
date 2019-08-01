@@ -2,17 +2,15 @@
     pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jstl/core" prefix="c"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
-<%@ page import="com.hvh.service.SettingService"%>
-<%@page import="com.hvh.service.impl.SettingServiceImpl"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<% 
-	SettingService settingService = new SettingServiceImpl();
-//  	String title = settingService.getSettingById(1).getTitle();
-%>
-<title></title>
+<title>${title.value}</title>
+<meta name="description" content="${description.value}">
+<meta name="author" content="${author.value}">
+<meta name="keywords" content="${keywords.value}">
 <link rel="stylesheet" href="<c:url value="/resources/fontawesome-free-5.8.1-web/css/all.css"/>"/>
 <link rel="stylesheet" href="<c:url value="/resources/bootstrap-4.3.1-dist/css/bootstrap.min.css"/>"/>
 <link rel="stylesheet" href="<c:url value="/resources/css/overlay.css"/>"/>

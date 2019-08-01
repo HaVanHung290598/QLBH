@@ -19,9 +19,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hvh.model.CartDTO;
+import com.hvh.model.ProductAttributeDTO;
 import com.hvh.model.ProductDTO;
 import com.hvh.model.UserDTO;
 import com.hvh.service.CartService;
+import com.hvh.service.ProductAttributeService;
 import com.hvh.service.ProductService;
 import com.hvh.service.SettingService;
 import com.hvh.service.UserService;
@@ -40,6 +42,12 @@ public class CartController {
 	
 	@Autowired
 	SettingService settingService;
+	
+	@Autowired
+	ProductAttributeService productAttributeService;
+	
+	@Autowired
+	HomeController homeController;
 	
 	@RequestMapping(value="/cart", method = RequestMethod.GET)
 	public String cart(Model model, HttpServletRequest req) {
@@ -82,27 +90,42 @@ public class CartController {
 		return "cart";
 	}
 	@RequestMapping(value="/cart", method = RequestMethod.POST)
-	public String cart(HttpServletRequest req, HttpServletResponse resp) {
+	public String cart(HttpServletRequest req, HttpServletResponse resp, Model model) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String username = authentication.getName();
 		UserDTO userDTO = userService.getUserByUsername(username);
 		
 		int product_id = Integer.parseInt(req.getParameter("product-id"));
+		
+		int quantity_available = productService.getProductById(product_id).getQuantity_available();
 		String color = req.getParameter("product-color");
 		String size = req.getParameter("product-size");
 		int quantity = Integer.parseInt(req.getParameter("quantity"));
-		CartDTO cartDTO = new CartDTO();
-		cartDTO.setProduct_id(product_id);
-		cartDTO.setUser_id(userDTO.getId());
-		cartDTO.setQuantity(quantity);
-		cartDTO.setSize(size);
-		cartDTO.setColor(color);
-//		if(cartService.getCartById(1, product_id) == null) {
+		if(quantity > quantity_available) {
+			model.addAttribute("error", "The number of purchases does not allow or the product already exists in the cart!!!");
+			ProductDTO productDTO = productService.getProductById(product_id);
+			model.addAttribute("productDTO", productDTO);
+			model.addAttribute("display", "flex");
+			List<ProductAttributeDTO> productAttributeDTOs = productAttributeService.getProductAttributeByProduct(product_id);
+			model.addAttribute("productAttributeDTOs", productAttributeDTOs);
+			
+			model.addAttribute("head", "PRODUCT SINGLE");
+			model.addAttribute("home", "HOME");
+			model.addAttribute("page", "PRODUCT SINGLE");
+			model.addAttribute("color", "#f1b8c4");
+			model.addAttribute("params", homeController.getListCart());
+			return "productSingle";
+		} else {
+			CartDTO cartDTO = new CartDTO();
+			cartDTO.setProduct_id(product_id);
+			cartDTO.setUser_id(userDTO.getId());
+			cartDTO.setQuantity(quantity);
+			cartDTO.setSize(size);
+			cartDTO.setColor(color);
 			cartService.addCart(cartDTO);
-//		} else {
-//			req.setAttribute("error", "Product already exists in cart");
-//		}
-		return "redirect:/cart";
+			return "redirect:/cart";
+		}
+		
 	}
 	@RequestMapping(value="/deleteCartItem", method = RequestMethod.GET)
 	public String deleteCartItem(Model model, @RequestParam(name="user-id")int user_id, @RequestParam(name="product-id")int product_id) {

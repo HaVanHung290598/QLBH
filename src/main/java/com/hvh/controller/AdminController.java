@@ -124,10 +124,11 @@ public class AdminController {
 		product.setProduct_name(productName);
 		product.setUnit_price(price);
 		product.setDescription(description);
-		product.setImage(file.getOriginalFilename());
+		String fileName = file.getOriginalFilename();
+		product.setImage(file.getOriginalFilename().substring(0, fileName.lastIndexOf('.')));
 		product.setQuantity_available(quantity);
 		product.setCreated_at(created_at);
-		File files  = new File("D:\\java\\QLBH\\src\\main\\webapp\\resources\\images", file.getOriginalFilename());
+		File files  = new File("D:\\java\\QLBH\\src\\main\\webapp\\resources\\images", fileName);
 	    try {
 			file.transferTo(files);
 		} catch (IllegalStateException e) {

@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Setting Admin</title>
 <link rel="stylesheet" href="<c:url value="/resources/fontawesome-free-5.8.1-web/css/all.css"/>"/>
 <link rel="stylesheet" href="<c:url value="/resources/bootstrap-4.3.1-dist/css/bootstrap.min.css"/>"/>
 <link rel="stylesheet" href="<c:url value="/resources/css/admin/headerAdmin.css"/>"/>
@@ -37,5 +37,6 @@
 	<script type="text/javascript" src="<c:url value="/resources/js/admin/settingAdmin.js"/>"></script>
 	<script type="text/javascript" src="<c:url value="/resources/js/admin/menuAdmin.js"/>"></script>
 	<script type="text/javascript" src="<c:url value="/resources/js/admin/invoiceAdmin.js"/>"></script>
+	<script type="text/javascript" src="<c:url value="/resources/js/delete.js"/>"></script>
 </body>
 </html>

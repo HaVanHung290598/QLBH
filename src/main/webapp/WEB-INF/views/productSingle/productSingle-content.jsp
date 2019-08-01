@@ -15,7 +15,6 @@
 					</div>
 					<div class="row">
 						<div class="col-md-12">
-<%-- 							<c:url value="/admin/cart" var="url"/> --%>
 							<form action="cart" method="post">
 								<select name="product-size" class="product-size">
 									<c:forEach items="${productAttributeDTOs}" var="s">
@@ -39,6 +38,10 @@
 								</div><br/>
 								<input type="submit" name="" value="Add to cart">
 							</form>
+							<c:if test="${not empty error}">
+								<input type="hidden" id="error" value="${error}"/>
+								<script type="text/javascript" src="<c:url value="/resources/js/error.js"/>"></script>
+							</c:if>
 						</div>
 					</div>
 				</div>

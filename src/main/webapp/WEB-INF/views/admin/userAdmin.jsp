@@ -55,7 +55,7 @@
 								<c:url value="/admin/repairUser?id=${s.id}" var="url3"/>
 								<c:url value="/admin/deleteUser?id=${s.id}" var="url4"/>
 								<a href="${url3}" title="repair"><i class="fas fa-pencil-alt"></i></a>
-								<a href="${url4}" title="delete"><i class="far fa-trash-alt"></i></a>
+								<a class="delete" href="${url4}" title="delete"><i class="far fa-trash-alt"></i></a>
 							</td>
 						</tr>
 					</c:forEach>

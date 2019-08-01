@@ -26,6 +26,7 @@ import com.hvh.service.CartService;
 import com.hvh.service.InvoiceItemService;
 import com.hvh.service.ProductAttributeService;
 import com.hvh.service.ProductService;
+import com.hvh.service.SettingService;
 import com.hvh.service.UserService;
 
 @Controller
@@ -35,7 +36,7 @@ public class HomeController {
 	ProductService productService;
 	
 	@Autowired
-	ProductAttributeService productAtttributeService;
+	ProductAttributeService productAttributeService;
 	
 	@Autowired
 	CartService cartService;
@@ -46,6 +47,9 @@ public class HomeController {
 	@Autowired
 	InvoiceItemService invoiceItemService;
 	
+	@Autowired
+	SettingService settingService;
+	
 	public List<Map<String, Object>> getListCart() {
 		List<Map<String, Object>> params = new ArrayList<Map<String, Object>>();
 		
@@ -53,9 +57,6 @@ public class HomeController {
 		if (authentication.isAuthenticated()) {
 			String username = authentication.getName();
 			UserDTO userDTO = userService.getUserByUsername(username);
-			System.out.println("thong tin nguoi dung..............");
-			System.out.println(userDTO.getUsername());
-			System.out.println(userDTO.getEmail());
 			
 			List<CartDTO> carts = cartService.getListCartByUser(userDTO.getId());
 			for(CartDTO cart : carts) {
@@ -74,6 +75,12 @@ public class HomeController {
 		}
 		return params;
 	}
+	public void getListSettingWeb(Model model) {
+		model.addAttribute("title", settingService.getSettingByName("title"));
+		model.addAttribute("description", settingService.getSettingByName("description"));
+		model.addAttribute("keywords", settingService.getSettingByName("keywords"));
+		model.addAttribute("author", settingService.getSettingByName("author"));
+	}
 	
 	@RequestMapping(value= {"/","/home"}, method = RequestMethod.GET)
 	public String home(Model model, Principal principal, HttpServletRequest req) {
@@ -85,6 +92,7 @@ public class HomeController {
 		if (principal != null) {
 			model.addAttribute("params", getListCart());	
 		}
+		getListSettingWeb(model);
 		return "home";
 	}
 	@RequestMapping(value="/collection", method = RequestMethod.GET)
@@ -105,6 +113,7 @@ public class HomeController {
 		if (principal != null) {
 			model.addAttribute("params", getListCart());	
 		}
+		getListSettingWeb(model);
 		return "collection";
 	}
 	@RequestMapping(value="/productSingle", method = RequestMethod.GET)
@@ -113,7 +122,7 @@ public class HomeController {
 			ProductDTO productDTO = productService.getProductById(productId);
 			model.addAttribute("productDTO", productDTO);
 			model.addAttribute("display", "flex");
-			List<ProductAttributeDTO> productAttributeDTOs = productAtttributeService.getProductAttributeByProduct(productId);
+			List<ProductAttributeDTO> productAttributeDTOs = productAttributeService.getProductAttributeByProduct(productId);
 			model.addAttribute("productAttributeDTOs", productAttributeDTOs);			
 		} else {
 			model.addAttribute("display", "none");
@@ -126,7 +135,7 @@ public class HomeController {
 		if (principal != null) {
 			model.addAttribute("params", getListCart());	
 		}
-		
+		getListSettingWeb(model);
 		return "productSingle";
 	}
 	@RequestMapping(value="/search", method = RequestMethod.GET)
@@ -154,6 +163,7 @@ public class HomeController {
 		if (principal != null) {
 			model.addAttribute("params", getListCart());	
 		}
+		getListSettingWeb(model);
 		return "collection";
 	}
 	@RequestMapping(value="/error", method = RequestMethod.GET)

@@ -8,11 +8,10 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<% 
-	SettingService settingService = new SettingServiceImpl();
-// 	String title = settingService.getSettingById(1).getTitle();
-%>
-<title></title>
+<title>${head}</title>
+<meta name="description" content="${description.value}">
+<meta name="author" content="${author.value}">
+<meta name="keywords" content="${keywords.value}">
 <link rel="stylesheet" href="<c:url value="/resources/fontawesome-free-5.8.1-web/css/all.css"/>"/>
 <link rel="stylesheet" href="<c:url value="/resources/bootstrap-4.3.1-dist/css/bootstrap.min.css"/>"/>
 <link rel="stylesheet" href="<c:url value="/resources/css/header-collection.css"/>"/>

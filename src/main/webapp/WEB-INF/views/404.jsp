@@ -10,7 +10,7 @@
 </head>
 <body>
 	<div class="error">
-		<h1>403</h1>
+		<h1>${error}</h1>
 		<h2>Aww Snap!</h2>
 		<p>Something went wrong or that page doesn't exist yet</p>
 		<c:url value="/home" var="url"/>

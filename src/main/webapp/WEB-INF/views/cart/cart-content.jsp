@@ -16,7 +16,7 @@
 						<c:forEach items="${params}" var="s">
 							<tr>
 								<td class="product">
-									<a href="deleteCartItem?user-id=${s.get('user-id')}&&product-id=${s.get('product-id')}">x</a>
+									<a class="delete" title="delete" href="deleteCartItem?user-id=${s.get('user-id')}&&product-id=${s.get('product-id')}">x</a>
 									<img src="<c:url value="/resources/images/${s.get('image')}.jpg"/>" height="240px" width="auto"/>
 								</td>
 								<td class="product-title">
@@ -50,11 +50,11 @@
 							</tr>
 							<tr>
 								<th>Delivery address</th>
-								<td><input type="text" class="form-control" name="delivery-address"></td>
+								<td><input type="text" class="form-control" name="delivery-address" required="required"></td>
 							</tr>
 							<tr>
 								<th>Delivery phone</th>
-								<td><input type="text" class="form-control" name="delivery-phone"></td>
+								<td><input type="text" class="form-control" name="delivery-phone" required="required"></td>
 							</tr>
 						</table>
 					</div>
@@ -65,11 +65,11 @@
 							</tr>
 							<tr>
 								<th>Subtotal</th>
-								<td>$<input type="text" value="" class="subtotal" readonly></td>
+								<td><input type="text" value="" class="subtotal" readonly>$</td>
 							</tr>
 							<tr>
 								<th>Tax</th>
-								<td>$<input type="text" value="${tax}" class="tax" readonly></td>
+								<td><input type="text" value="${tax}" class="tax" readonly>$</td>
 							</tr>
 							<tr>
 								<th>Discout</th>
@@ -77,7 +77,7 @@
 							</tr>
 							<tr class="total">
 								<th>TOTAL</th>
-								<td>$<input type="text" name="total" class="total-price-cartItem" readonly></td>
+								<td><input type="text" name="total" class="total-price-cartItem" readonly>$</td>
 							</tr>
 							<tr>
 								<td colspan="2">
@@ -91,3 +91,4 @@
 			</div>
 		</div>
 	</div>
+	<script type="text/javascript" src="<c:url value="/resources/js/delete.js"/>"></script>
